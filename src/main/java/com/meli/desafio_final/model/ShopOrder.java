@@ -1,11 +1,10 @@
 package com.meli.desafio_final.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,4 +12,7 @@ public class ShopOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
+    @ManyToMany
+    @JsonIgnoreProperties("shopOrder")
+    private List<SellerAd> sellerAd;
 }

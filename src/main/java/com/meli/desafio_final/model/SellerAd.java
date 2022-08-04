@@ -3,10 +3,8 @@ package com.meli.desafio_final.model;
 import lombok.Data;
 import org.hibernate.engine.jdbc.batch.spi.Batch;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,6 +13,18 @@ public class SellerAd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sellerAdId;
     private double price;
-    private BatchStock batchStockId;
+    @OneToMany(mappedBy = "sellerAd")
+    private List<BatchStock> batchStockId;
+
+    @ManyToMany
+    @JoinTable(name = "SellerAd_ShopOrder",
+            joinColumns = @JoinColumn(name = "orderId", referencedColumnName = "orderId"),
+            inverseJoinColumns = @JoinColumn(name = "sellerAdId", referencedColumnName = "sellerAdId"))
+    private List<ShopOrder> shopOrder;
+
+    @ManyToOne
+    @JoinColumn(name = "sellerAdList")
     private Seller sellerId;
+
+    // @OneToOne(mappedBy = "author", cascade = CascadeType.ALL)
 }
