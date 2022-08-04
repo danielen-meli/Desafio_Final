@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Data
 public class Section {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sectionId;
     private String wareHouseCode;
     private long sectionCode;
