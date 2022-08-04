@@ -1,9 +1,9 @@
 package com.meli.desafio_final.model;
 
-import lombok.Getter;
-
+import lombok.Data;
 import javax.persistence.Entity;
-@Data
+
 @Entity
+@Data
 public class SellerAd {
 }
