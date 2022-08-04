@@ -34,3 +34,6 @@ build/
 
 ### Environment ###
 .env
+
+### Pré commit
+.pre-commit-config.yaml
