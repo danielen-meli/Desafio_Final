@@ -18,7 +18,7 @@ public class SellerAd {
 
     @ManyToMany
 //    @JoinTable(name = "SellerAd_ShopOrder",
-//            joinColumns = @JoinColumn(name = "orderId", referencedColumnName = "orderId"),
+//          joinColumns = @JoinColumn(name = "orderId", referencedColumnName = "orderId"),
 //            inverseJoinColumns = @JoinColumn(name = "sellerAdId", referencedColumnName = "sellerAdId"))
    // @JsonIgnoreProperties("SellerAd")
     private List<ShopOrder> shopOrder;
