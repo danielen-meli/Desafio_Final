@@ -12,7 +12,8 @@ public class ShopOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "shopOrder")
     @JsonIgnoreProperties("shopOrder")
     private List<SellerAd> sellerAd;
 }

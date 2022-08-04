@@ -17,14 +17,15 @@ public class SellerAd {
     private List<BatchStock> batchStockId;
 
     @ManyToMany
-    @JoinTable(name = "SellerAd_ShopOrder",
-            joinColumns = @JoinColumn(name = "orderId", referencedColumnName = "orderId"),
-            inverseJoinColumns = @JoinColumn(name = "sellerAdId", referencedColumnName = "sellerAdId"))
+//    @JoinTable(name = "SellerAd_ShopOrder",
+//            joinColumns = @JoinColumn(name = "orderId", referencedColumnName = "orderId"),
+//            inverseJoinColumns = @JoinColumn(name = "sellerAdId", referencedColumnName = "sellerAdId"))
+   // @JsonIgnoreProperties("SellerAd")
     private List<ShopOrder> shopOrder;
 
     @ManyToOne
-    @JoinColumn(name = "sellerAdList")
-    private Seller sellerId;
+    @JoinColumn(name = "sellerId")
+    private Seller seller;
 
     // @OneToOne(mappedBy = "author", cascade = CascadeType.ALL)
 }

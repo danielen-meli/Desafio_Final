@@ -17,9 +17,11 @@ public class InboundOrder {
     private LocalDate orderDate;
 
     @ManyToOne
+    @JoinColumn(name = "sectionId")
     private Section section;
 
-    @OneToMany
+    @OneToMany(mappedBy = "inboundOrder")
     private List<BatchStock> batchStockList;
+
 
 }

@@ -37,4 +37,7 @@ public class BatchStock {
     @Column(nullable = false)
     private LocalDate dueDate;
 
+    @ManyToOne
+    private InboundOrder inboundOrder;
+
 }

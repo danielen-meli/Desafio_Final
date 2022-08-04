@@ -15,6 +15,6 @@ public class Seller {
     @Column(nullable = false)
     private String sellerName;
 
-    @OneToMany(mappedBy = "sellerId")
+    @OneToMany(mappedBy = "seller")
     private List<SellerAd> sellerAdList;
 }
