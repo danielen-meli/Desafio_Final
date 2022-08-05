@@ -20,10 +20,7 @@ public class ShopOrder {
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shopOrder_id")
     private List<ShopOrderItem> shopOrderItem;
-
-//    @ManyToMany(mappedBy = "shopOrder")
-//    @JsonIgnoreProperties("shopOrder")
-//    private List<SellerAd> sellerAd;
+    // registro no DB é invertido, a lista que armazena o ID da entidade dominante
 
     @ManyToOne
     private Buyer buyer;

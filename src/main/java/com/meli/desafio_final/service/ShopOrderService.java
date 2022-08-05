@@ -15,8 +15,10 @@ public class ShopOrderService {
 
     //@Transactional
     public ShopOrder save(ShopOrder shopOrder){
-        shopOrder.getShopOrderItem();
+        // shopOrder.getShopOrderItem()
         return shopOrderRepo.save(shopOrder);
+    // aqui recebe a lista, mas tem que verificar os itens todos, para validar o estoque.
+        // qdo mudar o status pra close é que decrementa a quantidade dos itens
 
     }
 
