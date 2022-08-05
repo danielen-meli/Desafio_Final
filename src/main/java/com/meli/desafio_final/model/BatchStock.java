@@ -20,6 +20,9 @@ public class BatchStock {
     private double currentTemperature;
 
     @Column(nullable = false)
+    private double minimumTemperature;
+
+    @Column(nullable = false)
     private int initialQuantity;
 
     @Column(nullable = false)
