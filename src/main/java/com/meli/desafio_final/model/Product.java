@@ -4,6 +4,7 @@ import com.meli.desafio_final.model.enums.Category;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.lang.reflect.Type;
 
 @Entity
 @Data
@@ -16,5 +17,6 @@ public class Product {
     private String productName;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 }
