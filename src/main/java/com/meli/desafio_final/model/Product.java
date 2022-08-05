@@ -12,7 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String productName;
 
     @Column(nullable = false)

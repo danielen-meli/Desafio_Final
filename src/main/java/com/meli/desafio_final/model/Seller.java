@@ -17,4 +17,7 @@ public class Seller {
 
     @OneToMany(mappedBy = "seller")
     private List<SellerAd> sellerAdList;
+
+    @OneToOne
+    private User user;
 }
