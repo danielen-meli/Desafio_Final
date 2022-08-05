@@ -17,9 +17,6 @@ public class Section {
     private Warehouse warehouse;
 
     @Column(nullable = false)
-    private long sectionCode;
-
-    @Column(nullable = false)
     private double sectionTemperature;
 
     @Column(nullable = false)

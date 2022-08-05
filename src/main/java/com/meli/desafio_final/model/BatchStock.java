@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class BatchStock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int batchNumber;
+    private long batchStockId;
 
     @ManyToOne
     private SellerAd sellerAd;
