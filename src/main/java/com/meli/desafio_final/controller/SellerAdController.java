@@ -27,6 +27,9 @@ public class SellerAdController {
 
     @GetMapping("/fresh-products/{category}")
     public ResponseEntity<List<SellerAd>> getProductsCategory(@RequestParam Category category){
-        return null;
+        if(sellerAdService.getByCategory(category).isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(sellerAdService.getByCategory(category));
     }
 }
