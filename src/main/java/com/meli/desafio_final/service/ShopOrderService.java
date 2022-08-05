@@ -4,7 +4,9 @@ import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.repository.ShopOrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.meli.desafio_final.model.ShopOrderItem;
+import com.meli.desafio_final.repository.ShopOrderRepository;
+import java.util.List;
 import javax.transaction.Transactional;
 
 @Service
@@ -21,5 +23,8 @@ public class ShopOrderService {
         // qdo mudar o status pra close é que decrementa a quantidade dos itens
 
     }
-
+    
+    public ShopOrder getById(long id){
+        return shopOrderRepo.findById(id).get();
+    }
 }

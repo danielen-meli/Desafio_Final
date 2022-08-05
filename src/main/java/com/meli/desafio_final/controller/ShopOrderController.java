@@ -1,4 +1,3 @@
-package com.meli.desafio_final.controller;
 
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.ShopOrderItem;
@@ -10,13 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.meli.desafio_final.controller.dto.ShopOrderDto;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v2/fresh-products/orders")
+@RequestMapping("/api/v1/fresh-products/orders")
 public class ShopOrderController {
     @Autowired
     private ShopOrderService shopOrderService;
 
+    @GetMapping("/{id}")
+    private ShopOrderDto getById(@PathVariable long id){
+        ShopOrder shop = shopOrderService.getById(id);
+        return ShopOrderDto.converter(shop);
+    }
 
     @PostMapping()
     public ResponseEntity<ShopOrder> createShopOrder(@RequestBody ShopOrder shopOrder){
