@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/fresh-products")
 public class InboundController {
 
-    @GetMapping("ping")
+    @GetMapping("/ping")
     public ResponseEntity<String> testeGet() {
         return ResponseEntity.ok("pong!");
     }

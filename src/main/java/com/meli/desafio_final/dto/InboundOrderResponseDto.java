@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @Builder
 public class InboundOrderResponseDto {
     List<BatchStock> batchStockList;
