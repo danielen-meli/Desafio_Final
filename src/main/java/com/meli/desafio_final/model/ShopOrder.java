@@ -1,6 +1,5 @@
 package com.meli.desafio_final.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.meli.desafio_final.model.enums.Status;
 import lombok.Data;
 

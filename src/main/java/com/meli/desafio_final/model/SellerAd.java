@@ -13,7 +13,9 @@ public class SellerAd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sellerAdId;
+
     private double price;
+
     @OneToMany(mappedBy = "sellerAd")
     private List<BatchStock> batchStockId;
 
