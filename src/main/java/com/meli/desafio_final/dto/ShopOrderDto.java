@@ -1,13 +1,10 @@
-package com.meli.desafio_final.controller.dto;
+package com.meli.desafio_final.dto;
 
 import com.meli.desafio_final.model.Buyer;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.ShopOrderItem;
-import com.meli.desafio_final.model.enums.Status;
 import lombok.*;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.util.List;
 
 @NoArgsConstructor
