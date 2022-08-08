@@ -15,10 +15,10 @@ public class ShopOrderService {
     @Autowired
     private ShopOrderRepo shopOrderRepo;
 
-    //@Transactional
-    public ShopOrder save(ShopOrder shopOrder){
+    @Transactional // save e importante ter rollback en caso de erro
+    public ShopOrder save(ShopOrder shopOrderModel){
         // shopOrder.getShopOrderItem()
-        return shopOrderRepo.save(shopOrder);
+        return shopOrderRepo.save(shopOrderModel);
     // aqui recebe a lista, mas tem que verificar os itens todos, para validar o estoque.
         // qdo mudar o status pra close é que decrementa a quantidade dos itens
 

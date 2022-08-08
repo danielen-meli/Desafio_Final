@@ -1,3 +1,4 @@
+package com.meli.desafio_final.controller;
 
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.service.ShopOrderService;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.meli.desafio_final.dto.ShopOrderDto;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/fresh-products/orders")
-public class ShopOrderController {
+public class ShopOrderController{
     @Autowired
     private ShopOrderService shopOrderService;
 
@@ -23,8 +26,8 @@ public class ShopOrderController {
         return ShopOrderDto.converter(shop);
     }
 
-    @PostMapping()
-    public ResponseEntity<ShopOrder> createShopOrder(@RequestBody ShopOrder shopOrder){
+    @PostMapping("/api/v1/fresh-products/orders/")
+    public ResponseEntity<ShopOrder> createShopOrder(@RequestBody @Valid ShopOrder shopOrder){
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.save(shopOrder));
     }
 
