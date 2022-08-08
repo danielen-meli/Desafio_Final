@@ -29,5 +29,4 @@ public class SellerAdService {
                 filter(p -> p.getProduct().getCategory().equals(category)).
                 collect(Collectors.toList());
     }
-
 }

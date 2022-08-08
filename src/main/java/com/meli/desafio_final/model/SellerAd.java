@@ -14,6 +14,7 @@ public class SellerAd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sellerAdId;
 
+    @Column(nullable = false)
     private double price;
 
     @OneToMany(mappedBy = "sellerAd")

@@ -3,7 +3,6 @@ package com.meli.desafio_final.exception;
 import lombok.Builder;
 import lombok.Data;
 
-
 import java.time.LocalDateTime;
 
 @Data
@@ -14,3 +13,4 @@ public class ExceptionsDetails {
     private String message;
     private LocalDateTime dateTime;
 }
+

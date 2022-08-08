@@ -13,7 +13,8 @@ public class ShopOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
 
-    @Column
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToMany(cascade = CascadeType.PERSIST)
