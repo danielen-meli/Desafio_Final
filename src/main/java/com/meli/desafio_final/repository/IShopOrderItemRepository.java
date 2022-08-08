@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ShopOrderItemRepo extends JpaRepository<ShopOrderItem, Long> {
+public interface IShopOrderItemRepository extends JpaRepository<ShopOrderItem, Long> {
 }
+

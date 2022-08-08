@@ -13,8 +13,14 @@ public class ShopOrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false)
     private LocalDate date;
+
+    @Column(nullable = false)
     private double price;
+
+    @Column(nullable = false)
     private int quantity;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
