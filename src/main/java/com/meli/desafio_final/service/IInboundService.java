@@ -1,6 +1,14 @@
 package com.meli.desafio_final.service;
 
-public interface IInboundService {
+import com.meli.desafio_final.dto.InboundOrderRequestDto;
+import com.meli.desafio_final.dto.InboundOrderResponseDto;
+import com.meli.desafio_final.model.BatchStock;
 
+import java.util.List;
+
+
+public interface IInboundService {
+    List<BatchStock> insertNewInboundOrder(InboundOrderRequestDto newInboundOrder);
+    List<BatchStock> updateNewInboundOrder(InboundOrderRequestDto newInboundOrder);
 
 }
