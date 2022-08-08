@@ -23,6 +23,7 @@ public class Section {
     private double sectionCapacity;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @OneToMany(mappedBy = "section")

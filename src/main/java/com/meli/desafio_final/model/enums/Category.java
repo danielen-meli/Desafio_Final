@@ -3,7 +3,6 @@ package com.meli.desafio_final.model.enums;
 import lombok.Getter;
 
 
-
 // @Enumerated(EnumType.STRING) passar essa anotacao pro model onde esta sendo usado a categoria
 public enum Category {
     FROZEN("FROZEN", -18, -12), // 0
