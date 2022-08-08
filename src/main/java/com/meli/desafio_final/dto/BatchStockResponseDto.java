@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-//@Builder
+@Builder
+@AllArgsConstructor
 public class BatchStockResponseDto {
     private double currentTemperature;
     private double minimumTemperature;
