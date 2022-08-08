@@ -1,21 +1,25 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.BatchStockRequestDto;
+import com.meli.desafio_final.dto.InboundOrderRequestDto;
+import com.meli.desafio_final.dto.InboundOrderResponseDto;
 import com.meli.desafio_final.model.BatchStock;
+import com.meli.desafio_final.model.InboundOrder;
 import com.meli.desafio_final.model.Section;
 import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.enums.Category;
-import com.meli.desafio_final.repository.IInboundOrderRepository;
-import com.meli.desafio_final.repository.ISectionRepository;
-import com.meli.desafio_final.repository.ISellerAdRepository;
-import com.meli.desafio_final.repository.IWarehouseRepository;
+import com.meli.desafio_final.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class InboundService {
+public class InboundService implements IInboundService {
     // TODO: somar o currentquantity de todos ods batchstock para saber se é menor q a section.sectioncapacity
     // TODO: verificar pela temperatura se corresponde aquela seção
 
@@ -26,10 +30,13 @@ public class InboundService {
     private IWarehouseRepository warehouseRepo;
 
     @Autowired
-    private ISectionRepository iSectionRepo;
+    private ISectionRepository sectionRepo;
 
     @Autowired
-    private ISellerAdRepository iSellerAdRepo;
+    private ISellerAdRepo sellerAdRepo;
+
+    @Autowired
+    private IBatchStockRepository batchStockRepo;
 
 
 //    QUANDO o representante entra no setor
@@ -38,43 +45,85 @@ public class InboundService {
 //    E o representante é associado ao registro de estoque
 
     // valida se o warehouse é valido
-    private boolean isWarehouseValid(long id){
-        if(warehouseRepo.findById(id).isPresent()){
-            return true;
+    private void isWarehouseValid(long id){
+        if(warehouseRepo.findById(id).isEmpty()){
+            // TODO: caso o warehouse seja invalido retornar uma exceção
         }
-        // TODO: caso o warehouse seja invalido retornar uma exceção
-        return false;
     }
 
-    private boolean isSectionValid(Section section){
-        if(section != null) {
-            return true;
+    private void isSectionValid(Section section){
+        if(section == null) {
+            // TODO: throw exception
         }
-        // TODO: caso o section seja invalida retornar uma exceção
-        return false;
     }
 
-    private boolean isSectionCapacityValid(List<BatchStock> batchStockList, double sectionCapacity){
-        double sumBatchStocksVolume = batchStockList.stream().mapToDouble(BatchStock::getVolume).sum();
+    private void isSectionCapacityValid(List<BatchStockRequestDto> batchStockList, double sectionCapacity){
+        double sumBatchStocksVolume = batchStockList.stream().mapToDouble(BatchStockRequestDto::getVolume).sum();
 
         if(sumBatchStocksVolume <= sectionCapacity) {
-            return true;
+            // TODO: lançar uma exceção
         }
-        // TODO: lançar uma exceção
-        return false;
     }
 
-    private boolean isAlltypeProductsValid(List<BatchStockRequestDto> batchStockList, Category sectionCategory){
+    private void isAlltypeProductsValid(List<BatchStockRequestDto> batchStockList, Category sectionCategory){
         batchStockList.forEach(bs -> {
-            SellerAd sellerAd = iSellerAdRepo.findById(bs.getSellerAdId()).get();
+            SellerAd sellerAd = sellerAdRepo.findById(bs.getSellerAdId()).get();
             if(!sellerAd.getProduct().getCategory().equals(sectionCategory)){
                 // TODO: lançar exception de categoria diferente
 
             }
         });
-        return true;
     }
 
+    // atualiza ou insere um inbound order
+    private List<BatchStock> saveInboundOrder(InboundOrderRequestDto inboundOrder) {
+        Section section = sectionRepo.findById(inboundOrder.getSection()).get();
+        isSectionValid(section);
 
+        long warehouseId = section.getWarehouse().getWarehouseId();
+        isWarehouseValid(warehouseId);
 
+        isSectionCapacityValid(inboundOrder.getBatchStockList(), section.getSectionCapacity());
+
+        isAlltypeProductsValid(inboundOrder.getBatchStockList(), section.getCategory());
+
+        InboundOrder inboudOrder = InboundOrder.builder()
+                .orderDate(LocalDate.now())
+                .section(section)
+                .build();
+
+        InboundOrder inboundOrderSaved = inboundOrderRepo.save(inboudOrder);
+
+        List<BatchStock> newBatchStockList = inboundOrder.getBatchStockList().stream().map(batchStockRequest -> {
+           SellerAd sellerAdFound = sellerAdRepo.findById(batchStockRequest.getSellerAdId()).get();
+           return new BatchStock(batchStockRequest, sellerAdFound, inboundOrderSaved);
+        }).collect(Collectors.toList());
+
+        List<BatchStock> batchStocksSaved = new ArrayList<BatchStock>();
+
+        newBatchStockList.forEach(batchStock -> {
+            batchStocksSaved.add(batchStockRepo.save(batchStock));
+        });
+
+        return batchStocksSaved;
+    }
+
+    @Override
+    public List<BatchStock> insertNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
+        if(newInboundOrder.getId() != 0){
+            //  TODO: lançar exception de InboundOrder já cadastrada
+        }
+        return saveInboundOrder(newInboundOrder);
+
+    }
+
+    @Override
+    public List<BatchStock> updateNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
+        Optional<InboundOrder> inboundFound = inboundOrderRepo.findById(newInboundOrder.getId());
+        if(inboundFound.isPresent()){
+            return saveInboundOrder(newInboundOrder);
+        }
+        //  TODO: lançar exception de InboundOrder já cadastrada
+        return null;
+    }
 }
