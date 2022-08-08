@@ -28,7 +28,7 @@ public class InboundOrder {
     @JsonIgnoreProperties("inboundOrder")
     private Section section;
 
-    @OneToMany(mappedBy = "inboundOrder")
+    @OneToMany(mappedBy = "inboundOrder", cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("inboundOrder")
     private List<BatchStock> batchStockList;
 

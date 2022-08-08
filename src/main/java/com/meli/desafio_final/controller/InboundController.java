@@ -30,7 +30,7 @@ public class InboundController {
     }
 
     @PutMapping("/inboundorder")
-    public ResponseEntity<InboundOrderResponseDto> updateInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
-        return null;
+    public ResponseEntity<List<BatchStock>> updateInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.updateNewInboundOrder(inboundOrderRequestDto));
     }
 }
