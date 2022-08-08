@@ -12,10 +12,20 @@ import java.util.List;
 @Data
 public class ShopOrderDto {
     public String status;
+    public Double precoTotal = .0;
     public List<ShopOrderItemDto> shopOrderItem;
 
     public ShopOrderDto(ShopOrder shopOrder) {
         this.status = shopOrder.getStatus().toString();
         this.shopOrderItem = ShopOrderItemDto.convert(shopOrder.getShopOrderItem());
+        calcularTotal();
+    }
+
+    public Double calcularTotal(){
+        shopOrderItem.forEach(i -> {
+            precoTotal += i.getSellerAdDTO().getPrice() * i.getQuantity();
+        });
+
+        return precoTotal;
     }
 }
