@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Builder
+//@Builder
 public class InboundOrderResponseDto {
     List<BatchStock> batchStockList;
 }
