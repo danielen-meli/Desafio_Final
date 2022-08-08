@@ -13,17 +13,11 @@ public class SellerAd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sellerAdId;
+
     private double price;
+
     @OneToMany(mappedBy = "sellerAd")
     private List<BatchStock> batchStockId;
-
-//    @ManyToMany
-//     @JoinTable(name = "SellerAd_ShopOrder",
-//       joinColumns = @JoinColumn(name = "sellerAdId", referencedColumnName = "sellerAdId"),
-//   inverseJoinColumns = @JoinColumn(name = "orderId", referencedColumnName = "orderId"))
-//    @JsonIgnoreProperties("sellerAd")
-    @OneToMany
-    private List<ShopOrder> shopOrder;
 
     @ManyToOne
     @JoinColumn(name = "sellerId")
@@ -32,5 +26,4 @@ public class SellerAd {
     @ManyToOne
     private Product product;
 
-    // @OneToOne(mappedBy = "author", cascade = CascadeType.ALL)
 }

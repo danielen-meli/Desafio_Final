@@ -1,6 +1,5 @@
 package com.meli.desafio_final.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.meli.desafio_final.model.enums.Status;
 import lombok.Data;
 
@@ -14,16 +13,14 @@ public class ShopOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
 
-    @Column
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shopOrder_id")
     private List<ShopOrderItem> shopOrderItem;
-
-//    @ManyToMany(mappedBy = "shopOrder")
-//    @JsonIgnoreProperties("shopOrder")
-//    private List<SellerAd> sellerAd;
+    // registro no DB é invertido, a lista que armazena o ID da entidade dominante
 
     @ManyToOne
     private Buyer buyer;
