@@ -18,10 +18,13 @@ public class SellerAd {
     private double price;
 
     @OneToMany(mappedBy = "sellerAd")
+    @JsonIgnoreProperties("sellerAd")
     private List<BatchStock> batchStockId;
 
     @ManyToOne
     @JoinColumn(name = "sellerId")
+
+    @JsonIgnoreProperties("sellerAdList")
     private Seller seller;
 
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.meli.desafio_final.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.meli.desafio_final.model.enums.Category;
 import lombok.Data;
 
@@ -27,5 +28,6 @@ public class Section {
     private Category category;
 
     @OneToMany(mappedBy = "section")
+    @JsonIgnoreProperties("section")
     private List<InboundOrder> inboundOrder;
 }
