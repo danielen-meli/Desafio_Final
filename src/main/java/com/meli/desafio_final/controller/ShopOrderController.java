@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import static com.meli.desafio_final.model.enums.Status.CLOSED;
+
 import java.util.Map;
 
 @RestController
@@ -27,7 +28,7 @@ public class ShopOrderController{
     @GetMapping("/{id}")
     private ShopOrderDto getById(@PathVariable long id){
         ShopOrder shop = shopOrderService.getById(id);
-        return ShopOrderDto.converter(shop);
+        return new ShopOrderDto(shop);
     }
 
     @PostMapping("/api/v1/fresh-products/orders/")
@@ -37,6 +38,12 @@ public class ShopOrderController{
         // apesar do usuario add no carrinho só com produco/ preço, ele tem que entrar tudo q tem no model pra pegar das tabelas relacionadas
         ShopOrderModel.setStatus(CLOSED); // fecha o carrinho pra poder criar a compra e retornar o created.
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.save(ShopOrderModel));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ShopOrder> updateShopOrder(@PathVariable long id, @RequestBody Map<String, Status> changes){
+        return ResponseEntity.ok(shopOrderService.updatePartial(id, changes));
+
     }
 
     @PutMapping("/{id}")

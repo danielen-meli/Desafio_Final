@@ -5,12 +5,20 @@ import com.meli.desafio_final.exception.QuantityException;
 import com.meli.desafio_final.model.BatchStock;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
+
+import com.meli.desafio_final.repository.ShopOrderRepo;
+
 import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.repository.IBatchStockRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+
+import com.meli.desafio_final.model.ShopOrderItem;
+import com.meli.desafio_final.repository.ShopOrderRepository;
+import java.util.List;
 
 import java.util.Map;
 import javax.transaction.Transactional;
