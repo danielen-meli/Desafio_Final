@@ -33,7 +33,7 @@ public class SellerAdController {
 
         if(sellerAdService.getByCategory(category).isEmpty()){
             return ResponseEntity.notFound().build();
-        }
+        }//TODO service
         return ResponseEntity.ok(sellerAdService.getByCategory(category));
     }
 }
