@@ -1,6 +1,6 @@
 package com.meli.desafio_final.util;
 
-import com.meli.desafio_final.dto.SellerAdDTO;
+import com.meli.desafio_final.dto.SellerAdDto;
 import com.meli.desafio_final.model.BatchStock;
 import com.meli.desafio_final.model.Product;
 import com.meli.desafio_final.model.SellerAd;
@@ -12,8 +12,8 @@ import static com.meli.desafio_final.model.enums.Category.FROZEN;
 
 public class TestUtilsGenerator {
 
-    public static List<SellerAdDTO> getNewListAds(){
-        List<SellerAdDTO> newProductList = new ArrayList<>();
+    public static List<SellerAdDto> getNewListAds(){
+        List<SellerAdDto> newProductList = new ArrayList<>();
 
         SellerAd newSellerAd = new SellerAd();
         newSellerAd.setPrice(15.00);
@@ -26,7 +26,7 @@ public class TestUtilsGenerator {
         Product newProduct = new Product(1, "Frango", FROZEN);
         newSellerAd.setProduct(newProduct);
 
-        SellerAdDTO newSellerAdDto = new SellerAdDTO(newSellerAd);
+        SellerAdDto newSellerAdDto = new SellerAdDto(newSellerAd);
 
         newProductList.add(newSellerAdDto);
 

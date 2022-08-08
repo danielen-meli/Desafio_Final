@@ -1,6 +1,7 @@
 package com.meli.desafio_final.model;
 
 import com.meli.desafio_final.model.enums.Status;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor  @AllArgsConstructor
 public class ShopOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

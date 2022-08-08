@@ -46,11 +46,6 @@ public class ShopOrderController{
 
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ShopOrder> updateShopOrder(@PathVariable long id, @RequestBody Map<String, Status> changes){
-        return ResponseEntity.ok(shopOrderService.updatePartial(id, changes));
-
-    }
 
 }
   /**  Registre um pedido com a lista de produtos que compõem o

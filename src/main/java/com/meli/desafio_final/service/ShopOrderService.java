@@ -5,20 +5,12 @@ import com.meli.desafio_final.exception.QuantityException;
 import com.meli.desafio_final.model.BatchStock;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
-
-import com.meli.desafio_final.repository.ShopOrderRepo;
-
-import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IShopOrderRepository;
+import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IBatchStockRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-
-import com.meli.desafio_final.model.ShopOrderItem;
-import com.meli.desafio_final.repository.ShopOrderRepository;
-import java.util.List;
 
 import java.util.Map;
 import javax.transaction.Transactional;
@@ -30,7 +22,7 @@ import static java.time.LocalTime.now;
 public class ShopOrderService {
 
     @Autowired
-    private IShopOrderRepository shopOrderRepo;
+    private IShopOrderRepository shopOrderRepository;
 
     @Autowired
     private IBuyerRepository buyerRepository;
@@ -69,14 +61,14 @@ public class ShopOrderService {
 
 
 
-        return shopOrderRepo.save(shopOrder);
+        return shopOrderRepository.save(shopOrder);
     // aqui recebe a lista, mas tem que verificar os itens todos, para validar o estoque.
         // qdo mudar o status pra close é que decrementa a quantidade dos itens
 
     }
 
     public ShopOrder getById(long id){
-        return shopOrderRepo.findById(id).get();
+        return shopOrderRepository.findById(id).get();
     }
 
     public ShopOrder updatePartial(long id, Map<String, Status> changes) {
@@ -88,6 +80,6 @@ public class ShopOrderService {
             }
         });
 
-        return shopOrderRepo.save(shopOrder);
+        return shopOrderRepository.save(shopOrder);
     }
 }

@@ -7,13 +7,13 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class SellerAdDTO {
+public class SellerAdDto {
     @NotBlank
     private Product product;
     @NotBlank
     private double price;
 
-    public SellerAdDTO(SellerAd sellerAd){
+    public SellerAdDto(SellerAd sellerAd){
         this.product = sellerAd.getProduct();
         this.price = sellerAd.getPrice();
     }
