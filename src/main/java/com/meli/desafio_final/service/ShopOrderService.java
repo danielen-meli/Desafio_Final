@@ -16,6 +16,8 @@ import java.util.Map;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import static java.time.LocalTime.now;
+
 @Service
 public class ShopOrderService {
 
@@ -42,9 +44,20 @@ public class ShopOrderService {
             if (productInfo.getCurrentQuantity() < product.getQuantity()){
                 throw new QuantityException("Não há quantidade suficiente no estoque!");
             }
+            // validacao da data de validade
+/*
+            LocalDate dataUltimoReajuste = funcionario.getDataUltimoReajuste();
+            LocalDate dataAtual = LocalDate.now();
+            long mesesEntreReajuste = ChronoUnit.MONTHS.between(dataUltimoReajuste, dataAtual);
 
+            if (mesesEntreReajuste < 6) {
+                throw new ValidacaoException("Intervalo entre reajustes não pode ser inferior a 6 meses");
+            }*/
 
-        } );
+           //  if (productInfo.getDueDate() - now() <= 21 );
+               // throw new Exception("Data de validade insuficiente");
+        }
+        );
 
 
 
