@@ -1,14 +1,11 @@
 package com.meli.desafio_final.service;
 
-import com.meli.desafio_final.dto.ShopOrderDto;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
-import com.meli.desafio_final.repository.ShopOrderRepo;
+import com.meli.desafio_final.repository.IShopOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.meli.desafio_final.model.ShopOrderItem;
-import com.meli.desafio_final.repository.ShopOrderRepository;
-import java.util.List;
+
 import java.util.Map;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -17,11 +14,11 @@ import javax.validation.Valid;
 public class ShopOrderService {
 
     @Autowired
-    private ShopOrderRepo shopOrderRepo;
+    private IShopOrderRepository shopOrderRepo;
 
     @Transactional // save e importante ter rollback en caso de erro
     public ShopOrder save(@Valid ShopOrder shopOrder){
-        // shopOrder.getShopOrderItem()
+        //shopOrder.getShopOrderItem()
         return shopOrderRepo.save(shopOrder);
     // aqui recebe a lista, mas tem que verificar os itens todos, para validar o estoque.
         // qdo mudar o status pra close é que decrementa a quantidade dos itens
