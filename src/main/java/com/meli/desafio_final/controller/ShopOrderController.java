@@ -24,7 +24,7 @@ public class ShopOrderController {
     @GetMapping("/{id}")
     private ShopOrderDto getById(@PathVariable long id){
         ShopOrder shop = shopOrderService.getById(id);
-        return ShopOrderDto.converter(shop);
+        return new ShopOrderDto(shop);
     }
 
     @PostMapping()

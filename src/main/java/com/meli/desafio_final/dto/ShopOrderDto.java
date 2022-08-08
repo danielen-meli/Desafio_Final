@@ -11,19 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class ShopOrderDto {
-    public long orderId;
     public String status;
-    public List<ShopOrderItem> shopOrderItem;
-    public Buyer buyer;
+    public List<ShopOrderItemDto> shopOrderItem;
 
     public ShopOrderDto(ShopOrder shopOrder) {
-        this.orderId = shopOrder.getOrderId();
         this.status = shopOrder.getStatus().toString();
-        this.shopOrderItem = shopOrder.getShopOrderItem();
-        this.buyer = shopOrder.getBuyer();
-    }
-
-    public static ShopOrderDto converter(ShopOrder shopOrder){
-        return new ShopOrderDto(shopOrder);
+        this.shopOrderItem = ShopOrderItemDto.convert(shopOrder.getShopOrderItem());
     }
 }
