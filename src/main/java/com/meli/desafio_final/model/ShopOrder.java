@@ -14,6 +14,7 @@ public class ShopOrder {
     private long orderId;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToMany(cascade = CascadeType.PERSIST)
