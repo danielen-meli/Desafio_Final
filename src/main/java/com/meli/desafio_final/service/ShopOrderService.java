@@ -2,7 +2,6 @@ package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.OrderAdRequestDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
-import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.model.*;
 import com.meli.desafio_final.model.enums.Status;
@@ -11,19 +10,14 @@ import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IBatchStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
-
-import static java.time.LocalTime.now;
 
 @Service
 public class ShopOrderService {

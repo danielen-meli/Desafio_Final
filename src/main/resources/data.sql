@@ -19,6 +19,8 @@ insert into product values(null, "REFRIGERATED", "tomate");
 
 insert into user values(null, "123456", "email@email.com", "senha123", "User1");
 
+insert into buyer VALUES (null, 1);
+
 insert into seller values(null, "Seller1", 1);
 
 insert into seller_ad values(null, 5, 3, 1);

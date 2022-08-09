@@ -35,7 +35,7 @@ public class ShopOrderController{
         return new ShopOrderDto(shop);
     }
 
-    @PostMapping("/api/v1/fresh-products/orders")
+    @PostMapping()
     public ResponseEntity<ShopOrder> createShopOrder(@RequestBody ShopOrderRequestDto shopOrderRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.insertNewShopOrder(shopOrderRequestDto));
     }

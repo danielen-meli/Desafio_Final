@@ -36,5 +36,4 @@ public class ShopOrder {
         this.buyer = buyer;
         this.shopOrderItem = shopOrderItem;
     }
-
 }
