@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class BatchStockRequestDto {
+    private long batchStockId;
     private long sellerAdId;
     private double currentTemperature;
     private double minimumTemperature;
