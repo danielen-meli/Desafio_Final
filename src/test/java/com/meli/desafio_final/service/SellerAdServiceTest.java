@@ -2,11 +2,9 @@ package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.exception.NotFoundException;
-import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.repository.ISellerAdRepository;
 import com.meli.desafio_final.util.TestUtilsGen_SellerAd;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

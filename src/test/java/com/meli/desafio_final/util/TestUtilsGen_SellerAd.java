@@ -1,20 +1,5 @@
 package com.meli.desafio_final.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.*;
-
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.model.Product;
 import com.meli.desafio_final.model.SellerAd;

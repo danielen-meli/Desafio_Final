@@ -2,11 +2,9 @@ package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.exception.NotFoundException;
-import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.repository.ISellerAdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -23,7 +23,6 @@ public class SellerAdController {
 
     @GetMapping("/fresh-products/category")
     public ResponseEntity<List<SellerAdDTO>> getProductsCategory(@RequestParam("category") Category category){
-        //TODO paula: passar verificacao para service
         return ResponseEntity.ok(sellerAdService.getByCategory(category));
     }
 }
