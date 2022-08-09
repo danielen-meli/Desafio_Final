@@ -53,12 +53,15 @@ class ShopOrderServiceTest {
                 .thenReturn(Optional.of(shopOrder));
 
         shopOrder.setStatus(OPEN);
+        shopOrder.setOrderId(3);
 
         Map<String, Status> map = new HashMap<>();
+        map.put("status", Status.CLOSED);
         ShopOrder shopOrderUpdated = service.updatePartial(shopOrder.getOrderId(), map);
 
-        assertThat(shopOrderUpdated).isNotNull();
-        assertThat(shopOrderUpdated.getStatus()).isEqualTo(shopOrder.getStatus());
+        assertThat(shopOrderUpdated.getStatus()).isEqualTo(Status.CLOSED);
+        assertThat(shopOrderUpdated.getOrderId()).isEqualTo(3L);
+
     }
 
 
