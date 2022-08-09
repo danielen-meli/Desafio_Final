@@ -3,6 +3,7 @@ package com.meli.desafio_final.service;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.exception.QuantityException;
 import com.meli.desafio_final.model.BatchStock;
+import com.meli.desafio_final.model.Buyer;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.IShopOrderRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -33,27 +35,26 @@ public class ShopOrderService {
 
 
     @Transactional // save e importante ter rollback en caso de erro
-    public ShopOrder save(@Valid ShopOrder shopOrder) {
+    public ShopOrder save(ShopOrder shopOrder) {
         // verificar se o comprador está cadastrado:
-        boolean buyerExist = buyerRepository.exists((Example) shopOrder.getBuyer());
-        if (!buyerExist) throw new NotFoundException("Comprador não cadastrado!");
+        Optional<Buyer> buyerExist = buyerRepository.findById(shopOrder.getBuyer().getBuyerId());
+        if (buyerExist.isEmpty()) throw new NotFoundException("Comprador não cadastrado!");
 
-        // TODO: 08/08/22 : ver com Mauri pq está dando essas marcações!
-        shopOrder.getShopOrderItem().stream().forEach(product -> {
+        shopOrder.getShopOrderItem().forEach(product -> {
             BatchStock productInfo = (BatchStock) batchStockRepository.findById(product.getId()).orElse(null);
             // verificar a quantidade de cada produto da lista
+            assert productInfo != null;
             if (productInfo.getCurrentQuantity() < product.getQuantity()) {
                 throw new QuantityException("Não há quantidade suficiente no estoque!");
             }
-            // validacao da data de validade
+            // validacao da data de validade - poderia ser o period
             long expirationDate = ChronoUnit.DAYS.between(productInfo.getDueDate(), now());
             if (expirationDate < 21) {
                 throw new QuantityException("Validade é menor que 3 semanas!");
             }
-            ;
         });
         return shopOrderRepository.save(shopOrder);
-    }
+    } // depois q valida, o carrinho pode ser fechado - fazer isso num put pra mudar o status e ai atualiza o estoque
 
 
     public ShopOrder getById(long id){
