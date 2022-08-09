@@ -45,19 +45,4 @@ public class ShopOrderController{
         return ResponseEntity.ok(shopOrderService.updatePartial(id, changes));
 
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ShopOrder> updateShopOrder(@PathVariable long id, @RequestBody Map<String, Status> changes){
-        return ResponseEntity.ok(shopOrderService.updatePartial(id, changes));
-
-    }
-
 }
-  /**  Registre um pedido com a lista de produtos que compõem o
-        PurchaseOrder. Calcule o preço final
-        e devolva-o juntamente com o código
-        de status "201 CREATED".
-        Se não houver estoque de um
-        produto, notifique a situação
-        retornando um erro por produto, não
-        no nível do pedido **/

@@ -11,11 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class ShopOrderDto {
+    public long orderId;
     public String status;
     public Double precoTotal = .0;
     public List<ShopOrderItemDto> shopOrderItem;
 
+
     public ShopOrderDto(ShopOrder shopOrder) {
+        this.orderId = shopOrder.getOrderId();
         this.status = shopOrder.getStatus().toString();
         this.shopOrderItem = ShopOrderItemDto.convert(shopOrder.getShopOrderItem());
         calcularTotal();
@@ -28,4 +31,5 @@ public class ShopOrderDto {
 
         return precoTotal;
     }
+
 }

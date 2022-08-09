@@ -34,7 +34,7 @@ public class InboundService implements IInboundService {
     private ISectionRepository sectionRepo;
 
     @Autowired
-    private ISellerAdRepo sellerAdRepo;
+    private ISellerAdRepository sellerAdRepo;
 
     @Autowired
     private IBatchStockRepository batchStockRepo;

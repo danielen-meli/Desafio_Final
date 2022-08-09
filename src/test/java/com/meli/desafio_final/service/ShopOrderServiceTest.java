@@ -1,7 +1,7 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.model.ShopOrder;
-import com.meli.desafio_final.repository.ShopOrderRepo;
+import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.util.TestUtilGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ class ShopOrderServiceTest {
     private ShopOrderService service;
 
     @Mock
-    private ShopOrderRepo repo;
+    private IShopOrderRepository repo;
 
     @Test
     public void get_returnShopOrder_WhenShopOrderValid(){

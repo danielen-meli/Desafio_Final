@@ -4,7 +4,6 @@ import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.service.SellerAdService;
-import com.meli.desafio_final.service.Util.StringToEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
