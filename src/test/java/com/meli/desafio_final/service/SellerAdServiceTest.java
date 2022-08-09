@@ -2,19 +2,18 @@ package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.model.SellerAd;
+import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.repository.ISellerAdRepository;
 import com.meli.desafio_final.util.TestUtilsGen_SellerAd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -28,12 +27,6 @@ class SellerAdServiceTest {
 
     @Mock
     ISellerAdRepository sellerAdRepository;
-
-//    @Autowired
-//    ISellerAdRepository sellerAdRepo;
-//
-//    @Autowired
-//    SellerAdService sellerAdService;
 
     @BeforeEach
     public void setup(){
@@ -53,6 +46,15 @@ class SellerAdServiceTest {
 
     @Test
     void getByCategory() {
+        List<SellerAd> newListSellerAd = TestUtilsGen_SellerAd.getNewListSellerAd();
+        List<SellerAdDTO> listCtgFrozen = TestUtilsGen_SellerAd.getAdDtoCtgFrozen();
+        List<SellerAdDTO> listCtgRefrig = TestUtilsGen_SellerAd.getAdDtoCtgRefrig();
+        List<SellerAdDTO> listCtgFresh = TestUtilsGen_SellerAd.getAdDtoCtgFresh();
 
+        sellerAdRepository.saveAll(newListSellerAd);
+
+        assertThat(sellerAdService.getByCategory(Category.FROZEN)).isEqualTo(listCtgFrozen);
+        assertThat(sellerAdService.getByCategory(Category.REFRIGERATED)).isEqualTo(listCtgRefrig);
+        assertThat(sellerAdService.getByCategory(Category.FRESH)).isEqualTo(listCtgFresh);
     }
 }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.meli.desafio_final.model.enums.Category.FROZEN;
+import static com.meli.desafio_final.model.enums.Category.*;
 
 public class TestUtilsGen_SellerAd {
     private static String SCOPE;
@@ -72,6 +72,27 @@ public class TestUtilsGen_SellerAd {
 
     public static List<SellerAdDTO> getNewListAdDto(){
         return getNewListSellerAd().stream().
+                map(SellerAdDTO::new).
+                collect(Collectors.toList());
+    }
+
+    public static List<SellerAdDTO> getAdDtoCtgFrozen(){
+        return getNewListSellerAd().stream().
+                filter(p -> p.getProduct().getCategory().equals(FROZEN)).
+                map(SellerAdDTO::new).
+                collect(Collectors.toList());
+    }
+
+    public static List<SellerAdDTO> getAdDtoCtgRefrig(){
+        return getNewListSellerAd().stream().
+                filter(p -> p.getProduct().getCategory().equals(REFRIGERATED)).
+                map(SellerAdDTO::new).
+                collect(Collectors.toList());
+    }
+
+    public static List<SellerAdDTO> getAdDtoCtgFresh(){
+        return getNewListSellerAd().stream().
+                filter(p -> p.getProduct().getCategory().equals(FRESH)).
                 map(SellerAdDTO::new).
                 collect(Collectors.toList());
     }
