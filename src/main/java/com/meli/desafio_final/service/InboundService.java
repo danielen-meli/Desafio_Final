@@ -1,6 +1,7 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.BatchStockRequestDto;
+import com.meli.desafio_final.dto.BatchStockResponseDto;
 import com.meli.desafio_final.dto.InboundOrderRequestDto;
 import com.meli.desafio_final.dto.InboundOrderResponseDto;
 import com.meli.desafio_final.exception.BadRequestException;
@@ -121,25 +122,34 @@ public class InboundService implements IInboundService {
         return batchStocksSaved;
     }
 
-    @Override
-    public List<BatchStock> insertNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
-        if(newInboundOrder.getId() != 0){
-            throw new BadRequestException("Order already registered, to update an order use the route /put");
-        }
-        return saveInboundOrder(newInboundOrder);
-
+    private InboundOrderResponseDto convertBatchStockToResponse(List<BatchStock> batchStocksSaved) {
+        List<BatchStockResponseDto> batchStocksResponseDto = batchStocksSaved.stream().map(BatchStockResponseDto::new).collect(Collectors.toList());
+        return InboundOrderResponseDto.builder()
+                .batchStockList(batchStocksResponseDto)
+                .build();
     }
 
     @Override
-    public List<BatchStock> updateNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
+    public InboundOrderResponseDto insertNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
+        if(newInboundOrder.getId() != 0){
+            throw new BadRequestException("Order already registered, to update an order use the route /put");
+        }
+        List<BatchStock> batchStocksSaved = saveInboundOrder(newInboundOrder);
+        return convertBatchStockToResponse(batchStocksSaved);
+    }
+
+    @Override
+    public InboundOrderResponseDto updateNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
         // TODO: Caso tenha um método para buscar order por ID utilizar aqui, dentro dele já tem a exception sendo lançada
 
         // TODO: SEMPRE ESTÁ INSERINDO NOVAMENTE APENAS O BATCHSTOCK POIS NAO POSSUI O ID nas informações de batchStock, caso o cascade não funcione criar a função para remover todos os batchstock relacionados aquele inboundorder e adicionar novamente
 
         Optional<InboundOrder> inboundFound = inboundOrderRepo.findById(newInboundOrder.getId());
         if(inboundFound.isPresent()){
-            return saveInboundOrder(newInboundOrder);
+            List<BatchStock> batchStocksSaved = saveInboundOrder(newInboundOrder);
+            return convertBatchStockToResponse(batchStocksSaved);
         }
+
         throw new BadRequestException("ID is required to update an order, to insert a new order use the route /post");
     }
 }
