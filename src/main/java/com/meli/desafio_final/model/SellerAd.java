@@ -14,13 +14,17 @@ public class SellerAd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sellerAdId;
 
+    @Column(nullable = false)
     private double price;
 
     @OneToMany(mappedBy = "sellerAd")
+    @JsonIgnoreProperties("sellerAd")
     private List<BatchStock> batchStockId;
 
     @ManyToOne
     @JoinColumn(name = "sellerId")
+
+    @JsonIgnoreProperties("sellerAdList")
     private Seller seller;
 
     @ManyToOne

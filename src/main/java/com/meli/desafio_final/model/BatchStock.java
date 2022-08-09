@@ -1,6 +1,11 @@
 package com.meli.desafio_final.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.meli.desafio_final.dto.BatchStockRequestDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,12 +13,16 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BatchStock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long batchStockId;
 
     @ManyToOne
+    @JsonIgnoreProperties("batchStockId")
     private SellerAd sellerAd;
 
     @Column(nullable = false)
@@ -41,6 +50,20 @@ public class BatchStock {
     private LocalDate dueDate;
 
     @ManyToOne
+    @JsonIgnoreProperties("batchStockList")
+    @JoinColumn(name = "inboundOrderId")
     private InboundOrder inboundOrder;
 
+    public BatchStock(BatchStockRequestDto batchStockRequestDto, SellerAd sellerAd) {
+        this.sellerAd = sellerAd;
+        this.currentTemperature = batchStockRequestDto.getCurrentTemperature();
+        this.minimumTemperature = batchStockRequestDto.getMinimumTemperature();
+        this.initialQuantity = batchStockRequestDto.getInitialQuantity();
+        this.currentQuantity = batchStockRequestDto.getCurrentQuantity();
+        this.manufacturingDate = batchStockRequestDto.getManufacturingDate();
+        this.manufacturingTime = batchStockRequestDto.getManufacturingTime();
+        this.volume = batchStockRequestDto.getVolume();
+        this.dueDate = batchStockRequestDto.getDueDate();
+        //this.inboundOrder = null;
+    }
 }

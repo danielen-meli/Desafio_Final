@@ -1,5 +1,6 @@
 package com.meli.desafio_final.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Seller {
     private String sellerName;
 
     @OneToMany(mappedBy = "seller")
+    @JsonIgnoreProperties("seller")
     private List<SellerAd> sellerAdList;
 
     @OneToOne

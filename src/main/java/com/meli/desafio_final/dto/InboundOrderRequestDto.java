@@ -11,9 +11,11 @@ import java.util.List;
 @Data
 public class InboundOrderRequestDto {
 
+    private long id;
+
     private LocalDate orderDate;
 
     private long section;
 
-    private List<BatchStock> batchStockList;
+    private List<BatchStockRequestDto> batchStockList;
 }
