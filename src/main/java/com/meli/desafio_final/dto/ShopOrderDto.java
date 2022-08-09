@@ -31,5 +31,5 @@ public class ShopOrderDto {
 
         return precoTotal;
     }
-
+// TODO: 09/08/22 validacoes do DTO 
 }

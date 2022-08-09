@@ -1,5 +1,6 @@
 package com.meli.desafio_final.model;
 
+import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.model.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +31,9 @@ public class ShopOrder {
     @ManyToOne
     private Buyer buyer;
 
+    public ShopOrder(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, List<ShopOrderItem> shopOrderItem){
+        this.status = shopOrderRequestDto.getOrderStatus();
+        this.buyer = buyer;
+        this.shopOrderItem = shopOrderItem;
+    }
 }
