@@ -27,32 +27,6 @@ import java.util.stream.Collectors;
 import static com.meli.desafio_final.model.enums.Category.*;
 
 public class TestUtilsGen_SellerAd {
-    private static String SCOPE;
-    private static ObjectWriter mapper;
-
-    public static void emptyAdsFile() {
-        Properties properties = new Properties();
-
-        try {
-            properties.load(new ClassPathResource("application.properties").getInputStream());
-            SCOPE = properties.getProperty("api.scope");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        PrintWriter writer = null;
-
-        try {
-            writer = new PrintWriter(ResourceUtils.getFile
-                    ("./src/" + SCOPE + "/resources/seller_ads.json"));
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-        }
-
-        writer.print("{}");
-        writer.close();
-    }
 
     public static List<SellerAd> getNewListSellerAd(){
         List<SellerAd> newProductList = new ArrayList<>();
@@ -67,7 +41,7 @@ public class TestUtilsGen_SellerAd {
                 price(5.00).
                 product(newProduct_2).build());
 
-        return newProductList;
+        return newProductList;//lista com dois anuncios de produto, nenhum da categoria REFRIGERATED
     }
 
     public static List<SellerAdDTO> getNewListAdDto(){
@@ -88,7 +62,7 @@ public class TestUtilsGen_SellerAd {
                 filter(p -> p.getProduct().getCategory().equals(REFRIGERATED)).
                 map(SellerAdDTO::new).
                 collect(Collectors.toList());
-    }
+    }//lista vazia para teste
 
     public static List<SellerAdDTO> getAdDtoCtgFresh(){
         return getNewListSellerAd().stream().

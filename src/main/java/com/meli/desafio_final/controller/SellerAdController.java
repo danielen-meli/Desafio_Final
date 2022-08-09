@@ -18,17 +18,12 @@ public class SellerAdController {
 
     @GetMapping("/fresh-products")
     public ResponseEntity<List<SellerAdDTO>> getListProducts(){
-        if(sellerAdService.getAllProducts().isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(sellerAdService.getAllProducts());
     }
 
     @GetMapping("/fresh-products/category")
     public ResponseEntity<List<SellerAdDTO>> getProductsCategory(@RequestParam("category") Category category){
-        if(sellerAdService.getByCategory(category).isEmpty()){
-            return ResponseEntity.notFound().build();
-        }//TODO paula: passar verificacao para service
+        //TODO paula: passar verificacao para service
         return ResponseEntity.ok(sellerAdService.getByCategory(category));
     }
 }
