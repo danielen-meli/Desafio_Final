@@ -64,9 +64,8 @@ public class ShopOrderService {
         ShopOrder shopOrder = getById(id);
 
         changes.forEach( (attribute, value)-> {
-            switch (attribute){
-                case "status": shopOrder.setStatus(value); break;
-            }
+            if (attribute.equals("status"))
+                shopOrder.setStatus(value);
         });
 
         return shopOrderRepository.save(shopOrder);
