@@ -1,6 +1,7 @@
 package com.meli.desafio_final.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.engine.jdbc.batch.spi.Batch;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 public class SellerAd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
