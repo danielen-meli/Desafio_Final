@@ -69,7 +69,7 @@ public class ShopOrderService {
     private List<BatchStock> filterBatchStocksByDueDate(List<BatchStock> batchStockList){
          List<BatchStock> batchStockListValid = batchStockList.stream().filter(bs-> {
             Period expirationDate = Period.between(bs.getDueDate(), LocalDate.now());
-            if (expirationDate.getDays() > 21){
+            if (expirationDate.getDays() < 21){
                 return false;
             }
             return true;
@@ -91,9 +91,7 @@ public class ShopOrderService {
 
         ShopOrder shopOrder = new ShopOrder(shopOrderRequestDto, buyer, shopOrderItems);
         return shopOrderRepository.save(shopOrder);
-
     }
-
 
     @Transactional // save e importante ter rollback en caso de erro
     public ShopOrder insertNewShopOrder(ShopOrderRequestDto shopOrderRequestDto) {
@@ -102,18 +100,6 @@ public class ShopOrderService {
 
         return save(shopOrderRequestDto, buyer);
     }
-
-
-/*    @Transactional
-    public void NewStatus(long id, Status statusOrder) {
-        shopOrderRepository
-                .findById(id)
-                .map(order -> {
-                    order.setStatus(statusOrder);
-                    return shopOrderRepository.save(order);
-                }).orElseThrow(() -> new BadRequestException("Não foi possível concluir o pedido."));
-    }*/
-
 
     public ShopOrder getById(long id) {
         return shopOrderRepository.findById(id).get();
@@ -129,7 +115,6 @@ public class ShopOrderService {
                     break;
             }
         });
-
         return shopOrderRepository.save(shopOrder);
     }
 
