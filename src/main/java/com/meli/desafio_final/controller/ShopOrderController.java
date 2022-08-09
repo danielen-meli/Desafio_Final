@@ -31,7 +31,7 @@ public class ShopOrderController{
         return new ShopOrderDto(shop);
     }
 
-    @PostMapping("/api/v1/fresh-products/orders/")
+    @PostMapping("/api/v1/fresh-products/orders")
     public ResponseEntity<Object> createShopOrder(@RequestBody @Valid ShopOrderDto shopOrderDto){
         var ShopOrderModel = new ShopOrder();
         BeanUtils.copyProperties(shopOrderDto, ShopOrderModel);
@@ -39,6 +39,7 @@ public class ShopOrderController{
         ShopOrderModel.setStatus(CLOSED); // fecha o carrinho pra poder criar a compra e retornar o created.
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.save(ShopOrderModel));
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ShopOrder> updateShopOrder(@PathVariable long id, @RequestBody Map<String, Status> changes){

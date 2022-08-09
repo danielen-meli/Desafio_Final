@@ -1,5 +1,7 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.exception.BadRequestException;
+import com.meli.desafio_final.exception.ExceptionsDetails;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.exception.QuantityException;
 import com.meli.desafio_final.model.BatchStock;
@@ -10,14 +12,21 @@ import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IBatchStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
+
 
 import static java.time.LocalTime.now;
 
@@ -53,23 +62,38 @@ public class ShopOrderService {
                 throw new QuantityException("Validade é menor que 3 semanas!");
             }
         });
+
         return shopOrderRepository.save(shopOrder);
     } // depois q valida, o carrinho pode ser fechado - fazer isso num put pra mudar o status e ai atualiza o estoque
 
 
-    public ShopOrder getById(long id){
+/*    @Transactional
+    public void NewStatus(long id, Status statusOrder) {
+        shopOrderRepository
+                .findById(id)
+                .map(order -> {
+                    order.setStatus(statusOrder);
+                    return shopOrderRepository.save(order);
+                }).orElseThrow(() -> new BadRequestException("Não foi possível concluir o pedido."));
+    }*/
+
+
+    public ShopOrder getById(long id) {
         return shopOrderRepository.findById(id).get();
     }
 
     public ShopOrder updatePartial(long id, Map<String, Status> changes) {
         ShopOrder shopOrder = getById(id);
 
-        changes.forEach( (attribute, value)-> {
-            switch (attribute){
-                case "status": shopOrder.setStatus(value); break;
+        changes.forEach((attribute, value) -> {
+            switch (attribute) {
+                case "status":
+                    shopOrder.setStatus(value);
+                    break;
             }
         });
 
         return shopOrderRepository.save(shopOrder);
     }
+
 }
