@@ -13,5 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class InboundOrderResponseDto {
-    List<BatchStock> batchStockList;
+    List<BatchStockResponseDto> batchStockList;
 }
