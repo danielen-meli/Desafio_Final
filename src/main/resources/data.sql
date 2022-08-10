@@ -1,4 +1,5 @@
 use meli_fresh;
+
 --
 --
 -- insert into warehouse values(null, "SP", "warehouse01");
@@ -38,3 +39,4 @@ use meli_fresh;
 -- VALUES (3, 30, -30, now(), 40, now(), now(), -40, 50, 1, 2 );
 --
 --
+

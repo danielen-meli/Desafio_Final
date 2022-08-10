@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class SellerAdService {
+public class SellerAdService implements ISellerAdService{
 
     @Autowired
     private ISellerAdRepository sellerAdRepo;
 
+    @Override
     public List<SellerAdDTO> getAllProducts() {
         List<SellerAdDTO> productsList = sellerAdRepo.findAll().
                 stream().map(SellerAdDTO::new).
@@ -27,7 +28,7 @@ public class SellerAdService {
 
         return productsList;
     }
-
+    @Override
     public List<SellerAdDTO> getByCategory(Category category){
         List<SellerAdDTO> allProducts = sellerAdRepo.findAll().
                 stream().map(SellerAdDTO::new).

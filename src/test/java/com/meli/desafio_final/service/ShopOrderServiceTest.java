@@ -1,17 +1,23 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.dto.ShopOrderRequestDto;
+import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.exception.NotFoundException;
+import com.meli.desafio_final.model.Buyer;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.IBatchStockRepository;
+import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.util.TestUtilsGeneratorShopOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.Optional;
 
@@ -31,6 +37,12 @@ class ShopOrderServiceTest {
 
     @Mock
     private IBatchStockRepository batchStockRepository;
+
+
+    @Mock
+    private IBuyerRepository buyerRepository;
+
+    private Object Long;
 
 
     @Test
@@ -109,5 +121,18 @@ class ShopOrderServiceTest {
         ShopOrder shopOrderUpdated = service.closedShopOrder(shopOrder.getOrderId());
 
         assertThat(shopOrderUpdated.getStatus()).isEqualTo(Status.CLOSED);
+    }
+
+    @Test
+    public void insertNewShopOrder (){
+        ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
+        ShopOrder shopOrderUtil = TestUtilsGeneratorShopOrder.getShopOrderMock();
+        BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
+        ShopOrder shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
+
+      //TODO: Faltam os assertThat
+
+
+
     }
 }

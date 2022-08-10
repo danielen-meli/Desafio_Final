@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.bytebuddy.asm.Advice;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,10 +21,12 @@ import java.util.List;
 public class InboundOrderRequestDto {
 
     private long id;
-
+    @NotNull(message = "OrderDate is required")
     private LocalDate orderDate;
 
-    private long section;
+    @NotNull(message = "Section is required")
+    private Long section;
 
+    @Valid
     private List<BatchStockRequestDto> batchStockList;
 }
