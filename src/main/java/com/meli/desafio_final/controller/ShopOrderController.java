@@ -40,9 +40,9 @@ public class ShopOrderController{
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.save(ShopOrderModel));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ShopOrder> updateShopOrder(@PathVariable long id, @RequestBody Map<String, Status> changes){
-        return ResponseEntity.ok(shopOrderService.updatePartial(id, changes));
+    @PutMapping("/closed-shopOrder/{id}")
+    public ResponseEntity<ShopOrder> closeShopOrder(@PathVariable long id){
+        return ResponseEntity.ok(shopOrderService.closedShopOrder(id));
 
     }
 }

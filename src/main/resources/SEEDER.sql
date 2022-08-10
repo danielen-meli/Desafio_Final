@@ -35,5 +35,5 @@ replace into SELLER_AD (seller_ad_id, price, seller_id, product_product_id) VALU
 
 replace into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (1, now(), 1.0, 2, 1, 1);
 
-replace into BATCH_STOCK (batch_stock_id, current_quantity, current_temperature, due_date, initial_quantity, manufacturing_date, manufacturing_time, minimum_temperature, volume, inbound_order_inbound_order_id, seller_ad_seller_ad_id)
+replace into BATCH_STOCK (batch_stock_id, current_quantity, current_temperature, due_date, initial_quantity, manufacturing_date, manufacturing_time, minimum_temperature, volume, inbound_order_id, seller_ad_seller_ad_id)
 VALUES (1, 1, -30, now(), 40, now(), now(), -40, 50, 1, 1 );

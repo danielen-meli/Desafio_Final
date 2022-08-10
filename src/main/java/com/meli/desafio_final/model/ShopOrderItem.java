@@ -1,14 +1,18 @@
 package com.meli.desafio_final.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 @Data
+@Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ShopOrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +31,5 @@ public class ShopOrderItem {
     @JoinColumn(name = "sellerAd_id")
     private SellerAd sellerAd;
 
-    public ShopOrderItem(int i, Object o, double v, int i1, Object o1) {
-    }
 //    private ShopOrder shopOrder;
 }
