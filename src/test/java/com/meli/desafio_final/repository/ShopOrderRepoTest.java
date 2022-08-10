@@ -1,7 +1,7 @@
 package com.meli.desafio_final.repository;
 
 import com.meli.desafio_final.model.ShopOrder;
-import com.meli.desafio_final.util.TestUtilGenerator;
+import com.meli.desafio_final.util.TestUtilsGeneratorShopOrder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class ShopOrderRepoTest {
@@ -19,7 +18,7 @@ class ShopOrderRepoTest {
 
     @Test
     public void getById_returnShopOrder_WhenShopOrderValid(){
-        ShopOrder shopOrder = TestUtilGenerator.newShopOrderToSave();
+        ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderToSave();
         repository.save(shopOrder);
 
         ShopOrder shopFound = repository.findById(shopOrder.getOrderId()).get();
@@ -30,7 +29,7 @@ class ShopOrderRepoTest {
 
     @Test
     public void getById_returnEmptyShopOrder_WhenShopOrderInvalid(){
-        ShopOrder shopOrder = TestUtilGenerator.newShopOrderToSave();
+        ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderToSave();
         repository.save(shopOrder);
 
         Optional<ShopOrder> shopFound = repository.findById(shopOrder.getOrderId());

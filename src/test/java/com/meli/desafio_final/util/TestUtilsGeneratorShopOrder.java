@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestUtilGenerator {
+public class TestUtilsGeneratorShopOrder {
 
     public static ShopOrder newShopOrderToSave() {
         Product produto = Product.builder()

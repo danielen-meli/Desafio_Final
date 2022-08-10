@@ -58,6 +58,7 @@ public class InboundService implements IInboundService {
 
     private double isSectionCapacityValid(List<BatchStockRequestDto> batchStockList, double sectionCapacity){
         double sumBatchStocksVolume = batchStockList.stream().mapToDouble(bs -> {
+        // TODO: Verificar o current quantity como se fosse a flag de stock ativo ou não
             if(bs.getBatchStockId() > 0){
                 return 0;
             }

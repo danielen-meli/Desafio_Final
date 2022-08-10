@@ -1,14 +1,11 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.exception.NotFoundException;
-import com.meli.desafio_final.model.BatchStock;
-import com.meli.desafio_final.model.Product;
-import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.IBatchStockRepository;
 import com.meli.desafio_final.repository.IShopOrderRepository;
-import com.meli.desafio_final.util.TestUtilGenerator;
+import com.meli.desafio_final.util.TestUtilsGeneratorShopOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -16,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,12 +37,12 @@ class ShopOrderServiceTest {
     @Test
     public void get_returnShopOrder_WhenShopOrderValid(){
         BDDMockito.when(shopOrderRepository.findById(anyLong()))
-                .thenReturn(Optional.of(TestUtilGenerator.newShopOrderToSave()));
+                .thenReturn(Optional.of(TestUtilsGeneratorShopOrder.newShopOrderToSave()));
 
         ShopOrder shopOrder = service.getById(1L);
 
         assertThat(shopOrder).isNotNull();
-        assertThat(shopOrder.getOrderId()).isEqualTo(TestUtilGenerator.newShopOrderToSave().getOrderId());
+        assertThat(shopOrder.getOrderId()).isEqualTo(TestUtilsGeneratorShopOrder.newShopOrderToSave().getOrderId());
     }
 
     @Test
@@ -60,7 +56,7 @@ class ShopOrderServiceTest {
 
     @Test
     public void closedShopOrder_ShouldReturnException_WhenShopOrderAlreadyClosed(){
-        ShopOrder shopOrder = TestUtilGenerator.newShopOrderToSave();
+        ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderToSave();
         shopOrder.setStatus(Status.CLOSED);
 
         BDDMockito.when(shopOrderRepository.findById(anyLong()))
@@ -76,7 +72,7 @@ class ShopOrderServiceTest {
 
     @Test
     public void closedShopOrder_ShouldReturnException_WhenNotHaveQuantityInStorage(){
-        ShopOrder shopOrder = TestUtilGenerator.newShopOrderToSave();
+        ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderToSave();
 
         BDDMockito.when(shopOrderRepository.findById(anyLong())).thenReturn(Optional.of(shopOrder));
         BDDMockito.when(batchStockRepository.getQuantityProduct(anyLong())).thenReturn(0l);
@@ -92,7 +88,7 @@ class ShopOrderServiceTest {
 
     @Test
     public void closedShopOrder_ShouldCloseShopOrderWhenHaveQuantityInSameBatch(){
-        ShopOrder shopOrder = TestUtilGenerator.newShopOrderToSave();
+        ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderToSave();
 
         BDDMockito.when(shopOrderRepository.findById(anyLong())).thenReturn(Optional.of(shopOrder));
         BDDMockito.when(batchStockRepository.getQuantityProduct(anyLong())).thenReturn(10L);
@@ -105,7 +101,7 @@ class ShopOrderServiceTest {
 
     @Test
     public void closedShopOrder_ShouldCloseShopOrderWhenHaveQuantitDiferentsBatch(){
-        ShopOrder shopOrder = TestUtilGenerator.newShopOrderWithTwoBatch();
+        ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderWithTwoBatch();
 
         BDDMockito.when(shopOrderRepository.findById(anyLong())).thenReturn(Optional.of(shopOrder));
         BDDMockito.when(batchStockRepository.getQuantityProduct(anyLong())).thenReturn(180L);

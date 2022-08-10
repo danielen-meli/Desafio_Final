@@ -67,8 +67,12 @@ public class ShopOrderService {
     // Retorna apenas os BatchStocks que o due date é maior q 21
     private List<BatchStock> filterBatchStocksByDueDate(List<BatchStock> batchStockList){
          List<BatchStock> batchStockListValid = batchStockList.stream().filter(bs-> {
-            Period expirationDate = Period.between(bs.getDueDate(), LocalDate.now());
-            if (expirationDate.getDays() < 21){
+//             LocalDate dateNow = LocalDate.now();
+//             LocalDate dueDate = bs.getDueDate();
+//            Period expirationDate = Period.between(LocalDate.now(), bs.getDueDate());
+            //int daysToExpire = expirationDate.getDays();
+            long weeks = ChronoUnit.WEEKS.between(LocalDate.now(), bs.getDueDate());
+            if (weeks < 3){
                 return false;
             }
             return true;
