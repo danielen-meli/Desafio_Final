@@ -6,6 +6,6 @@ import com.meli.desafio_final.model.BatchStock;
 import java.util.List;
 
 public interface IBatchStockService {
-    List<BatchStockDto> getProductsInStock();
+    List<BatchStockDto> getProductsInStock(long productId);
     List<BatchStockDto> getProductsStockOrdered();
 }
