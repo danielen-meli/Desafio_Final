@@ -14,7 +14,6 @@ import java.lang.reflect.Type;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
