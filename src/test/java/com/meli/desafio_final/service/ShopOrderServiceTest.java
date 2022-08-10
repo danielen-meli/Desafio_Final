@@ -38,10 +38,12 @@ class ShopOrderServiceTest {
     @Mock
     private IBatchStockRepository batchStockRepository;
 
+
     @Mock
     private IBuyerRepository buyerRepository;
 
     private Object Long;
+
 
     @Test
     public void get_returnShopOrder_WhenShopOrderValid(){
