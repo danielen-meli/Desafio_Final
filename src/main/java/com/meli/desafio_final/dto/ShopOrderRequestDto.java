@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,9 +17,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShopOrderRequestDto {
+    @NotNull(message = "date is required")
     private LocalDate date;
-    private long buyerId;
+
+    @NotNull(message = "buyerId is required")
+    private Long buyerId;
+
+    @NotNull(message = "orderStatus is required")
     private Status orderStatus;
-    List<OrderAdRequestDto> products;
+
+    @Valid
+    private List<OrderAdRequestDto> products;
 
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @NoArgsConstructor
@@ -15,10 +16,10 @@ import java.util.List;
 @Data
 @Builder
 public class SellerAdDTO {
-    @NotBlank
+    @NotNull
     private Product product;
-    @NotBlank
-    private double price;
+    @NotNull
+    private Double price;
 
     public SellerAdDTO(SellerAd sellerAd){
         this.product = sellerAd.getProduct();
