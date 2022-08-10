@@ -11,6 +11,7 @@ import java.lang.reflect.Type;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
