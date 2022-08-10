@@ -13,7 +13,6 @@ import java.util.List;
 public interface IBatchStockRepository extends JpaRepository<BatchStock, Long> {
     List<BatchStock> findAllBySellerAdSellerAdId (long SellerAdId);
 
-
     @Query(nativeQuery = true, value = "SELECT SUM(bs.current_quantity) from BATCH_STOCK bs where bs.seller_ad_seller_ad_id = :sellerId")
     long getQuantityProduct(@Param("sellerId") Long sellerId);
 }
