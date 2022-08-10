@@ -1,5 +1,6 @@
 package com.meli.desafio_final.controller;
 
+import com.meli.desafio_final.dto.BatchStockDto;
 import com.meli.desafio_final.model.BatchStock;
 import com.meli.desafio_final.model.enums.OrderBy;
 import com.meli.desafio_final.service.IBatchStockService;
@@ -20,12 +21,12 @@ public class BatchStockController {
     IBatchStockService batchStockService;
 
     @GetMapping("/stock")
-    public ResponseEntity<List<BatchStock>> getProductsStock(){
+    public ResponseEntity<List<BatchStockDto>> getProductsStock(){
         return ResponseEntity.ok(batchStockService.getProductsInStock());
     }
 
     @GetMapping("/stock/orderBy/")
-    public ResponseEntity<List<BatchStock>> getProductsStockOrder(@RequestParam("orderBy") OrderBy orderBy){
+    public ResponseEntity<List<BatchStockDto>> getProductsStockOrder(@RequestParam("orderBy") OrderBy orderBy){
         return null;
     }
 

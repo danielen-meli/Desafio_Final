@@ -1,10 +1,11 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.dto.BatchStockDto;
 import com.meli.desafio_final.model.BatchStock;
 
 import java.util.List;
 
 public interface IBatchStockService {
-    List<BatchStock> getProductsInStock();
-    List<BatchStock> getProductsStockOrdered();
+    List<BatchStockDto> getProductsInStock();
+    List<BatchStockDto> getProductsStockOrdered();
 }
