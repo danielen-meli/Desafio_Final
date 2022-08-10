@@ -32,7 +32,6 @@ class ShopOrderServiceTest {
     @Mock
     private IBatchStockRepository batchStockRepository;
 
-    private Object Long;
 
     @Test
     public void get_returnShopOrder_WhenShopOrderValid(){
