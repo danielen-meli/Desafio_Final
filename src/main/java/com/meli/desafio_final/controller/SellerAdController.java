@@ -2,6 +2,7 @@ package com.meli.desafio_final.controller;
 
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.model.enums.Category;
+import com.meli.desafio_final.service.ISellerAdService;
 import com.meli.desafio_final.service.SellerAdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.List;
 public class SellerAdController {
 
     @Autowired
-    private SellerAdService sellerAdService;
+    private ISellerAdService sellerAdService;
 
     @GetMapping("/fresh-products")
     public ResponseEntity<List<SellerAdDTO>> getListProducts(){

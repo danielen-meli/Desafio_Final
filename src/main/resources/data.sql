@@ -26,5 +26,5 @@ insert into seller_ad values(null, 4, 2, 1);
 insert into seller_ad values(null, 8, 1, 1);
 
 insert into buyer values(null, 1);
-insert into seller_ad values(null, 10, 4, 1);
+-- insert into seller_ad values(null, 10, 4, 1);
 

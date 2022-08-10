@@ -1,30 +1,23 @@
 package com.meli.desafio_final.controller;
 
+import com.meli.desafio_final.dto.ShopOrderDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
-import com.meli.desafio_final.model.BatchStock;
+import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.model.ShopOrder;
-import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.IBatchStockRepository;
-import com.meli.desafio_final.service.ShopOrderService;
-import org.apache.coyote.Response;
+import com.meli.desafio_final.service.IShopOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.meli.desafio_final.dto.ShopOrderDto;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/v1/fresh-products/orders")
 public class ShopOrderController{
     @Autowired
-    private ShopOrderService shopOrderService;
+    private IShopOrderService shopOrderService;
 
     @Autowired
     private IBatchStockRepository testerepo;
@@ -36,20 +29,13 @@ public class ShopOrderController{
     }
 
     @PostMapping()
-    public ResponseEntity<ShopOrder> createShopOrder(@RequestBody ShopOrderRequestDto shopOrderRequestDto){
+    public ResponseEntity<ShopOrderResponseDto> createShopOrder(@RequestBody ShopOrderRequestDto shopOrderRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.insertNewShopOrder(shopOrderRequestDto));
     }
-
 
     @PutMapping("/closed-shopOrder/{id}")
     public ResponseEntity<ShopOrder> closeShopOrder(@PathVariable long id){
         return ResponseEntity.ok(shopOrderService.closedShopOrder(id));
 
     }
-
-  /*
-  @GetMapping("/teste")
-    public ResponseEntity<List<BatchStock>> teste() {
-        return ResponseEntity.ok(testerepo.findAllBySellerAdSellerAdId(1L));
-    }*/
-}
+    }
