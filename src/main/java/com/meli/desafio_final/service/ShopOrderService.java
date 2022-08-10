@@ -2,6 +2,7 @@ package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.OrderAdRequestDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
+import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.*;
@@ -25,7 +26,7 @@ import javax.transaction.Transactional;
 
 
 @Service
-public class ShopOrderService {
+public class ShopOrderService implements IShopOrderService {
 
     @Autowired
     private IShopOrderRepository shopOrderRepository;
@@ -96,14 +97,26 @@ public class ShopOrderService {
         return shopOrderRepository.save(shopOrder);
     }
 
+    private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList){
+        double total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
+
+        return ShopOrderResponseDto.builder()
+                .totalPrice(total)
+                .build();
+    }
+
+    @Override
     @Transactional // save e importante ter rollback en caso de erro
-    public ShopOrder insertNewShopOrder(ShopOrderRequestDto shopOrderRequestDto) {
+    public ShopOrderResponseDto insertNewShopOrder(ShopOrderRequestDto shopOrderRequestDto) {
         Buyer buyer = verifyBuyerExists(shopOrderRequestDto.getBuyerId());
         productStocksAvailable(shopOrderRequestDto.getProducts());
 
-        return save(shopOrderRequestDto, buyer);
+        ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer);
+        List<ShopOrderItem> shopOrderItems = shopOrderSaved.getShopOrderItem();
+        return sumShopOrderItem(shopOrderItems);
     }
 
+    @Override
     public ShopOrder getById(Long id){
         Optional<ShopOrder> shopOrder = shopOrderRepository.findById(id);
         if(shopOrder.isEmpty())
@@ -112,7 +125,7 @@ public class ShopOrderService {
         return shopOrder.get();
     }
 
-
+    @Override
     public ShopOrder closedShopOrder(long id){
         ShopOrder shopOrder = getById(id);
 
@@ -152,5 +165,6 @@ public class ShopOrderService {
         });
         return shopOrderRepository.save(shopOrder);
     }
+
 
 }
