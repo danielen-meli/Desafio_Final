@@ -1,5 +1,11 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.dto.BatchStockDto;
+import com.meli.desafio_final.exception.NotFoundException;
+import com.meli.desafio_final.repository.IBatchStockRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.meli.desafio_final.dto.BatchStockByDueDateResponseDto;
 import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.model.BatchStock;
@@ -15,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,4 +63,21 @@ public class BatchStockService implements IBatchStockService {
         return batchStockListFilterByDueDate.stream().map(bs -> new BatchStockByDueDateResponseDto(bs, sectionCategory)).collect(Collectors.toList());
 
     };
+    
+    @Override
+    public List<BatchStockDto> getProductsInStock(long productId) {
+        List<BatchStockDto> listDtoByCategory = batchStockRepository.findAll().stream().
+                map(BatchStockDto::new).filter(p -> p.getProductId() == productId).collect(Collectors.toList());
+
+        if(listDtoByCategory.isEmpty()){
+            throw new NotFoundException("Não existem produtos em estoque.");
+        }
+
+        return listDtoByCategory;
+    }
+
+    @Override
+    public List<BatchStockDto> getProductsStockOrdered() {
+        return null;
+    }
 }

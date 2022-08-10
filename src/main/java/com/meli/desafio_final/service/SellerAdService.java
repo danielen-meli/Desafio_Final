@@ -30,11 +30,8 @@ public class SellerAdService implements ISellerAdService{
     }
     @Override
     public List<SellerAdDTO> getByCategory(Category category){
-        List<SellerAdDTO> allProducts = sellerAdRepo.findAll().
+        List<SellerAdDTO> productsByCat = sellerAdRepo.findAll().
                 stream().map(SellerAdDTO::new).
-                collect(Collectors.toList());
-
-        List<SellerAdDTO> productsByCat = allProducts.stream().
                 filter(p -> p.getProduct().getCategory().equals(category)).
                 collect(Collectors.toList());
 

@@ -1,6 +1,6 @@
-use meli_fresh;
 
---
+-- use meli_fresh;
+
 --
 -- insert into warehouse values(null, "SP", "warehouse01");
 --
@@ -17,7 +17,7 @@ use meli_fresh;
 -- insert into product values(null, "REFRIGERATED", "tomate");
 -- -- insert into product values(null, "REFRIGERATED", "pera");
 --
---
+
 -- insert into user values(null, "123456", "email@email.com", "senha123", "User1");
 --
 -- insert into seller values(null, "Seller1", 1);
@@ -27,6 +27,7 @@ use meli_fresh;
 -- insert into seller_ad values(null, 8, 1, 1);
 --
 -- insert into buyer values(null, 1);
+
 -- insert into seller_ad values(null, 10, 4, 1);
 --
 -- replace into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (1, "OPEN", 1);
@@ -38,5 +39,5 @@ use meli_fresh;
 -- insert into BATCH_STOCK (batch_stock_id, current_quantity, current_temperature, due_date, initial_quantity, manufacturing_date, manufacturing_time, minimum_temperature, volume, inbound_order_id, seller_ad_seller_ad_id)
 -- VALUES (3, 30, -30, now(), 40, now(), now(), -40, 50, 1, 2 );
 --
---
+
 

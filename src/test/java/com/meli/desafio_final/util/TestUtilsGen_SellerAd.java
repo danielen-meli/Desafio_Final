@@ -42,13 +42,6 @@ public class TestUtilsGen_SellerAd {
                 collect(Collectors.toList());
     }
 
-    public static List<SellerAdDTO> getAdDtoCtgRefrig(){
-        return getNewListSellerAd().stream().
-                filter(p -> p.getProduct().getCategory().equals(REFRIGERATED)).
-                map(SellerAdDTO::new).
-                collect(Collectors.toList());
-    }//lista vazia para teste
-
     public static List<SellerAdDTO> getAdDtoCtgFresh(){
         return getNewListSellerAd().stream().
                 filter(p -> p.getProduct().getCategory().equals(FRESH)).
