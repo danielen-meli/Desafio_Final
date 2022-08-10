@@ -7,22 +7,16 @@ import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.*;
 import com.meli.desafio_final.model.enums.Status;
-import com.meli.desafio_final.repository.ISellerAdRepository;
-import com.meli.desafio_final.repository.IShopOrderRepository;
-import com.meli.desafio_final.repository.IBuyerRepository;
-import com.meli.desafio_final.repository.IBatchStockRepository;
+import com.meli.desafio_final.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 
 
 @Service
@@ -39,6 +33,9 @@ public class ShopOrderService implements IShopOrderService {
 
     @Autowired
     private ISellerAdRepository sellerAdRepository;
+
+    @Autowired
+    private ISectionRepository sectionRepository;
 
     // verifica o buyer
     private Buyer verifyBuyerExists(long id){
@@ -68,10 +65,7 @@ public class ShopOrderService implements IShopOrderService {
     // Retorna apenas os BatchStocks que o due date é maior q 21
     private List<BatchStock> filterBatchStocksByDueDate(List<BatchStock> batchStockList){
          List<BatchStock> batchStockListValid = batchStockList.stream().filter(bs-> {
-//             LocalDate dateNow = LocalDate.now();
-//             LocalDate dueDate = bs.getDueDate();
-//            Period expirationDate = Period.between(LocalDate.now(), bs.getDueDate());
-            //int daysToExpire = expirationDate.getDays();
+
             long weeks = ChronoUnit.WEEKS.between(LocalDate.now(), bs.getDueDate());
             if (weeks < 3){
                 return false;
@@ -125,6 +119,12 @@ public class ShopOrderService implements IShopOrderService {
         return shopOrder.get();
     }
 
+    private void updateSectionCapacity(BatchStock batchStock) {
+        Section sectionToUpdateCapacity = batchStock.getInboundOrder().getSection();
+        sectionToUpdateCapacity.setSectionCapacity(sectionToUpdateCapacity.getSectionCapacity() + batchStock.getVolume());
+        sectionRepository.save(sectionToUpdateCapacity);
+    }
+
     @Override
     public ShopOrder closedShopOrder(long id){
         ShopOrder shopOrder = getById(id);
@@ -150,16 +150,19 @@ public class ShopOrderService implements IShopOrderService {
             for (BatchStock batchStock: batchStockList) {
                 int currentQuantity = batchStock.getCurrentQuantity();
 
-                if (currentQuantity >= quantityToBuy){
+                // TODO: Confirmar com julia >=
+                if (currentQuantity > quantityToBuy){
                     currentQuantity -= quantityToBuy;
                     batchStock.setCurrentQuantity(currentQuantity);
                     batchStockRepository.save(batchStock);
                     break;
-                }else{
-                    quantityToBuy -=currentQuantity;
+                } else{
+                    quantityToBuy -= currentQuantity;
                     currentQuantity = 0;
                     batchStock.setCurrentQuantity(currentQuantity);
+                    // função q atualiza a capacidade da seção quando comprar o total
                     batchStockRepository.save(batchStock);
+                    updateSectionCapacity(batchStock);
                 }
             }
         });
