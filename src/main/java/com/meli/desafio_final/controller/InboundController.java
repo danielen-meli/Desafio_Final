@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,12 +26,12 @@ public class InboundController {
     }
 
     @PostMapping("/inboundorder")
-    public ResponseEntity<InboundOrderResponseDto> insertNewInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
+    public ResponseEntity<InboundOrderResponseDto> insertNewInboundOrder(@RequestBody @Valid InboundOrderRequestDto inboundOrderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.insertNewInboundOrder(inboundOrderRequestDto));
     }
 
     @PutMapping("/inboundorder")
-    public ResponseEntity<InboundOrderResponseDto> updateInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
+    public ResponseEntity<InboundOrderResponseDto> updateInboundOrder(@RequestBody @Valid InboundOrderRequestDto inboundOrderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.updateNewInboundOrder(inboundOrderRequestDto));
     }
 }

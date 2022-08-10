@@ -17,39 +17,39 @@ public class TestUtilsGeneratorInboundOrder {
         BatchStockRequestDto  batchStockRequestDto1 = BatchStockRequestDto
                 .builder()
                 .sellerAdId(1L)
-                .currentTemperature(5)
-                .minimumTemperature(2)
+                .currentTemperature(5.0)
+                .minimumTemperature(2.0)
                 .initialQuantity(100)
                 .currentQuantity(100)
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
-                .volume(100)
+                .volume(100.0)
                 .dueDate(LocalDate.of(2022, 10, 15))
                 .build();
 
         BatchStockRequestDto  batchStockRequestDto2 = BatchStockRequestDto
                 .builder()
                 .sellerAdId(2L)
-                .currentTemperature(8)
-                .minimumTemperature(1)
+                .currentTemperature(8.0)
+                .minimumTemperature(1.0)
                 .initialQuantity(150)
                 .currentQuantity(150)
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
-                .volume(150)
+                .volume(150.0)
                 .dueDate(LocalDate.of(2022, 10, 15))
                 .build();
 
         BatchStockRequestDto  batchStockRequestDto3 = BatchStockRequestDto
                 .builder()
                 .sellerAdId(3L)
-                .currentTemperature(5)
-                .minimumTemperature(2)
+                .currentTemperature(5.0)
+                .minimumTemperature(2.0)
                 .initialQuantity(100)
                 .currentQuantity(100)
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
-                .volume(100)
+                .volume(100.0)
                 .dueDate(LocalDate.of(2022, 10, 15))
                 .build();
 
@@ -65,13 +65,13 @@ public class TestUtilsGeneratorInboundOrder {
                 .builder()
                 .batchStockId(1)
                 .sellerAdId(1L)
-                .currentTemperature(5)
-                .minimumTemperature(2)
+                .currentTemperature(5.0)
+                .minimumTemperature(2.0)
                 .initialQuantity(100)
                 .currentQuantity(100)
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
-                .volume(100)
+                .volume(100.0)
                 .dueDate(LocalDate.of(2022, 10, 15))
                 .build();
 
@@ -87,7 +87,7 @@ public class TestUtilsGeneratorInboundOrder {
         return InboundOrderRequestDto
                 .builder()
                 .orderDate(LocalDate.of(2022, 8, 8))
-                .section(1)
+                .section(1L)
                 .batchStockList(batchStockRequestDtoList)
                 .build();
     }
@@ -98,11 +98,10 @@ public class TestUtilsGeneratorInboundOrder {
                 .builder()
                 .id(1)
                 .orderDate(LocalDate.of(2022, 8, 8))
-                .section(1)
+                .section(1L)
                 .batchStockList(batchStockRequestDtoList)
                 .build();
     }
-
 
 
     public static User getUserMock() {
@@ -124,7 +123,6 @@ public class TestUtilsGeneratorInboundOrder {
                 .user(getUserMock())
                 .build();
     }
-
 
 
     public static Product getProductMock(long productId, String productName, Category category) {
@@ -225,7 +223,7 @@ public class TestUtilsGeneratorInboundOrder {
         return InboundOrderRequestDto
                 .builder()
                 .orderDate(LocalDate.of(2022, 8, 8))
-                .section(2)
+                .section(2L)
                 .batchStockList(batchStockRequestDtoList)
                 .build();
     }
@@ -235,7 +233,7 @@ public class TestUtilsGeneratorInboundOrder {
         return InboundOrderRequestDto
                 .builder()
                 .orderDate(LocalDate.of(2022, 8, 8))
-                .section(1)
+                .section(1L)
                 .batchStockList(batchStockRequestDtoList)
                 .build();
     }
