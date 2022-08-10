@@ -3,6 +3,7 @@ package com.meli.desafio_final.service;
 import com.meli.desafio_final.dto.OrderAdRequestDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.exception.BadRequestException;
+import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.*;
 import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.ISellerAdRepository;
@@ -11,10 +12,14 @@ import com.meli.desafio_final.repository.IBuyerRepository;
 import com.meli.desafio_final.repository.IBatchStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
@@ -95,18 +100,50 @@ public class ShopOrderService {
         return save(shopOrderRequestDto, buyer);
     }
 
-    public ShopOrder getById(long id) {
-        return shopOrderRepository.findById(id).get();
+    public ShopOrder getById(Long id){
+        Optional<ShopOrder> shopOrder = shopOrderRepository.findById(id);
+        if(shopOrder.isEmpty())
+            throw new NotFoundException("Shop order not found");
+
+        return shopOrder.get();
     }
 
-    public ShopOrder updatePartial(long id, Map<String, Status> changes) {
+
+    public ShopOrder closedShopOrder(long id){
         ShopOrder shopOrder = getById(id);
 
-        changes.forEach((attribute, value) -> {
-            switch (attribute) {
-                case "status":
-                    shopOrder.setStatus(value);
+        if (shopOrder.getStatus().equals(Status.CLOSED))
+            throw new IllegalArgumentException("carrinho ja esta fechado");
+
+        shopOrder.getShopOrderItem().forEach(item -> {
+
+            if (item.getQuantity() > batchStockRepository.getQuantityProduct(item.getSellerAd().getSellerAdId())){
+                String productName = item.getSellerAd().getProduct().getProductName();
+                throw new IllegalArgumentException("Estoque nao possui quantidade suficiente de " + productName);
+            }
+        });
+
+        shopOrder.setStatus(Status.CLOSED);
+
+        shopOrder.getShopOrderItem().forEach(item -> {
+
+            int quantityToBuy = item.getQuantity();
+
+            List<BatchStock> batchStockList = item.getSellerAd().getBatchStockId();
+            for (BatchStock batchStock: batchStockList) {
+                int currentQuantity = batchStock.getCurrentQuantity();
+
+                if (currentQuantity >= quantityToBuy){
+                    currentQuantity -= quantityToBuy;
+                    batchStock.setCurrentQuantity(currentQuantity);
+                    batchStockRepository.save(batchStock);
                     break;
+                }else{
+                    quantityToBuy -=currentQuantity;
+                    currentQuantity = 0;
+                    batchStock.setCurrentQuantity(currentQuantity);
+                    batchStockRepository.save(batchStock);
+                }
             }
         });
         return shopOrderRepository.save(shopOrder);

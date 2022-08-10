@@ -2,6 +2,8 @@ package com.meli.desafio_final.model;
 
 import com.meli.desafio_final.model.enums.Category;
 import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,7 @@ import java.lang.reflect.Type;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
