@@ -1,6 +1,7 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.BatchStockRequestDto;
+import com.meli.desafio_final.dto.BatchStockResponseDto;
 import com.meli.desafio_final.dto.InboundOrderRequestDto;
 import com.meli.desafio_final.dto.InboundOrderResponseDto;
 import com.meli.desafio_final.exception.BadRequestException;
@@ -55,17 +56,24 @@ public class InboundService implements IInboundService {
         }
     }
 
-    private void isSectionCapacityValid(List<BatchStockRequestDto> batchStockList, double sectionCapacity){
-        double sumBatchStocksVolume = batchStockList.stream().mapToDouble(BatchStockRequestDto::getVolume).sum();
+    private double isSectionCapacityValid(List<BatchStockRequestDto> batchStockList, double sectionCapacity){
+        double sumBatchStocksVolume = batchStockList.stream().mapToDouble(bs -> {
+            if(bs.getBatchStockId() > 0){
+                return 0;
+            }
+            return bs.getVolume();
+        }).sum();
 
         if(sumBatchStocksVolume > sectionCapacity) {
             throw new BadRequestException("Section capacity is lower than batchstocks!");
         }
+
+        return sumBatchStocksVolume;
     }
 
     private void isAlltypeProductsValid(List<BatchStockRequestDto> batchStockList, Category sectionCategory){
         batchStockList.forEach(bs -> {
-            SellerAd sellerAd = sellerAdRepo.findById(bs.getSellerAdId()).get();
+            SellerAd sellerAd = sellerAdRepo.findById(bs.getSellerAdId()).orElseThrow(() -> new BadRequestException("Invalid Seller Ad!"));
             if(!sellerAd.getProduct().getCategory().equals(sectionCategory)){
                 throw new BadRequestException("Product type doesn't exist!");
 
@@ -81,54 +89,67 @@ public class InboundService implements IInboundService {
         long warehouseId = section.getWarehouse().getWarehouseId();
         isWarehouseValid(warehouseId);
 
-        isSectionCapacityValid(inboundOrderRequestDto.getBatchStockList(), section.getSectionCapacity());
+        double sectionActualCapacity = section.getSectionCapacity();
+
+        double batchStocksTotalVolume = isSectionCapacityValid(inboundOrderRequestDto.getBatchStockList(), sectionActualCapacity);
 
         isAlltypeProductsValid(inboundOrderRequestDto.getBatchStockList(), section.getCategory());
 
-        // TODO: Testar com cascade
-        List<BatchStock> newBatchStockList = inboundOrderRequestDto.getBatchStockList().stream().map(batchStockRequest -> {
-            SellerAd sellerAdFound = sellerAdRepo.findById(batchStockRequest.getSellerAdId()).get();
-            return new BatchStock(batchStockRequest, sellerAdFound);
-        }).collect(Collectors.toList());
-
         InboundOrder inboudOrder = InboundOrder.builder()
                 .orderDate(LocalDate.now())
-                .batchStockList(newBatchStockList)
+                .inboundOrderId(inboundOrderRequestDto.getId())  // necessario pois sem o id ele nao consegue atualizar
                 .section(section)
                 .build();
 
-        inboudOrder.setInboundOrderId(0L);
-
         InboundOrder inboundOrderSaved = inboundOrderRepo.save(inboudOrder);
 
-        // TODO: transformar para o formato de response
-        return inboundOrderSaved.getBatchStockList();
+        List<BatchStock> newBatchStockList = inboundOrderRequestDto.getBatchStockList().stream().map(batchStockRequest -> {
+            SellerAd sellerAdFound = sellerAdRepo.findById(batchStockRequest.getSellerAdId()).get();
+            return new BatchStock(batchStockRequest, sellerAdFound, inboundOrderSaved);
+        }).collect(Collectors.toList());
 
-//        List<BatchStock> batchStocksSaved = new ArrayList<BatchStock>();
-//
-//        newBatchStockList.forEach(batchStock -> {
-//            batchStocksSaved.add(batchStockRepo.save(batchStock));
-//        });
-//
-//        return batchStocksSaved;
+
+        List<BatchStock> batchStocksSaved = new ArrayList<>();
+
+        newBatchStockList.forEach(batchStock -> {
+            batchStocksSaved.add(batchStockRepo.save(batchStock));
+        });
+
+        section.setSectionCapacity(sectionActualCapacity - batchStocksTotalVolume);
+
+        sectionRepo.save(section);
+
+        return batchStocksSaved;
+    }
+
+    private InboundOrderResponseDto convertBatchStockToResponse(List<BatchStock> batchStocksSaved) {
+        List<BatchStockResponseDto> batchStocksResponseDto = batchStocksSaved.stream().map(BatchStockResponseDto::new).collect(Collectors.toList());
+        return InboundOrderResponseDto.builder()
+                .batchStockList(batchStocksResponseDto)
+                .build();
     }
 
     @Override
-    public List<BatchStock> insertNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
+    public InboundOrderResponseDto insertNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
         if(newInboundOrder.getId() != 0){
             throw new BadRequestException("Order already registered, to update an order use the route /put");
         }
-        return saveInboundOrder(newInboundOrder);
-
+        List<BatchStock> batchStocksSaved = saveInboundOrder(newInboundOrder);
+        return convertBatchStockToResponse(batchStocksSaved);
     }
 
     @Override
-    public List<BatchStock> updateNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
+    public InboundOrderResponseDto updateNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
         // TODO: Caso tenha um método para buscar order por ID utilizar aqui, dentro dele já tem a exception sendo lançada
+
+        // TODO: SEMPRE ESTÁ INSERINDO NOVAMENTE APENAS O BATCHSTOCK POIS NAO POSSUI O ID nas informações de batchStock, caso o cascade não funcione criar a função para remover todos os batchstock relacionados aquele inboundorder e adicionar novamente
+
         Optional<InboundOrder> inboundFound = inboundOrderRepo.findById(newInboundOrder.getId());
         if(inboundFound.isPresent()){
-            return saveInboundOrder(newInboundOrder);
+            List<BatchStock> batchStocksSaved = saveInboundOrder(newInboundOrder);
+            return convertBatchStockToResponse(batchStocksSaved);
         }
+
         throw new BadRequestException("ID is required to update an order, to insert a new order use the route /post");
     }
 }

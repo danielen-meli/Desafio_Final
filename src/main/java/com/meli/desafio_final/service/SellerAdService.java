@@ -1,6 +1,7 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.dto.SellerAdDTO;
+import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.repository.ISellerAdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,30 @@ public class SellerAdService {
     private ISellerAdRepository sellerAdRepo;
 
     public List<SellerAdDTO> getAllProducts() {
-        return sellerAdRepo.findAll().
+        List<SellerAdDTO> productsList = sellerAdRepo.findAll().
                 stream().map(SellerAdDTO::new).
                 collect(Collectors.toList());
+
+        if(productsList.isEmpty()){
+            throw new NotFoundException("A lista de produtos está vazia.");
+        }
+
+        return productsList;
     }
 
     public List<SellerAdDTO> getByCategory(Category category){
-        List<SellerAdDTO> allProducts = getAllProducts();
+        List<SellerAdDTO> allProducts = sellerAdRepo.findAll().
+                stream().map(SellerAdDTO::new).
+                collect(Collectors.toList());
 
-        return allProducts.stream().
+        List<SellerAdDTO> productsByCat = allProducts.stream().
                 filter(p -> p.getProduct().getCategory().equals(category)).
                 collect(Collectors.toList());
+
+        if(productsByCat.isEmpty()){
+            throw new NotFoundException("Não há produtos nesta categoria.");
+        }
+
+        return productsByCat;
     }
 }

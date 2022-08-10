@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ISellerAdRepository extends JpaRepository<SellerAd, Long> {
+
 }

@@ -1,5 +1,6 @@
 package com.meli.desafio_final.dto;
 
+import com.meli.desafio_final.model.BatchStock;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,15 @@ public class BatchStockResponseDto {
     private LocalDateTime manufacturingTime;
     private double volume;
     private LocalDate dueDate;
+
+    public BatchStockResponseDto(BatchStock batchStock) {
+        this.currentTemperature = batchStock.getCurrentTemperature();
+        this.minimumTemperature = batchStock.getMinimumTemperature();
+        this.initialQuantity = batchStock.getInitialQuantity();
+        this.currentQuantity = batchStock.getCurrentQuantity();
+        this.manufacturingDate = batchStock.getManufacturingDate();
+        this.manufacturingTime = batchStock.getManufacturingTime();
+        this.volume = batchStock.getVolume();
+        this.dueDate = batchStock.getDueDate();
+    }
 }

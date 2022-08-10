@@ -51,10 +51,11 @@ public class BatchStock {
 
     @ManyToOne
     @JsonIgnoreProperties("batchStockList")
-    @JoinColumn(name = "inboundOrderId")
+    @JoinColumn(name = "inbound_order_id")
     private InboundOrder inboundOrder;
 
-    public BatchStock(BatchStockRequestDto batchStockRequestDto, SellerAd sellerAd) {
+    public BatchStock(BatchStockRequestDto batchStockRequestDto, SellerAd sellerAd, InboundOrder inboundOrder) {
+        this.batchStockId = batchStockRequestDto.getBatchStockId();
         this.sellerAd = sellerAd;
         this.currentTemperature = batchStockRequestDto.getCurrentTemperature();
         this.minimumTemperature = batchStockRequestDto.getMinimumTemperature();
@@ -64,6 +65,6 @@ public class BatchStock {
         this.manufacturingTime = batchStockRequestDto.getManufacturingTime();
         this.volume = batchStockRequestDto.getVolume();
         this.dueDate = batchStockRequestDto.getDueDate();
-        //this.inboundOrder = null;
+        this.inboundOrder = inboundOrder;
     }
 }

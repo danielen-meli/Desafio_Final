@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface IInboundService {
-    List<BatchStock> insertNewInboundOrder(InboundOrderRequestDto newInboundOrder);
-    List<BatchStock> updateNewInboundOrder(InboundOrderRequestDto newInboundOrder);
+    InboundOrderResponseDto insertNewInboundOrder(InboundOrderRequestDto newInboundOrder);
+    InboundOrderResponseDto updateNewInboundOrder(InboundOrderRequestDto newInboundOrder);
 
 }

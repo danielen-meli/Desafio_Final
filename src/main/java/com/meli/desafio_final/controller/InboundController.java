@@ -25,12 +25,12 @@ public class InboundController {
     }
 
     @PostMapping("/inboundorder")
-    public ResponseEntity<List<BatchStock>> insertNewInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
+    public ResponseEntity<InboundOrderResponseDto> insertNewInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.insertNewInboundOrder(inboundOrderRequestDto));
     }
 
     @PutMapping("/inboundorder")
-    public ResponseEntity<List<BatchStock>> updateInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
+    public ResponseEntity<InboundOrderResponseDto> updateInboundOrder(@RequestBody InboundOrderRequestDto inboundOrderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.updateNewInboundOrder(inboundOrderRequestDto));
     }
 }

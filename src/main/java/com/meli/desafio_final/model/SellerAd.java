@@ -13,8 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 public class SellerAd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

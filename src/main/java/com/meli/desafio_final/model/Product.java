@@ -2,6 +2,7 @@ package com.meli.desafio_final.model;
 
 import com.meli.desafio_final.model.enums.Category;
 import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,10 +26,4 @@ public class Product {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
-
-    public Product(int i, String frango, Category frozen) {
-        this.productId = i;
-        this.productName = frango;
-        this.category = frozen;
-    }
 }

@@ -31,5 +31,14 @@ public class ShopOrderItem {
     @JoinColumn(name = "sellerAd_id")
     private SellerAd sellerAd;
 
-//    private ShopOrder shopOrder;
+    //TODO ver se esse construtor está sendo usado
+    public ShopOrderItem(int i, Object o, double v, int i1, Object o1) {
+    }
+
+    public ShopOrderItem(LocalDate date, int quantity, SellerAd sellerAd) {
+        this.date = date;
+        this.price = sellerAd.getPrice();
+        this.quantity = quantity;
+        this.sellerAd = sellerAd;
+    }
 }
