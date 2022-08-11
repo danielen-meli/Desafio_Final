@@ -1,5 +1,6 @@
 package com.meli.desafio_final.service;
 
+
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.Section;
 import com.meli.desafio_final.model.SellerAd;
@@ -28,6 +29,7 @@ class WareHouseServiceTest {
 
     @Test
     public void getQuantityProducts_returnTotalQuantity_WhenProductHaveQuantity(){
+
         Section section = TestUtilGeneratorWareHouse.newSectionToWareHouse();
         SellerAd sellerAd = SellerAd.builder()
                 .sellerAdId(1)
@@ -57,5 +59,6 @@ class WareHouseServiceTest {
 
         assertThat(exception.getMessage().contains("Produto não existe em nenhum depósito"));
         assertThat(exception.getClass()).isEqualTo(NotFoundException.class);
+
     }
 }

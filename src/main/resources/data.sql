@@ -1,3 +1,4 @@
+
 use meli_fresh;
 
 insert into warehouse values(null, "SP", "warehouse01");
@@ -41,3 +42,4 @@ insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (2, "2022-08-08", 8.0, 5, 2, 1);
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (3, "2022-08-08", 1.0, 2, 3, 2);
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (4, "2022-08-08", 8.0, 5, 4, 2);
+

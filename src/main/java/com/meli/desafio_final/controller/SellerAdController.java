@@ -3,10 +3,12 @@ package com.meli.desafio_final.controller;
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.service.ISellerAdService;
-import com.meli.desafio_final.service.SellerAdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

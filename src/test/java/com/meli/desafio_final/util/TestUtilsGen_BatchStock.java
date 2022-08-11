@@ -1,0 +1,54 @@
+package com.meli.desafio_final.util;
+
+import com.meli.desafio_final.dto.BatchStockDto;
+import com.meli.desafio_final.model.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class TestUtilsGen_BatchStock {
+    public static List<BatchStock> getNewListBatchStock(){
+        List<BatchStock> listBatchStock = new ArrayList<>();
+
+        Warehouse warehouse = new Warehouse();
+        warehouse.setWarehouseId(1);
+
+        Section section = new Section();
+        section.setSectionId(1);
+
+        Product product = new Product();
+        product.setProductId(1);
+
+        SellerAd sellerAd = new SellerAd();
+        sellerAd.setProduct(product);
+
+        InboundOrder inboundOrder = new InboundOrder();
+        inboundOrder.setSection(section);
+
+        listBatchStock.add(BatchStock.builder().
+                batchStockId(1).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(10).
+                dueDate(LocalDate.of(2022, 8, 30))
+                .build());
+
+        listBatchStock.add(BatchStock.builder().
+                batchStockId(1).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(10).
+                dueDate(LocalDate.of(2022, 8, 30))
+                .build());//TODO paula: editar exemplos fazer itens diferentes
+
+        listBatchStock.add(BatchStock.builder().
+                batchStockId(1).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(10).
+                dueDate(LocalDate.of(2022, 8, 30))
+                .build());
+
+        return listBatchStock;
+    }
+
+    public static List<BatchStockDto> getNewListBStockDto(){
+        return getNewListBatchStock().stream().map(BatchStockDto::new).collect(Collectors.toList());
+    }
+}
