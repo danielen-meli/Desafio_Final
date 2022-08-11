@@ -1,12 +1,9 @@
 package com.meli.desafio_final.controller;
 
-import com.meli.desafio_final.dto.BatchStockDto;
-import com.meli.desafio_final.model.BatchStock;
-import com.meli.desafio_final.model.enums.OrderBy;
-
 import com.meli.desafio_final.dto.BatchStockByDueDateResponseDto;
+import com.meli.desafio_final.dto.BatchStockDto;
 import com.meli.desafio_final.model.enums.Category;
-
+import com.meli.desafio_final.model.enums.OrderBy;
 import com.meli.desafio_final.service.IBatchStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +44,5 @@ public class BatchStockController {
             @RequestParam String orderType) {
         return ResponseEntity.ok(batchStockService.getBatchStocksFilteredBy(number_days, category, orderType));
     }
-
-
 
 }
