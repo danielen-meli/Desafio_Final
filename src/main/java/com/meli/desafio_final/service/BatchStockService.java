@@ -100,7 +100,8 @@ public class BatchStockService implements IBatchStockService {
     @Override
     public List<BatchStockDto> getProductsInStock(long productId) {
         List<BatchStockDto> listDtoByCategory = batchStockRepository.findAll().stream().
-                map(BatchStockDto::new).filter(p -> p.getProductId() == productId).collect(Collectors.toList());
+                map(BatchStockDto::new).filter(p -> p.getProductId() == productId).
+                collect(Collectors.toList());
 
         if(listDtoByCategory.isEmpty()){
             throw new NotFoundException("Não existem produtos em estoque.");
