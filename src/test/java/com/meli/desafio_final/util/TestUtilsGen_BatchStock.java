@@ -22,48 +22,9 @@ public class TestUtilsGen_BatchStock {
 
         Section section = new Section();
         section.setSectionId(1);
+        section.setCategory(Category.REFRIGERATED);
         section.setWarehouse(warehouse);
 
-        Product product = new Product();
-        product.setProductId(1);
-
-        SellerAd sellerAd = new SellerAd();
-        sellerAd.setProduct(product);
-
-        InboundOrder inboundOrder = new InboundOrder();
-        inboundOrder.setSection(section);
-
-        listBatchStock.add(BatchStock.builder().
-                batchStockId(1).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(10).
-                dueDate(LocalDate.of(2022, 8, 30))
-                .build());
-
-        listBatchStock.add(BatchStock.builder().
-                batchStockId(2).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(15).
-                dueDate(LocalDate.of(2022, 11, 30)).
-                build());
-
-        listBatchStock.add(BatchStock.builder().
-                batchStockId(3).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(20).
-                dueDate(LocalDate.of(2022, 10, 30))
-                .build());
-
-        return listBatchStock;
-    }
-
-
-    public static List<BatchStock> getNewListBatchStock2(){
-        List<BatchStock> listBatchStock = new ArrayList<>();
-
-        Warehouse warehouse = new Warehouse();
-        warehouse.setWarehouseId(1);
-
-        Section section = new Section();
-        section.setSectionId(1);
-        section.setCategory(Category.REFRIGERATED);
 
         Product product = new Product();
         product.setProductId(1);
@@ -82,14 +43,14 @@ public class TestUtilsGen_BatchStock {
                 .build());
 
         listBatchStock.add(BatchStock.builder().
-                batchStockId(1).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(10).
+                batchStockId(2).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(15).
                 dueDate(LocalDate.now().plusDays(1).plusMonths(1).plusYears(0))
                 .build());
 
         listBatchStock.add(BatchStock.builder().
-                batchStockId(1).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(10).
+                batchStockId(3).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(20).
                 dueDate(LocalDate.now())
                 .build());
 
@@ -101,6 +62,7 @@ public class TestUtilsGen_BatchStock {
 
         return listBatchStock;
     }
+
 
     public static List<BatchStockDto> getNewListBStockDto(){
         return getNewListBatchStock().stream().map(BatchStockDto::new).collect(Collectors.toList());
@@ -163,7 +125,7 @@ public class TestUtilsGen_BatchStock {
                 .builder()
                 .inboundOrderId(1)
                 .section(getSectionMock().get())
-                .batchStockList(getNewListBatchStock2())
+                .batchStockList(getNewListBatchStock())
                 .build();
         return Optional.ofNullable(inboundOrder);
     }

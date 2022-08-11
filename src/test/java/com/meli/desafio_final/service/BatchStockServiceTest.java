@@ -54,6 +54,7 @@ public class BatchStockServiceTest {
 
     @BeforeEach
     public void setup(){
+
         BDDMockito.when(batchStockRepository.findAll())
                 .thenReturn(TestUtilsGen_BatchStock.getNewListBatchStock());
 
@@ -63,8 +64,6 @@ public class BatchStockServiceTest {
         BDDMockito.when(sectionRepository.getSectionsIdsByCategory(ArgumentMatchers.any(Category.class)))
                 .thenReturn(TestUtilsGen_BatchStock.getSectionsIdsByCategory());
 
-        BDDMockito.when(batchStockRepository.findAll())
-                .thenReturn(TestUtilsGen_BatchStock.getNewListBatchStock2());
 
         BDDMockito.when(inboundOrderRepository.findAllBySectionSectionId(ArgumentMatchers.any(Long.class)))
                 .thenReturn(TestUtilsGen_BatchStock.getInboundOrderBySectionsMock());
