@@ -123,13 +123,19 @@ class ShopOrderServiceTest {
         assertThat(shopOrderUpdated.getStatus()).isEqualTo(Status.CLOSED);
     }
 
-//    @Test
-//    public void insertNewShopOrder (){
-//        ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
-//        ShopOrder shopOrderUtil = TestUtilsGeneratorShopOrder.getShopOrderMock();
-//        BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
-//        ShopOrder shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
-//
-//      //TODO: Faltam os assertThat
-//    }
+
+    @Test
+    public void insertNewShopOrder (){
+        ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
+        ShopOrder shopOrderUtil = TestUtilsGeneratorShopOrder.getShopOrderMock();
+        BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
+        ShopOrderResponseDto shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
+
+
+      //TODO: Faltam os assertThat
+
+
+
+    }
+
 }

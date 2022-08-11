@@ -1,9 +1,9 @@
 package com.meli.desafio_final.dto;
 
-import com.meli.desafio_final.model.Buyer;
 import com.meli.desafio_final.model.ShopOrder;
-import com.meli.desafio_final.model.ShopOrderItem;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 

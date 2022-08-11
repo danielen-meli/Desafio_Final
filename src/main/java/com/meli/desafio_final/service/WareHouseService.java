@@ -16,10 +16,6 @@ public class WareHouseService implements IWarehouseService{
     private IWarehouseRepository warehouseRepository;
 
 
-    private List<Warehouse> getAllWareHouse(){
-        return warehouseRepository.findAll();
-    }
-
     @Override
     public long getTotalQuantitySellerAdinWareHouse(SellerAd sellerAdId, Warehouse wareHouseId) {
         long quantityProducts = warehouseRepository.getAllProducts(sellerAdId.getSellerAdId(), wareHouseId.getWarehouseId());
