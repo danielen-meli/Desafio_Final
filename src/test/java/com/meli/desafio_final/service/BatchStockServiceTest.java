@@ -73,11 +73,11 @@ public class BatchStockServiceTest {
     }
 
 //    @Test
-//    void getAllStockOrderdWhenParamOrderInvalid(){
+//    void getAllStockOrderedWhenParamOrderInvalid(){
 //        NotFoundException message = assertThrows(NotFoundException.class ,
 //                () -> {batchStockService.getProductsInStockOrdered(1, OrderBy.default);});
 //
 //        assertEquals("Categoria inválida.", message.getMessage());
 //    }
-    //TODO teste categoria invalida
+    //TODO paula: teste categoria invalida
 }
