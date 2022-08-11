@@ -131,6 +131,7 @@ class ShopOrderServiceTest {
         BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
         ShopOrderResponseDto shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
 
+
       //TODO: Faltam os assertThat
 
 
