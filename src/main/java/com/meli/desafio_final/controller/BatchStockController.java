@@ -44,5 +44,4 @@ public class BatchStockController {
             @RequestParam String orderType) {
         return ResponseEntity.ok(batchStockService.getBatchStocksFilteredBy(number_days, category, orderType));
     }
-
 }

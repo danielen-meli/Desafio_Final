@@ -32,14 +32,12 @@ public class BatchStockService implements IBatchStockService {
     @Autowired
     private ISectionRepository sectionRepository;
 
-
     private List<BatchStock> filterBatchStockCurrentQuantity(List<BatchStock> batchStockList){
         return batchStockList.stream().filter(bs -> {
             int batchStockCurrentQuantity = bs.getCurrentQuantity();
             return batchStockCurrentQuantity != 0;
         }).collect(Collectors.toList());
     }
-
 
     private List<BatchStock> filterBatchStocksByDueDate(List<BatchStock> batchStocks, int numberOfDays) {
         LocalDate actualDate = LocalDate.now();
@@ -50,7 +48,6 @@ public class BatchStockService implements IBatchStockService {
         }).collect(Collectors.toList());
     }
 
-    // TODO: Transformar para um BatchStockByDueDateDto
     @Override
     public List<BatchStockByDueDateResponseDto> getBatchStocksByDueDate(int numberOfDays, long sectionId) {
 
@@ -93,12 +90,7 @@ public class BatchStockService implements IBatchStockService {
         List<BatchStock> batchStocksOrderByDueDate = orderBy(batchStockListFilterByDueDate, orderType);
 
         return batchStocksOrderByDueDate.stream().map(bs -> new BatchStockByDueDateResponseDto(bs, category)).collect(Collectors.toList());
-
-
     }
-
-    /*select section_id from section where category = "REFRIGERATED";
-    select * from inbound_order where section_id in (1, 3, 6);*/
 
     @Override
     public List<BatchStockDto> getProductsInStock(long productId) {

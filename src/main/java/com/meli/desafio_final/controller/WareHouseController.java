@@ -1,6 +1,5 @@
 package com.meli.desafio_final.controller;
 
-
 import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.Warehouse;
 import com.meli.desafio_final.service.IWarehouseService;

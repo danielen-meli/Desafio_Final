@@ -16,7 +16,4 @@ public interface ISectionRepository extends JpaRepository<Section, Long> {
     @Query(nativeQuery = true, value = "SELECT sec.section_id from section as sec where sec.category = \"REFRIGERATED\"")
     List<BigInteger> getSectionsIdsByCategory(@Param("category") Category category);
 
-//    @Query("SELECT sec.sectionId from Section as sec where sec.category = :category")
-//    List<Long> getSectionsIdsByCategory(Category category);
-
 }
