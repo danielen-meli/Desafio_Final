@@ -123,6 +123,7 @@ class ShopOrderServiceTest {
         assertThat(shopOrderUpdated.getStatus()).isEqualTo(Status.CLOSED);
     }
 
+
     @Test
     public void insertNewShopOrder (){
         ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
@@ -135,4 +136,5 @@ class ShopOrderServiceTest {
 
 
     }
+
 }

@@ -22,13 +22,14 @@ public class BatchStockController {
     private IBatchStockService batchStockService;
 
     @GetMapping("/stock")
-    public ResponseEntity<List<BatchStockDto>> getProductsStock(@RequestParam("productId") long productId) {
+    public ResponseEntity<List<BatchStockDto>> getProductsInStock(@RequestParam("productId") long productId){
         return ResponseEntity.ok(batchStockService.getProductsInStock(productId));
     }
 
     @GetMapping("/stock/orderBy")
-    public ResponseEntity<List<BatchStockDto>> getProductsStockOrder(@RequestParam("orderBy") OrderBy orderBy) {
-        return null;
+    public ResponseEntity<List<BatchStockDto>> getProductsInStockOrdered(@RequestParam("productId") long productId,
+                                                                         @RequestParam("orderBy") OrderBy orderBy){
+        return ResponseEntity.ok(batchStockService.getProductsInStockOrdered(productId, orderBy));
     }
 
     @GetMapping("/due-date")
