@@ -128,7 +128,7 @@ class ShopOrderServiceTest {
         ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
         ShopOrder shopOrderUtil = TestUtilsGeneratorShopOrder.getShopOrderMock();
         BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
-        ShopOrder shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
+        ShopOrderResponseDto shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
 
       //TODO: Faltam os assertThat
 
