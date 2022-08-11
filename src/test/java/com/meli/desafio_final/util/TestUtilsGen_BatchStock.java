@@ -5,6 +5,7 @@ import com.meli.desafio_final.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class TestUtilsGen_BatchStock {
                 build());
 
         listBatchStock.add(BatchStock.builder().
-                batchStockId(1).sellerAd(sellerAd).
+                batchStockId(3).sellerAd(sellerAd).
                 inboundOrder(inboundOrder).currentQuantity(20).
                 dueDate(LocalDate.of(2022, 10, 30))
                 .build());
@@ -53,7 +54,21 @@ public class TestUtilsGen_BatchStock {
         return getNewListBatchStock().stream().map(BatchStockDto::new).collect(Collectors.toList());
     }
 
-    public static List<BatchStockDto> getListStockDtoOrdered(){
-        return null;
+    public static List<BatchStockDto> getNewListOrderedByStockId() {
+        return getNewListBStockDto().stream().
+                sorted(Comparator.comparingLong(BatchStockDto::getBatchStockId)).
+                collect(Collectors.toList());
+    }
+
+    public static List<BatchStockDto> getNewListOrderedByQuantity() {
+        return getNewListBStockDto().stream().
+                sorted(Comparator.comparingLong(BatchStockDto::getCurrentQuantity)).
+                collect(Collectors.toList());
+    }
+
+    public static List<BatchStockDto> getNewListOrderedByDueDate() {
+        return getNewListBStockDto().stream().
+                sorted(Comparator.comparing(BatchStockDto::getDueDate)).
+                collect(Collectors.toList());
     }
 }

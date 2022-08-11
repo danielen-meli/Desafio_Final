@@ -4,9 +4,11 @@ import com.meli.desafio_final.dto.BatchStockDto;
 import com.meli.desafio_final.dto.SellerAdDTO;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.BatchStock;
+import com.meli.desafio_final.model.enums.OrderBy;
 import com.meli.desafio_final.repository.IBatchStockRepository;
 import com.meli.desafio_final.util.TestUtilsGen_BatchStock;
 import com.meli.desafio_final.util.TestUtilsGen_SellerAd;
+import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,7 +50,7 @@ public class BatchStockServiceTest {
     }
 
     @Test
-    void getAllWhenNotPresent(){
+    void getAllStockWhenNotPresent(){
         BDDMockito.when(batchStockRepository.findAll())
                 .thenReturn(new ArrayList<>());
 
@@ -59,7 +61,23 @@ public class BatchStockServiceTest {
         assertEquals("Não existem produtos em estoque.", message.getMessage());
     }
 
+    @Test
+    void getAllStockOrderedWhenPresent() {
+        List<BatchStockDto> newListOrderedById = TestUtilsGen_BatchStock.getNewListOrderedByStockId();
+        List<BatchStockDto> newListOrderedByQuantity = TestUtilsGen_BatchStock.getNewListOrderedByQuantity();
+        List<BatchStockDto> newListOrderedByDueDate = TestUtilsGen_BatchStock.getNewListOrderedByDueDate();
 
+        assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.L)).isEqualTo(newListOrderedById);
+        assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.Q)).isEqualTo(newListOrderedByQuantity);
+        assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.V)).isEqualTo(newListOrderedByDueDate);
+    }
 
-
+//    @Test
+//    void getAllStockOrderdWhenParamOrderInvalid(){
+//        NotFoundException message = assertThrows(NotFoundException.class ,
+//                () -> {batchStockService.getProductsInStockOrdered(1, OrderBy.default);});
+//
+//        assertEquals("Categoria inválida.", message.getMessage());
+//    }
+    //TODO teste categoria invalida
 }
