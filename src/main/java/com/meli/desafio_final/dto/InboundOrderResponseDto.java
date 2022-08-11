@@ -1,6 +1,5 @@
 package com.meli.desafio_final.dto;
 
-import com.meli.desafio_final.model.BatchStock;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -27,5 +27,4 @@ public class BatchStockByDueDateResponseDto {
         this.category = category;
         this.sellerAdId = batchStock.getSellerAd().getSellerAdId();
     }
-
 }
