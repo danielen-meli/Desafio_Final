@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class TestUtilsGen_BatchStock {
 
         Section section = new Section();
         section.setSectionId(1);
+        section.setWarehouse(warehouse);
 
         Product product = new Product();
         product.setProductId(1);
@@ -38,15 +40,15 @@ public class TestUtilsGen_BatchStock {
                 .build());
 
         listBatchStock.add(BatchStock.builder().
-                batchStockId(1).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(10).
-                dueDate(LocalDate.of(2022, 8, 30))
-                .build());//TODO paula: editar exemplos fazer itens diferentes
+                batchStockId(2).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(15).
+                dueDate(LocalDate.of(2022, 11, 30)).
+                build());
 
         listBatchStock.add(BatchStock.builder().
-                batchStockId(1).sellerAd(sellerAd).
-                inboundOrder(inboundOrder).currentQuantity(10).
-                dueDate(LocalDate.of(2022, 8, 30))
+                batchStockId(3).sellerAd(sellerAd).
+                inboundOrder(inboundOrder).currentQuantity(20).
+                dueDate(LocalDate.of(2022, 10, 30))
                 .build());
 
         return listBatchStock;
@@ -102,6 +104,24 @@ public class TestUtilsGen_BatchStock {
 
     public static List<BatchStockDto> getNewListBStockDto(){
         return getNewListBatchStock().stream().map(BatchStockDto::new).collect(Collectors.toList());
+    }
+
+    public static List<BatchStockDto> getNewListOrderedByStockId() {
+        return getNewListBStockDto().stream().
+                sorted(Comparator.comparingLong(BatchStockDto::getBatchStockId)).
+                collect(Collectors.toList());
+    }
+
+    public static List<BatchStockDto> getNewListOrderedByQuantity() {
+        return getNewListBStockDto().stream().
+                sorted(Comparator.comparingLong(BatchStockDto::getCurrentQuantity)).
+                collect(Collectors.toList());
+    }
+
+    public static List<BatchStockDto> getNewListOrderedByDueDate() {
+        return getNewListBStockDto().stream().
+                sorted(Comparator.comparing(BatchStockDto::getDueDate)).
+                collect(Collectors.toList());
     }
 
     // todo: teste dos metodos getBatchStocksByDueDate - getBatchStocksFilteredBy
