@@ -17,16 +17,21 @@ public class InboundController {
     @Autowired
     IInboundService inboundService;
 
-    @GetMapping("/ping")
-    public ResponseEntity<String> testeGet() {
-        return ResponseEntity.ok("pong!");
-    }
-
+    /**
+     * A seller sends an order and a batch of products to be sold.
+     * @param inboundOrderRequestDto
+     * @return  an answer for the seller showing the products who are available for sale.
+     */
     @PostMapping("/inboundorder")
     public ResponseEntity<InboundOrderResponseDto> insertNewInboundOrder(@RequestBody @Valid InboundOrderRequestDto inboundOrderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.insertNewInboundOrder(inboundOrderRequestDto));
     }
 
+    /**
+     * The seller can edit his order of products to be sold.
+     * @param inboundOrderRequestDto
+     * @return an answer for the seller showing the products who are available for sale.
+     */
     @PutMapping("/inboundorder")
     public ResponseEntity<InboundOrderResponseDto> updateInboundOrder(@RequestBody @Valid InboundOrderRequestDto inboundOrderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inboundService.updateNewInboundOrder(inboundOrderRequestDto));

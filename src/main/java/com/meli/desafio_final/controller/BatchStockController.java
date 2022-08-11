@@ -21,22 +21,38 @@ public class BatchStockController {
     @Autowired
     private IBatchStockService batchStockService;
 
+    /** Show product in stock if available when search by id.
+     * @param productId
+     * @return the product asked for.
+     */
     @GetMapping("/stock")
     public ResponseEntity<List<BatchStockDto>> getProductsInStock(@RequestParam("productId") long productId){
         return ResponseEntity.ok(batchStockService.getProductsInStock(productId));
     }
 
+    /**
+     * Show product in stock if available
+     * @param orderBy
+     * @return a list is ordered
+     */
     @GetMapping("/stock/orderBy")
     public ResponseEntity<List<BatchStockDto>> getProductsInStockOrdered(@RequestParam("productId") long productId,
                                                                          @RequestParam("orderBy") OrderBy orderBy){
         return ResponseEntity.ok(batchStockService.getProductsInStockOrdered(productId, orderBy));
     }
 
+    /**
+     * Show product in stock available when the due date is between the interval asked for.
+     * @param number_days
+     * @param section
+     * @return a list of products who are near to the due date.
+     */
     @GetMapping("/due-date")
     public ResponseEntity<List<BatchStockByDueDateResponseDto>>
     getBatchStocksByDueDate(@RequestParam int number_days, @RequestParam long section) {
         return ResponseEntity.ok(batchStockService.getBatchStocksByDueDate(number_days, section));
     }
+
 
     @GetMapping("/due-date/list")
     public ResponseEntity<List<BatchStockByDueDateResponseDto>> getBachStocksFilteredBy(

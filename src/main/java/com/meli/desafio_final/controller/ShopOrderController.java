@@ -22,17 +22,32 @@ public class ShopOrderController{
     @Autowired
     private IBatchStockRepository testerepo;
 
+    /**
+     * Lists purchase orders by cart ID.
+     * @param id
+     * @return the purchase order for the requested ID.
+     */
     @GetMapping("/{id}")
     private ShopOrderDto getById(@PathVariable long id){
         ShopOrder shop = shopOrderService.getById(id);
         return new ShopOrderDto(shop);
     }
 
+    /**
+     * Generates a possible shopping cart.
+     * @param shopOrderRequestDto
+     * @return A valid shopping cart and a positive response to the user.
+     */
     @PostMapping()
     public ResponseEntity<ShopOrderResponseDto> createShopOrder(@RequestBody ShopOrderRequestDto shopOrderRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(shopOrderService.insertNewShopOrder(shopOrderRequestDto));
     }
 
+    /**
+     * A valid shopping cart is closed
+     * @param id
+     * @return a completed purchase order
+     */
     @PutMapping("/closed-shopOrder/{id}")
     public ResponseEntity<ShopOrder> closeShopOrder(@PathVariable long id){
         return ResponseEntity.ok(shopOrderService.closedShopOrder(id));
