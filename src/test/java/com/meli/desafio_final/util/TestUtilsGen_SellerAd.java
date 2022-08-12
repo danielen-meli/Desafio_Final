@@ -19,10 +19,12 @@ public class TestUtilsGen_SellerAd {
         Product newProduct_2 = new Product(2, "Tomate", Category.FRESH);
 
         newProductList.add(SellerAd.builder().
+                sellerAdId(1).
                 price(15.00).
                 product(newProduct_1).build());
 
         newProductList.add(SellerAd.builder().
+                sellerAdId(1).
                 price(5.00).
                 product(newProduct_2).build());
 
@@ -47,5 +49,13 @@ public class TestUtilsGen_SellerAd {
                 filter(p -> p.getProduct().getCategory().equals(FRESH)).
                 map(SellerAdDTO::new).
                 collect(Collectors.toList());
+    }
+
+    public static SellerAd getSellerAd (){
+        return SellerAd.builder()
+                .sellerAdId(2)
+                .product(null)
+                .batchStockId(TestUtilsGeneratorInboundOrder.getBatchStockListMock())
+                .build();
     }
 }

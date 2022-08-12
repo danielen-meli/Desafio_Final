@@ -17,6 +17,12 @@ public class WareHouseController {
     @Autowired
     private IWarehouseService warehouseService;
 
+    /**
+     * Checks the total amount of seller listings in WareHouse
+     * @param sellerAdId - ad identification number
+     * @param wareHouseId - identification number of ware house
+     * @return listings by WareHouse
+     */
     @GetMapping("/{wareHouseId}/{sellerAdId}")
     public ResponseEntity<Long> getTotalQuantitySellerAd(@PathVariable("sellerAdId") SellerAd sellerAdId, @PathVariable("wareHouseId") Warehouse wareHouseId){
         return ResponseEntity.ok(warehouseService.getTotalQuantitySellerAdinWareHouse(sellerAdId, wareHouseId));

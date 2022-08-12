@@ -46,37 +46,6 @@ class InboundServiceTest {
     @Mock
     private IBatchStockRepository batchStockRepo;
 
-    // TODO: CASES TO TEST
-
-    /*
-    * 1- Warehouse doesn't exists
-    * 2- Section doesn't exists
-    * 3- Section capacity is lower than stock0
-    * 4- Products type is different from section selected
-    * */
-
-    // TODO: Methods to mock
-
-    /*
-    * INBOUND ORDER REPO:
-    * 1- inboundOrderRepo.save
-    * 2- inboundOrderRepo.findById
-    *
-    *
-    * WAREHOUSE REPO
-    * 1- warehouseRepo.findById
-    *
-    * SECTION REPO
-    * 1- sectionRepo.findById
-    * 2- sectionRepo.save
-    *
-    * SELLER AD REPO
-    * 1- sellerAdRepo.findById
-    *
-    * BATCH STOCK REPO
-    * 1- bachStockRepo.save
-    *
-    * */
 
     @BeforeEach
     public void setup() {

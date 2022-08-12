@@ -258,6 +258,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .build();
     }
 
+    // mocks test integração
     public static List<BatchStockRequestDto> generateBatchStockRequestDtoListMockIntegration() {
         BatchStockRequestDto  batchStockRequestDto1 = BatchStockRequestDto
                 .builder()
@@ -313,9 +314,6 @@ public class TestUtilsGeneratorInboundOrder {
                 .section(1L)
                 .batchStockList(generateBatchStockRequestDtoListMockIntegration())
                 .build();
-    }}
-
-
-
-
+    }
+}
 
