@@ -48,4 +48,12 @@ public class TestUtilsGen_SellerAd {
                 map(SellerAdDTO::new).
                 collect(Collectors.toList());
     }
+
+    public static SellerAd getSellerAd (){
+        return SellerAd.builder()
+                .sellerAdId(2)
+                .product(null)
+                .batchStockId(TestUtilsGeneratorInboundOrder.getBatchStockListMock())
+                .build();
+    }
 }

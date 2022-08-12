@@ -3,12 +3,15 @@ package com.meli.desafio_final.util;
 import com.meli.desafio_final.dto.OrderAdRequestDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.model.*;
+import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.model.enums.Status;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class TestUtilsGeneratorShopOrder {
 
@@ -117,5 +120,17 @@ public class TestUtilsGeneratorShopOrder {
                 .shopOrderItem(Arrays.asList(shopOrderItem))
                 .build();
     }
+
+    //Mocks tati e adão
+
+
+
+    public static Buyer generatedBuyer(){
+        return Buyer.builder()
+                .buyerId(1)
+                .user(TestUtilsGeneratorInboundOrder.getUserMock())
+                .build();
+    }
+
 
 }
