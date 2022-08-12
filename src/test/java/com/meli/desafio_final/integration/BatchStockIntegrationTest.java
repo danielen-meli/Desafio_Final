@@ -26,19 +26,18 @@ public class BatchStockIntegrationTest {
     @Test
     public void testGetProductsInStock() throws Exception{
         ResultActions mvcResult =
-                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock")
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/")
                         .param("productId", "uhsaushuahsuahs"))
-                .andDo(print()).andExpect(status().isBadRequest());
+                        .andDo(print()).andExpect(status().isBadRequest());
     }
 
     @Test
-    public void tesGetProductsInStockOrdered() throws Exception{
+    public void tesGetProductsInStockOrdered_whenParamIsInvalid() throws Exception{
         ResultActions mvcResult =
                 this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/orderBy")
                         .param("productId", "2")
                         .param("orderBy", "asc"))
-                        .andDo(print()).andExpect(status().isOk())
-                        .andExpect(content().contentType("json"));
+                        .andDo(print()).andExpect(status().isBadRequest());
     }
 
     @Test
