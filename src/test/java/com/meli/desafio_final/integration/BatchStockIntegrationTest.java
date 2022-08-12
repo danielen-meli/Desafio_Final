@@ -30,7 +30,8 @@ public class BatchStockIntegrationTest {
         ResultActions mvcResult =
                 this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock")
                         .param("productId", "1"))
-                        .andExpect(status().isNotFound());
+                        //.andExpect(status().isNotFound())
+                        .andExpect(content().contentType("application/json"));
     }
 
     @Test
