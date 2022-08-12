@@ -37,11 +37,19 @@ public class ShopOrderService implements IShopOrderService {
     @Autowired
     private ISectionRepository sectionRepository;
 
+    /** Method that verifies if the buyer is registered.
+     * @param id buyer's id
+     * @return if exists
+     */
     // verifica o buyer
     private Buyer verifyBuyerExists(long id){
         return buyerRepository.findById(id).orElseThrow(() -> new BadRequestException("Buyer does't exists"));
     }
 
+    /**
+    /** Calls isStockQuantityAvailable to verify the product's stock available.
+     * @param products list of products in the shop order
+     */
     private void productStocksAvailable(List<OrderAdRequestDto> products){
         products.forEach(orderRequest -> {
             long sellerAdId = orderRequest.getSellerAdId();
@@ -54,7 +62,10 @@ public class ShopOrderService implements IShopOrderService {
         });
     }
 
-    // valida que a quantidade em stock é suficiente para a request
+    /** Method that verifies if the product's stock available is enough to fulfill the order.
+     * @param batchStockList list of  products in stock
+     * @param orderQuantity quantity of products requested in the shop order
+     */
     private void isStockQuantityAvailable(List<BatchStock> batchStockList, int orderQuantity){
         double stockQuantityAvailable = batchStockList.stream().mapToDouble(BatchStock::getCurrentQuantity).sum();
         if(orderQuantity > stockQuantityAvailable) {
@@ -62,15 +73,15 @@ public class ShopOrderService implements IShopOrderService {
         }
     }
 
+    /** Method that filters list of products in stock and checks for valid due dates.
+     * @param batchStockList list of all products in stock
+     * @return list of products with valid due date (more than three weeks in the future)
+     */
     // Retorna apenas os BatchStocks que o due date é maior q 21
     private List<BatchStock> filterBatchStocksByDueDate(List<BatchStock> batchStockList){
          List<BatchStock> batchStockListValid = batchStockList.stream().filter(bs-> {
-
             long weeks = ChronoUnit.WEEKS.between(LocalDate.now(), bs.getDueDate());
-            if (weeks < 3){
-                return false;
-            }
-            return true;
+             return weeks >= 3;
          }).collect(Collectors.toList());
 
          if(batchStockListValid.isEmpty()){
@@ -79,6 +90,11 @@ public class ShopOrderService implements IShopOrderService {
          return batchStockListValid;
     }
 
+    /** Method that receives and registers a Shop Order.
+     * @param shopOrderRequestDto list of itens requested in the order
+     * @param buyer id of the buyer
+     * @return calls method to register the order
+     */
     private ShopOrder save(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer) {
         List<ShopOrderItem> shopOrderItems = shopOrderRequestDto.getProducts().stream().map(order -> {
             SellerAd sellerAd = sellerAdRepository.findById(order.getSellerAdId()).orElseThrow(() -> new BadRequestException("SellerAd Invalid"));
@@ -91,6 +107,10 @@ public class ShopOrderService implements IShopOrderService {
         return shopOrderRepository.save(shopOrder);
     }
 
+    /** Method that calculates total price of the order.
+     * @param shopOrderItemList list of itens requested in the order
+     * @return Object ShopOrderResponseDto
+     */
     private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList){
         double total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
 
@@ -99,6 +119,10 @@ public class ShopOrderService implements IShopOrderService {
                 .build();
     }
 
+    /** Method that registers a new shop order.
+     * @param shopOrderRequestDto list of itens requested in the order
+     * @return calls method to calculate total price of the order.
+     */
     @Override
     @Transactional // save e importante ter rollback en caso de erro
     public ShopOrderResponseDto insertNewShopOrder(ShopOrderRequestDto shopOrderRequestDto) {
@@ -110,6 +134,10 @@ public class ShopOrderService implements IShopOrderService {
         return sumShopOrderItem(shopOrderItems);
     }
 
+    /** Method that finds a shop order by id.
+     * @param id shop order's id
+     * @return shop order
+     */
     @Override
     public ShopOrder getById(Long id){
         Optional<ShopOrder> shopOrder = shopOrderRepository.findById(id);
@@ -119,12 +147,19 @@ public class ShopOrderService implements IShopOrderService {
         return shopOrder.get();
     }
 
+    /** Method that updates the capacity of the section.
+     * @param batchStock Object BatchStock
+     */
     private void updateSectionCapacity(BatchStock batchStock) {
         Section sectionToUpdateCapacity = batchStock.getInboundOrder().getSection();
         sectionToUpdateCapacity.setSectionCapacity(sectionToUpdateCapacity.getSectionCapacity() + batchStock.getVolume());
         sectionRepository.save(sectionToUpdateCapacity);
     }
 
+    /** Method that closes a shop order.
+     * @param id shop order's id
+     * @return calls method to save a shop order
+     */
     @Override
     public ShopOrder closedShopOrder(long id){
         ShopOrder shopOrder = getById(id);
@@ -150,7 +185,6 @@ public class ShopOrderService implements IShopOrderService {
             for (BatchStock batchStock: batchStockList) {
                 int currentQuantity = batchStock.getCurrentQuantity();
 
-                // TODO: Confirmar com julia >=
                 if (currentQuantity > quantityToBuy){
                     currentQuantity -= quantityToBuy;
                     batchStock.setCurrentQuantity(currentQuantity);
@@ -168,6 +202,7 @@ public class ShopOrderService implements IShopOrderService {
         });
         return shopOrderRepository.save(shopOrder);
     }
+
 
 
 }

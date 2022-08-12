@@ -53,7 +53,7 @@ public class BatchStockServiceTest {
     IInboundOrderRepository inboundOrderRepository;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
 
         BDDMockito.when(batchStockRepository.findAll())
                 .thenReturn(TestUtilsGen_BatchStock.getNewListBatchStock());
@@ -102,8 +102,8 @@ public class BatchStockServiceTest {
     public void getBatchStocksFilteredBy() {
         int numberOfDays = 200;
         Category category = Category.REFRIGERATED;
-        String orderTypeAsc= "asc";
-        String orderTypeDesc= "desc";
+        String orderTypeAsc = "asc";
+        String orderTypeDesc = "desc";
 
         List<BatchStockByDueDateResponseDto> batchStocksDto = batchStockService.getBatchStocksFilteredBy(numberOfDays, category, orderTypeAsc);
 
@@ -124,12 +124,14 @@ public class BatchStockServiceTest {
     }
 
     @Test
-    void getAllStockWhenNotPresent(){
+    void getAllStockWhenNotPresent() {
         BDDMockito.when(batchStockRepository.findAll())
                 .thenReturn(new ArrayList<>());
 
-        NotFoundException message = assertThrows(NotFoundException.class ,
-                () -> {batchStockService.getProductsInStock(2);});
+        NotFoundException message = assertThrows(NotFoundException.class,
+                () -> {
+                    batchStockService.getProductsInStock(2);
+                });
         //nao existe produto cadastrado com id 2 em test util gen
 
         assertEquals("Não existem produtos em estoque.", message.getMessage());
@@ -145,13 +147,4 @@ public class BatchStockServiceTest {
         assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.Q)).isEqualTo(newListOrderedByQuantity);
         assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.V)).isEqualTo(newListOrderedByDueDate);
     }
-
-//    @Test
-//    void getAllStockOrderedWhenParamOrderInvalid(){
-//        NotFoundException message = assertThrows(NotFoundException.class ,
-//                () -> {batchStockService.getProductsInStockOrdered(1, OrderBy.default);});
-//
-//        assertEquals("Categoria inválida.", message.getMessage());
-//    }
-    //TODO paula: teste categoria invalida
 }
