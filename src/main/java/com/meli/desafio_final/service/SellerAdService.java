@@ -16,6 +16,9 @@ public class SellerAdService implements ISellerAdService{
     @Autowired
     private ISellerAdRepository sellerAdRepo;
 
+    /** Method that shows a list of all product ads registered.
+     * @return list of product ads available
+     */
     @Override
     public List<SellerAdDTO> getAllProducts() {
         List<SellerAdDTO> productsList = sellerAdRepo.findAll().
@@ -28,6 +31,11 @@ public class SellerAdService implements ISellerAdService{
 
         return productsList;
     }
+
+    /** Method that shows a list of all product ads registered ordered by category.
+     * @param category FRESH, FROZEN or REFRIGERATED products
+     * @return
+     */
     @Override
     public List<SellerAdDTO> getByCategory(Category category){
         List<SellerAdDTO> productsByCat = sellerAdRepo.findAll().
