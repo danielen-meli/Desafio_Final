@@ -24,15 +24,6 @@ public class BatchStockIntegrationTest {
     @Autowired
     public MockMvc mockMvc;
 
-    @Sql({ "data.sql" })
-
-    @Test
-    public void PRIMEIRO_TESTE_QUEBRA() throws Exception{
-        ResultActions mvcResult =
-                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock")
-                        .param("productId", "1"))
-                        .andExpect(status().isNotFound());
-    }
 
     @Test
     public void testGetProductsInStock() throws Exception{
