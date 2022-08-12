@@ -1,5 +1,5 @@
 
-use meli_fresh;
+show tables;
 
 insert into warehouse values(null, "SP", "warehouse01");
 insert into warehouse values(null, "SC", "warehouse02");

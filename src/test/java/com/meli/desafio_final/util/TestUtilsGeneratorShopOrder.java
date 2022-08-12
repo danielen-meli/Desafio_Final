@@ -33,7 +33,7 @@ public class TestUtilsGeneratorShopOrder {
                 .build();
 
         return ShopOrder.builder()
-                .orderId(1)
+                .orderId(2)
                 .status(Status.OPEN)
                 .shopOrderItem(Arrays.asList(shopOrderItem))
                 .build();
