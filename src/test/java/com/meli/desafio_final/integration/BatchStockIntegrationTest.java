@@ -21,7 +21,7 @@ public class BatchStockIntegrationTest {
     @Autowired
     public MockMvc mockMvc;
 
-    @Sql({ "data.sql" })
+    @Sql({"data.sql"})
 
     @Test
     public void testGetProductsInStock() throws Exception{
