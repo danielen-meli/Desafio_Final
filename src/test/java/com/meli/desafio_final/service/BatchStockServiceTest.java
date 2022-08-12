@@ -71,13 +71,4 @@ public class BatchStockServiceTest {
         assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.Q)).isEqualTo(newListOrderedByQuantity);
         assertThat(batchStockService.getProductsInStockOrdered(1, OrderBy.V)).isEqualTo(newListOrderedByDueDate);
     }
-
-//    @Test
-//    void getAllStockOrderedWhenParamOrderInvalid(){
-//        NotFoundException message = assertThrows(NotFoundException.class ,
-//                () -> {batchStockService.getProductsInStockOrdered(1, OrderBy.default);});
-//
-//        assertEquals("Categoria inválida.", message.getMessage());
-//    }
-    //TODO paula: teste categoria invalida
 }
