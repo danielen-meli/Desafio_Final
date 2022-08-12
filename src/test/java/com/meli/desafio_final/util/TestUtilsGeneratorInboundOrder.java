@@ -24,7 +24,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
                 .volume(100.0)
-                .dueDate(LocalDate.of(2022, 10, 15))
+                .dueDate(LocalDate.now().plusDays(1).plusMonths(1).plusYears(1))
                 .build();
 
         BatchStockRequestDto  batchStockRequestDto2 = BatchStockRequestDto
@@ -37,7 +37,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
                 .volume(150.0)
-                .dueDate(LocalDate.of(2022, 10, 15))
+                .dueDate(LocalDate.now().plusDays(1).plusMonths(1).plusYears(1))
                 .build();
 
         BatchStockRequestDto  batchStockRequestDto3 = BatchStockRequestDto
@@ -258,9 +258,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .build();
     }
 
-
     // mocks test integração
-
     public static List<BatchStockRequestDto> generateBatchStockRequestDtoListMockIntegration() {
         BatchStockRequestDto  batchStockRequestDto1 = BatchStockRequestDto
                 .builder()
@@ -272,7 +270,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .manufacturingDate(LocalDate.of(2022, 8, 8))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
                 .volume(100.0)
-                .dueDate(LocalDate.of(2022, 10, 15))
+                .dueDate(LocalDate.now().plusDays(1).plusMonths(1).plusYears(1))
                 .build();
 
         BatchStockRequestDto  batchStockRequestDto2 = BatchStockRequestDto
@@ -285,7 +283,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
                 .volume(50.0)
-                .dueDate(LocalDate.of(2022, 10, 15))
+                .dueDate(LocalDate.now().plusDays(1).plusMonths(1).plusYears(1))
                 .build();
 
         BatchStockRequestDto  batchStockRequestDto3 = BatchStockRequestDto
@@ -298,7 +296,7 @@ public class TestUtilsGeneratorInboundOrder {
                 .manufacturingDate(LocalDate.of(2022, 8, 10))
                 .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
                 .volume(100.0)
-                .dueDate(LocalDate.of(2022, 10, 15))
+                .dueDate(LocalDate.now().plusDays(1).plusMonths(1).plusYears(1))
                 .build();
 
         List<BatchStockRequestDto> batchStockRequestDtoList = new ArrayList<>();
@@ -317,6 +315,5 @@ public class TestUtilsGeneratorInboundOrder {
                 .batchStockList(generateBatchStockRequestDtoListMockIntegration())
                 .build();
     }
-
-
 }
+
