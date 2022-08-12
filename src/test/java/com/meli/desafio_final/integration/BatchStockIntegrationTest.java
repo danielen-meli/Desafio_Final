@@ -21,13 +21,13 @@ public class BatchStockIntegrationTest {
     @Autowired
     public MockMvc mockMvc;
 
-    @Sql({"data.sql"})
+    //@Sql({"data.sql"})
 
     @Test
     public void testGetProductsInStock() throws Exception{
         ResultActions mvcResult =
                 this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/")
-                        .param("productId", "uhsaushuahsuahs"))
+                        .param("productId", "jjnjb"))
                         .andDo(print()).andExpect(status().isBadRequest());
     }
 
