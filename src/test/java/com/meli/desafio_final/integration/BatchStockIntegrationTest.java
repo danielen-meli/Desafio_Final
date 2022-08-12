@@ -1,8 +1,10 @@
 
 package com.meli.desafio_final.integration;
 
+
 import com.meli.desafio_final.exception.NotFoundException;
 import org.hibernate.annotations.NotFound;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,12 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-
 public class BatchStockIntegrationTest {
 
     @Autowired
     public MockMvc mockMvc;
-
 
     @Test
     public void testGetProductsInStock() throws Exception{
