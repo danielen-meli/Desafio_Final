@@ -1,4 +1,3 @@
-
 use meli_fresh;
 
 insert into warehouse values(null, "SP", "warehouse01");
@@ -36,10 +35,11 @@ insert into seller_ad values(null, 8, 1, 1);
 insert into buyer values(null, 1);
 insert into buyer values(null, 2);
 
-insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (1, "OPEN", 1);
-insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (2, "OPEN", 2);
-insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (1, "2022-08-08", 1.0, 2, 1, 1);
-insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (2, "2022-08-08", 8.0, 5, 2, 1);
-insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (3, "2022-08-08", 1.0, 2, 3, 2);
-insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (4, "2022-08-08", 8.0, 5, 4, 2);
+insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (null, "OPEN", 1);
+insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (null, "OPEN", 2);
+
+insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 1.0, 2, 1, 1);
+insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 8.0, 5, 2, 1);
+insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 1.0, 2, 3, 2);
+insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 8.0, 5, 4, 2);
 

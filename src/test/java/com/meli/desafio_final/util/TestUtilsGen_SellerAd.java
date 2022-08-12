@@ -19,10 +19,12 @@ public class TestUtilsGen_SellerAd {
         Product newProduct_2 = new Product(2, "Tomate", Category.FRESH);
 
         newProductList.add(SellerAd.builder().
+                sellerAdId(1).
                 price(15.00).
                 product(newProduct_1).build());
 
         newProductList.add(SellerAd.builder().
+                sellerAdId(1).
                 price(5.00).
                 product(newProduct_2).build());
 
