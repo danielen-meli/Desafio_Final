@@ -261,7 +261,7 @@ public class TestUtilsGeneratorInboundOrder {
 
     // mocks test integração
 
-    public static List<BatchStockRequestDto> generateBatchStockRequestDtoListMockInt() {
+    public static List<BatchStockRequestDto> generateBatchStockRequestDtoListMockIntegration() {
         BatchStockRequestDto  batchStockRequestDto1 = BatchStockRequestDto
                 .builder()
                 .sellerAdId(2L)
@@ -308,13 +308,13 @@ public class TestUtilsGeneratorInboundOrder {
         return batchStockRequestDtoList;
     }
 
-    public static InboundOrderRequestDto getInboundOrderRequestDtoWithWrongWarehouseMockInt(){
+    public static InboundOrderRequestDto getInboundOrderRequestDtoWithWrongWarehouseMockIntegration(){
         List<BatchStockRequestDto> batchStockRequestDtoList = generateBatchStockRequestDtoListMock();
         return InboundOrderRequestDto
                 .builder()
                 .orderDate(LocalDate.of(2022, 8, 8))
                 .section(1L)
-                .batchStockList(generateBatchStockRequestDtoListMockInt())
+                .batchStockList(generateBatchStockRequestDtoListMockIntegration())
                 .build();
     }
 

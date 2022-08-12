@@ -129,7 +129,7 @@ public class BatchStockService implements IBatchStockService {
                         sorted(Comparator.comparing(BatchStockDto::getDueDate)).
                         collect(Collectors.toList());
             default:
-                throw new BadRequestException("Categoria inválida.");
+                throw new IllegalArgumentException("Categoria inválida.");
         }
     }
 }
