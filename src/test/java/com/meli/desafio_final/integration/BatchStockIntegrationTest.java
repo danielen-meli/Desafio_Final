@@ -1,6 +1,8 @@
 
 package com.meli.desafio_final.integration;
 
+import com.meli.desafio_final.exception.NotFoundException;
+import org.hibernate.annotations.NotFound;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+
 public class BatchStockIntegrationTest {
 
     @Autowired
@@ -24,20 +27,28 @@ public class BatchStockIntegrationTest {
     @Sql({ "data.sql" })
 
     @Test
-    public void testGetProductsInStock() throws Exception{
+    public void PRIMEIRO_TESTE_QUEBRA() throws Exception{
         ResultActions mvcResult =
-                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/")
-                        .param("productId", "uhsaushuahsuahs"))
-                        .andDo(print()).andExpect(status().isBadRequest());
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock")
+                        .param("productId", "1"))
+                        .andExpect(status().isNotFound());
     }
 
     @Test
-    public void tesGetProductsInStockOrdered_whenParamIsInvalid() throws Exception{
+    public void testGetProductsInStock() throws Exception{
+        ResultActions mvcResult =
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock")
+                        .param("productId", "1"))
+                        .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void tesGetProductsInStockOrdered() throws Exception{
         ResultActions mvcResult =
                 this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/orderBy")
                         .param("productId", "2")
-                        .param("orderBy", "asc"))
-                        .andDo(print()).andExpect(status().isBadRequest());
+                        .param("orderBy", "L"))
+                        .andDo(print()).andExpect(content().contentType("application/json"));
     }
 
     @Test
