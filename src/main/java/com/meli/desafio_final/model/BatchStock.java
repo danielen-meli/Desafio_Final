@@ -40,7 +40,7 @@ public class BatchStock {
     @Column(nullable = false)
     private LocalDate manufacturingDate;
 
-    @Column(nullable = false) //TODO acho q está redundante com o atributo a cima
+    @Column(nullable = false)
     private LocalDateTime manufacturingTime;
 
     @Column(nullable = false)

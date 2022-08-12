@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class InboundService implements IInboundService {
-    // TODO: somar o currentquantity de todos ods batchstock para saber se é menor q a section.sectioncapacity
-    // TODO: verificar pela temperatura se corresponde aquela seção
 
     @Autowired
     private IInboundOrderRepository inboundOrderRepo;
@@ -58,7 +56,6 @@ public class InboundService implements IInboundService {
 
     private double isSectionCapacityValid(List<BatchStockRequestDto> batchStockList, double sectionCapacity){
         double sumBatchStocksVolume = batchStockList.stream().mapToDouble(bs -> {
-        // TODO: Verificar o current quantity como se fosse a flag de stock ativo ou não
             if(bs.getBatchStockId() > 0){
                 return 0;
             }
@@ -141,10 +138,6 @@ public class InboundService implements IInboundService {
 
     @Override
     public InboundOrderResponseDto updateNewInboundOrder(InboundOrderRequestDto newInboundOrder) {
-        // TODO: Caso tenha um método para buscar order por ID utilizar aqui, dentro dele já tem a exception sendo lançada
-
-        // TODO: SEMPRE ESTÁ INSERINDO NOVAMENTE APENAS O BATCHSTOCK POIS NAO POSSUI O ID nas informações de batchStock, caso o cascade não funcione criar a função para remover todos os batchstock relacionados aquele inboundorder e adicionar novamente
-
         Optional<InboundOrder> inboundFound = inboundOrderRepo.findById(newInboundOrder.getId());
         if(inboundFound.isPresent()){
             List<BatchStock> batchStocksSaved = saveInboundOrder(newInboundOrder);

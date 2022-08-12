@@ -86,11 +86,6 @@ public class TestUtilsGen_BatchStock {
                 collect(Collectors.toList());
     }
 
-    // todo: teste dos metodos getBatchStocksByDueDate - getBatchStocksFilteredBy
-
-    //    public List<BatchStockByDueDateResponseDto>
-    //    (int numberOfDays, Category category, String orderType) {
-
 
     public static Optional<Warehouse> getWharehouseMock() {
         return Optional.ofNullable(Warehouse

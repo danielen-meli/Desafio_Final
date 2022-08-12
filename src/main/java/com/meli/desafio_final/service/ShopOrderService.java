@@ -150,7 +150,6 @@ public class ShopOrderService implements IShopOrderService {
             for (BatchStock batchStock: batchStockList) {
                 int currentQuantity = batchStock.getCurrentQuantity();
 
-                // TODO: Confirmar com julia >=
                 if (currentQuantity > quantityToBuy){
                     currentQuantity -= quantityToBuy;
                     batchStock.setCurrentQuantity(currentQuantity);
