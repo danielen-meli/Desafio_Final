@@ -1,6 +1,10 @@
 
 package com.meli.desafio_final.integration;
 
+
+import com.meli.desafio_final.exception.NotFoundException;
+import org.hibernate.annotations.NotFound;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,23 +25,21 @@ public class BatchStockIntegrationTest {
     @Autowired
     public MockMvc mockMvc;
 
-    //@Sql({"data.sql"})
-
     @Test
     public void testGetProductsInStock() throws Exception{
         ResultActions mvcResult =
-                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/")
-                        .param("productId", "jjnjb"))
-                        .andDo(print()).andExpect(status().isBadRequest());
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock")
+                        .param("productId", "1"))
+                        .andExpect(status().isNotFound());
     }
 
     @Test
-    public void tesGetProductsInStockOrdered_whenParamIsInvalid() throws Exception{
+    public void tesGetProductsInStockOrdered() throws Exception{
         ResultActions mvcResult =
                 this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/stock/orderBy")
                         .param("productId", "2")
-                        .param("orderBy", "asc"))
-                        .andDo(print()).andExpect(status().isBadRequest());
+                        .param("orderBy", "L"))
+                        .andDo(print()).andExpect(content().contentType("application/json"));
     }
 
     @Test
@@ -60,6 +62,4 @@ public class BatchStockIntegrationTest {
                         .andDo(print()).andExpect(status().isOk())
                         .andExpect(content().contentType("application/json"));
     }
-
-
 }
