@@ -1,11 +1,11 @@
 # Desafio Integrador : MELI FRESH
 
 ## Objetivo
-Implementar uma API Rest no âmbito do slogan e aplicar os conteúdos trabalhados durante o Bootcamp) Git, java, Banco de Dados, Qualidade e Segurança).
+Implementar uma API Rest e aplicar os conteúdos trabalhados durante o Bootcamp (Git, Java, Banco de Dados, Qualidade e Segurança).
 
 ## Requisitos:
 
-### 01. Insirir um lote no armazém de atendimento;
+### 01. Inserir um lote no armazém de atendimento;
 ##### -  Será possível inserir um lote de produtos no armazém de distribuição para registrar sua existência em estoque;
     Registrar o lote no setor correspondente;
     Verificar se o setor de warehouse está sendo registrado corretamente;
