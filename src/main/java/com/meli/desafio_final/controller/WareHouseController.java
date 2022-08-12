@@ -21,4 +21,5 @@ public class WareHouseController {
     public ResponseEntity<Long> getTotalQuantitySellerAd(@PathVariable("sellerAdId") SellerAd sellerAdId, @PathVariable("wareHouseId") Warehouse wareHouseId){
         return ResponseEntity.ok(warehouseService.getTotalQuantitySellerAdinWareHouse(sellerAdId, wareHouseId));
     }
+
 }

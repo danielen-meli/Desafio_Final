@@ -1,6 +1,7 @@
 package com.meli.desafio_final.service;
 
 import com.meli.desafio_final.exception.NotFoundException;
+import com.meli.desafio_final.model.Seller;
 import com.meli.desafio_final.model.SellerAd;
 import com.meli.desafio_final.model.Warehouse;
 import com.meli.desafio_final.repository.IWarehouseRepository;

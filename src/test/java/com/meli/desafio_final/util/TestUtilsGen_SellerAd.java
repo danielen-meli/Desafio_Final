@@ -52,7 +52,7 @@ public class TestUtilsGen_SellerAd {
     public static SellerAd getSellerAd (){
         return SellerAd.builder()
                 .sellerAdId(2)
-                .product(null)
+                .product(new Product(1,"banana", Category.REFRIGERATED))
                 .batchStockId(TestUtilsGeneratorInboundOrder.getBatchStockListMock())
                 .build();
     }

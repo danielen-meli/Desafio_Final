@@ -257,4 +257,65 @@ public class TestUtilsGeneratorInboundOrder {
                 .category(Category.REFRIGERATED)
                 .build();
     }
+
+
+    // mocks test integração
+
+    public static List<BatchStockRequestDto> generateBatchStockRequestDtoListMockInt() {
+        BatchStockRequestDto  batchStockRequestDto1 = BatchStockRequestDto
+                .builder()
+                .sellerAdId(2L)
+                .currentTemperature(5.0)
+                .minimumTemperature(2.0)
+                .initialQuantity(100)
+                .currentQuantity(100)
+                .manufacturingDate(LocalDate.of(2022, 8, 8))
+                .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
+                .volume(100.0)
+                .dueDate(LocalDate.of(2022, 10, 15))
+                .build();
+
+        BatchStockRequestDto  batchStockRequestDto2 = BatchStockRequestDto
+                .builder()
+                .sellerAdId(3L)
+                .currentTemperature(8.0)
+                .minimumTemperature(1.0)
+                .initialQuantity(50)
+                .currentQuantity(50)
+                .manufacturingDate(LocalDate.of(2022, 8, 10))
+                .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
+                .volume(50.0)
+                .dueDate(LocalDate.of(2022, 10, 15))
+                .build();
+
+        BatchStockRequestDto  batchStockRequestDto3 = BatchStockRequestDto
+                .builder()
+                .sellerAdId(3L)
+                .currentTemperature(5.0)
+                .minimumTemperature(2.0)
+                .initialQuantity(100)
+                .currentQuantity(100)
+                .manufacturingDate(LocalDate.of(2022, 8, 10))
+                .manufacturingTime(LocalDateTime.of(2022, 5, 15, 12,45))
+                .volume(100.0)
+                .dueDate(LocalDate.of(2022, 10, 15))
+                .build();
+
+        List<BatchStockRequestDto> batchStockRequestDtoList = new ArrayList<>();
+        batchStockRequestDtoList.add(batchStockRequestDto1);
+        batchStockRequestDtoList.add(batchStockRequestDto2);
+        batchStockRequestDtoList.add(batchStockRequestDto3);
+        return batchStockRequestDtoList;
+    }
+
+    public static InboundOrderRequestDto getInboundOrderRequestDtoWithWrongWarehouseMockInt(){
+        List<BatchStockRequestDto> batchStockRequestDtoList = generateBatchStockRequestDtoListMock();
+        return InboundOrderRequestDto
+                .builder()
+                .orderDate(LocalDate.of(2022, 8, 8))
+                .section(1L)
+                .batchStockList(generateBatchStockRequestDtoListMockInt())
+                .build();
+    }
+
 }
