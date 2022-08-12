@@ -19,8 +19,8 @@ public class WareHouseController {
 
     /**
      * Checks the total amount of seller listings in WareHouse
-     * @param sellerAdId
-     * @param wareHouseId
+     * @param sellerAdId - ad identification number
+     * @param wareHouseId - identification number of ware house
      * @return listings by WareHouse
      */
     @GetMapping("/{wareHouseId}/{sellerAdId}")

@@ -22,7 +22,7 @@ public class BatchStockController {
     private IBatchStockService batchStockService;
 
     /** Show product in stock if available when search by id.
-     * @param productId
+     * @param productId type number long
      * @return the product asked for.
      */
     @GetMapping("/stock")
@@ -32,8 +32,8 @@ public class BatchStockController {
 
     /**
      * Show product in stock if available
-     * @param orderBy
-     * @return a list is ordered
+     * @param orderBy the enum - L, Q, V;
+     * @return a ordered list of products
      */
     @GetMapping("/stock/orderBy")
     public ResponseEntity<List<BatchStockDto>> getProductsInStockOrdered(@RequestParam("productId") long productId,
@@ -43,8 +43,8 @@ public class BatchStockController {
 
     /**
      * Show product in stock available when the due date is between the interval asked for.
-     * @param number_days
-     * @param section
+     * @param number_days - days to the due date.
+     * @param section in the warehouse.
      * @return a list of products who are near to the due date.
      */
     @GetMapping("/due-date")
@@ -53,7 +53,13 @@ public class BatchStockController {
         return ResponseEntity.ok(batchStockService.getBatchStocksByDueDate(number_days, section));
     }
 
-
+    /**
+     * Show products in stock that are is between the interval, in the category and orderly.
+     * @param number_days - days to the due date.
+     * @param category is a enum, can be: FROZEN,REFRIGERATED,FRESH;
+     * @param orderType - can be ascending (asc) ou descendant (desc)
+     * @return a filtered list of products who are near to the due date, and belongs to the same category, and are orderly.
+     */
     @GetMapping("/due-date/list")
     public ResponseEntity<List<BatchStockByDueDateResponseDto>> getBachStocksFilteredBy(
             @RequestParam int number_days,

@@ -30,11 +30,12 @@ public class SellerAdController {
 
     /**
      * Show a list of products selected by category (advertisement) to the client.
-     * @param category
+     * @param category is a enum, can be: FROZEN,REFRIGERATED,FRESH;
      * @return List of all products selected by category are available
      */
     @GetMapping("/fresh-products/category")
-    public ResponseEntity<List<SellerAdDTO>> getProductsCategory(@RequestParam("category") Category category){
+    public ResponseEntity<List<SellerAdDTO>>
+        getProductsCategory(@RequestParam("category") Category category){
         return ResponseEntity.ok(sellerAdService.getByCategory(category));
     }
 }
