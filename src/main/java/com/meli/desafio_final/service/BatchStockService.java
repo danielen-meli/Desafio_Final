@@ -17,7 +17,6 @@ import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.repository.IInboundOrderRepository;
 import com.meli.desafio_final.repository.ISectionRepository;
 
-
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -53,6 +52,15 @@ public class BatchStockService implements IBatchStockService {
         }).collect(Collectors.toList());
     }
 
+
+    private List<BatchStock> orderBy(List<BatchStock> batchStockListFilterByDueDate, String orderType){
+        return batchStockListFilterByDueDate.stream().sorted((b1,b2) -> {
+            if(orderType.equalsIgnoreCase("asc")) return b1.getDueDate().compareTo(b2.getDueDate());
+            else if(orderType.equalsIgnoreCase("desc")) return b2.getDueDate().compareTo(b1.getDueDate());
+            else throw new BadRequestException("Invalid order type");
+        }).collect(Collectors.toList());
+    }
+
     @Override
     public List<BatchStockByDueDateResponseDto> getBatchStocksByDueDate(int numberOfDays, long sectionId) {
 
@@ -71,14 +79,6 @@ public class BatchStockService implements IBatchStockService {
         return batchStockListFilterByDueDate.stream().map(bs -> new BatchStockByDueDateResponseDto(bs, sectionCategory)).collect(Collectors.toList());
 
     };
-
-    private List<BatchStock> orderBy(List<BatchStock> batchStockListFilterByDueDate, String orderType){
-        return batchStockListFilterByDueDate.stream().sorted((b1,b2) -> {
-            if(orderType.equalsIgnoreCase("asc")) return b1.getDueDate().compareTo(b2.getDueDate());
-            else if(orderType.equalsIgnoreCase("desc")) return b2.getDueDate().compareTo(b1.getDueDate());
-            else throw new BadRequestException("Invalid order type");
-        }).collect(Collectors.toList());
-    }
 
     @Override
     public List<BatchStockByDueDateResponseDto> getBatchStocksFilteredBy(int numberOfDays, Category category, String orderType) {
@@ -100,7 +100,8 @@ public class BatchStockService implements IBatchStockService {
     @Override
     public List<BatchStockDto> getProductsInStock(long productId) {
         List<BatchStockDto> listDtoByCategory = batchStockRepository.findAll().stream().
-                map(BatchStockDto::new).filter(p -> p.getProductId() == productId).collect(Collectors.toList());
+                map(BatchStockDto::new).filter(p -> p.getProductId() == productId).
+                collect(Collectors.toList());
 
         if(listDtoByCategory.isEmpty()){
             throw new NotFoundException("Não existem produtos em estoque.");
