@@ -8,6 +8,7 @@ import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.IBatchStockRepository;
 import com.meli.desafio_final.repository.IBuyerRepository;
+import com.meli.desafio_final.repository.ISellerAdRepository;
 import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.util.TestUtilsGeneratorShopOrder;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,8 @@ class ShopOrderServiceTest {
     @Mock
     private IBatchStockRepository batchStockRepository;
 
+    @Mock
+    private ISellerAdRepository sellerAdRepository;
 
     @Mock
     private IBuyerRepository buyerRepository;
@@ -115,7 +118,7 @@ class ShopOrderServiceTest {
         ShopOrder shopOrder = TestUtilsGeneratorShopOrder.newShopOrderWithTwoBatch();
 
         BDDMockito.when(shopOrderRepository.findById(anyLong())).thenReturn(Optional.of(shopOrder));
-        BDDMockito.when(batchStockRepository.getQuantityProduct(anyLong())).thenReturn(180L);
+        BDDMockito.when(batchStockRepository.getQuantityProduct(anyLong())).thenReturn(10L);
         BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrder);
 
         ShopOrder shopOrderUpdated = service.closedShopOrder(shopOrder.getOrderId());
@@ -126,10 +129,15 @@ class ShopOrderServiceTest {
 
     @Test
     public void insertNewShopOrder (){
-        ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
-        ShopOrder shopOrderUtil = TestUtilsGeneratorShopOrder.getShopOrderMock();
-        BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
-        ShopOrderResponseDto shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
+        BDDMockito.when(buyerRepository.findById(ArgumentMatchers.any(Long.class)))
+                .thenReturn(Optional.of(TestUtilsGeneratorShopOrder.generateBuyer()));
+        BDDMockito.when(batchStockRepository.findAllBySellerAdSellerAdId(ArgumentMatchers.any(Long.class)))
+                .thenReturn(Optional.of(TestUtilsGeneratorShopOrder.generatedBatchStock()));
+
+//        ShopOrderRequestDto shopOrderRequestDtoUtil = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
+//        ShopOrder shopOrderUtil = TestUtilsGeneratorShopOrder.getShopOrderMock();
+//        BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrderUtil);
+//        ShopOrderResponseDto shopOrder = service.insertNewShopOrder(shopOrderRequestDtoUtil);
 
 
       //TODO: Faltam os assertThat

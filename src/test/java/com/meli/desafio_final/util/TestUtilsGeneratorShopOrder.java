@@ -3,12 +3,16 @@ package com.meli.desafio_final.util;
 import com.meli.desafio_final.dto.OrderAdRequestDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.model.*;
+import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.model.enums.Status;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class TestUtilsGeneratorShopOrder {
 
@@ -118,4 +122,47 @@ public class TestUtilsGeneratorShopOrder {
                 .build();
     }
 
+    //Mocks tati e adão
+
+    public static User getUserMock() {
+        return User
+                .builder()
+                .userId(1)
+                .userName("User01")
+                .email("user01@email.com")
+                .password("pass")
+                .cpf("067.987.543-27")
+                .build();
+    }
+
+    public static Buyer generateBuyer(){
+        return Buyer.builder()
+                .buyerId(1)
+                .user(getUserMock())
+                .build();
+    }
+
+    public static SellerAd genarateSellerAd (){
+        return SellerAd.builder()
+                .sellerAdId(2)
+                .product(new Product(1, "banana", Category.REFRIGERATED))
+                .batchStockId(Arrays.asList(null))
+                .build();
+    }
+
+    public static List<BatchStock> genarateBatchStock (){
+        List<BatchStock> batchStockList = new ArrayList<>();
+
+        batchStockList.add(BatchStock.builder()
+                .batchStockId(1L)
+                .sellerAd(genarateSellerAd())
+                .currentTemperature(17.0)
+                .minimumTemperature(10.0)
+                .currentQuantity(100)
+                .manufacturingDate(LocalDate.now())
+                .manufacturingTime(LocalDateTime.now())
+                .volume(1)
+                .dueDate(LocalDate.of(LocalDate.now().plusDays(1).plusMonths(1).plusYears(0)))
+                .build());
+    }
 }
