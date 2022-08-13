@@ -15,6 +15,9 @@ public class Buyer {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long buyerId;
+
     @OneToOne
     private User user;
+
+    private double quantityPurchased;
 }

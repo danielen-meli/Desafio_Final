@@ -32,8 +32,8 @@ insert into seller_ad values(null, 5, 4, 1);
 insert into seller_ad values(null, 4, 5, 1);
 insert into seller_ad values(null, 8, 1, 1);
 
-insert into buyer values(null, 1);
-insert into buyer values(null, 2);
+insert into buyer values(null, 0, 1);
+insert into buyer values(null, 0, 2);
 
 insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (null, "OPEN", 1);
 insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (null, "OPEN", 2);

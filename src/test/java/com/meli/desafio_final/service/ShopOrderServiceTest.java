@@ -3,13 +3,11 @@ package com.meli.desafio_final.service;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.exception.NotFoundException;
-import com.meli.desafio_final.model.SellerAd;
+import com.meli.desafio_final.model.Buyer;
+import com.meli.desafio_final.model.SellerHistory;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
-import com.meli.desafio_final.repository.IBatchStockRepository;
-import com.meli.desafio_final.repository.IBuyerRepository;
-import com.meli.desafio_final.repository.ISellerAdRepository;
-import com.meli.desafio_final.repository.IShopOrderRepository;
+import com.meli.desafio_final.repository.*;
 import com.meli.desafio_final.util.TestUtilsGen_SellerAd;
 import com.meli.desafio_final.util.TestUtilsGeneratorInboundOrder;
 import com.meli.desafio_final.util.TestUtilsGeneratorShopOrder;
@@ -45,6 +43,9 @@ class ShopOrderServiceTest {
 
     @Mock
     private IBuyerRepository buyerRepository;
+
+    @Mock
+    private ISellerHistoryRepository sellerHistoryRepository;
 
     private Object Long;
 
@@ -108,6 +109,9 @@ class ShopOrderServiceTest {
         BDDMockito.when(shopOrderRepository.findById(anyLong())).thenReturn(Optional.of(shopOrder));
         BDDMockito.when(batchStockRepository.getQuantityProduct(anyLong())).thenReturn(10L);
         BDDMockito.when(shopOrderRepository.save(any())).thenReturn(shopOrder);
+        BDDMockito.when(buyerRepository.findById(anyLong())).thenReturn(Optional.of(Buyer.builder().buyerId(1).build()));
+        BDDMockito.when(sellerHistoryRepository.save(ArgumentMatchers.any(SellerHistory.class)))
+                .thenReturn(null);
 
         ShopOrder shopOrderUpdated = service.closedShopOrder(shopOrder.getOrderId());
 

@@ -37,6 +37,10 @@ public class ShopOrderService implements IShopOrderService {
     @Autowired
     private ISectionRepository sectionRepository;
 
+    @Autowired
+    private ISellerHistoryRepository sellerHistory;
+
+
     /** Method that verifies if the buyer is registered.
      * @param id buyer's id
      * @return if exists
@@ -200,9 +204,37 @@ public class ShopOrderService implements IShopOrderService {
                 }
             }
         });
+        // Gabriel
+        updateBuyerAndSeller(shopOrder);
         return shopOrderRepository.save(shopOrder);
     }
 
 
+
+    // PARTE ABAIXO É REFERENTE AO REQUISITO 06 ONDE CADA INTEGRANTE DO GRUPO FAZ UM REQUISITO SOLO
+    // Gabriel Gonçalves Medeiros
+
+    public void updateBuyerAndSeller(ShopOrder shopOrderClosed) {
+        // update buyer
+        double valuePurchased = sumShopOrderItem(shopOrderClosed.getShopOrderItem()).getTotalPrice();
+        updatePurchasedBuyerQuantity(shopOrderClosed.getBuyer().getBuyerId(), valuePurchased);
+
+        //update sellers
+        updateSellersHistory(shopOrderClosed.getShopOrderItem());
+    }
+
+    private void updatePurchasedBuyerQuantity(long buyerId, double quantityToSum) {
+        Buyer buyerToUpdate = buyerRepository.findById(buyerId).get();
+        double buyerActualQuantity = buyerToUpdate.getQuantityPurchased();
+
+        buyerToUpdate.setQuantityPurchased(buyerActualQuantity + quantityToSum);
+        buyerRepository.save(buyerToUpdate);
+    }
+
+    private void updateSellersHistory(List<ShopOrderItem> shopOrderItems) {
+        shopOrderItems.forEach(shopOrderItem -> {
+            sellerHistory.save(new SellerHistory(shopOrderItem));
+        });
+    }
 
 }

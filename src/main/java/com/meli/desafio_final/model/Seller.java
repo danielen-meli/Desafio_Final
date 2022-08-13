@@ -26,6 +26,10 @@ public class Seller {
     @JsonIgnoreProperties("seller")
     private List<SellerAd> sellerAdList;
 
+    @OneToMany(mappedBy = "seller")
+    @JsonIgnoreProperties("seller")
+    private List<SellerHistory> sellerHistory;
+
     @OneToOne
     private User user;
 }

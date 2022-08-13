@@ -37,6 +37,7 @@ public class TestUtilsGeneratorShopOrder {
 
         return ShopOrder.builder()
                 .orderId(2)
+                .buyer(Buyer.builder().buyerId(1).build())
                 .status(Status.OPEN)
                 .shopOrderItem(Arrays.asList(shopOrderItem))
                 .build();
