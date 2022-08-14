@@ -22,8 +22,13 @@ public class TestUtilsGeneratorShopOrder {
 
         BatchStock batchStock = BatchStock.builder().currentQuantity(100).build();
 
+        Seller seller = Seller.builder()
+                .sellerId(1)
+                .build();
+
         SellerAd sellerAd = SellerAd.builder()
                 .sellerAdId(1L)
+                .seller(seller)
                 .product(produto)
                 .batchStockId(Arrays.asList(batchStock))
                 .build();
@@ -102,8 +107,13 @@ public class TestUtilsGeneratorShopOrder {
 
         BatchStock batchStock = BatchStock.builder().currentQuantity(100).build();
 
+        Seller seller = Seller.builder()
+                .sellerId(1L)
+                .build();
+
         SellerAd sellerAd = SellerAd.builder()
                 .sellerAdId(2L)
+                .seller(seller)
                 .product(produto)
                 .batchStockId(Arrays.asList(batchStock))
                 .build();

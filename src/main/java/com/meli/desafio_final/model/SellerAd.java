@@ -28,7 +28,6 @@ public class SellerAd {
 
     @ManyToOne
     @JoinColumn(name = "sellerId")
-
     @JsonIgnoreProperties("sellerAdList")
     private Seller seller;
 

@@ -22,7 +22,7 @@ public class SellerHistory {
     @ManyToOne
     private Seller seller;
 
-    @JsonIgnoreProperties("sellerAdList")
+    @JsonIgnoreProperties("seller")
     @ManyToOne
     private SellerAd sellerAd;
 
@@ -32,5 +32,12 @@ public class SellerHistory {
         this.seller = shopOrderItem.getSellerAd().getSeller();
         this.sellerAd = shopOrderItem.getSellerAd();
         this.quantity = shopOrderItem.getQuantity();
+    }
+
+    public SellerHistory(ShopOrderItem shopOrderItem, long id, double newQuantity) {
+        this.id = id;
+        this.seller = shopOrderItem.getSellerAd().getSeller();
+        this.sellerAd = shopOrderItem.getSellerAd();
+        this.quantity = newQuantity;
     }
 }

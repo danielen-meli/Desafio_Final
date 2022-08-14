@@ -47,6 +47,7 @@ class ShopOrderServiceTest {
     @Mock
     private ISellerHistoryRepository sellerHistoryRepository;
 
+
     private Object Long;
 
 
@@ -112,6 +113,7 @@ class ShopOrderServiceTest {
         BDDMockito.when(buyerRepository.findById(anyLong())).thenReturn(Optional.of(Buyer.builder().buyerId(1).build()));
         BDDMockito.when(sellerHistoryRepository.save(ArgumentMatchers.any(SellerHistory.class)))
                 .thenReturn(null);
+        BDDMockito.when(sellerHistoryRepository.getSellerHistoryIfExists(anyLong(), anyLong())).thenReturn(null);
 
         ShopOrder shopOrderUpdated = service.closedShopOrder(shopOrder.getOrderId());
 

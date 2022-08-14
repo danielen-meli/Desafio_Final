@@ -22,6 +22,7 @@ insert into product values(null, "FROZEN", "pizza");
 
 insert into user values(null, "123456", "email@email.com", "senha123", "User1");
 insert into user values(null, "654321", "email@email.com", "senha123", "User2");
+insert into user values(null, "225645", "email@email.com", "senha123", "User3");
 
 insert into seller values(null, "Seller1", 1);
 
@@ -32,8 +33,9 @@ insert into seller_ad values(null, 5, 4, 1);
 insert into seller_ad values(null, 4, 5, 1);
 insert into seller_ad values(null, 8, 1, 1);
 
-insert into buyer values(null, 0, 1);
-insert into buyer values(null, 0, 2);
+insert into buyer values(null, 20, 1);
+insert into buyer values(null, 300, 2);
+insert into buyer values(null, 500, 3);
 
 insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (null, "OPEN", 1);
 insert into SHOP_ORDER (order_id, status, buyer_buyer_id) VALUES (null, "OPEN", 2);

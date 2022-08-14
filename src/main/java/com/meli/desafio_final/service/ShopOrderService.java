@@ -214,7 +214,7 @@ public class ShopOrderService implements IShopOrderService {
     // PARTE ABAIXO É REFERENTE AO REQUISITO 06 ONDE CADA INTEGRANTE DO GRUPO FAZ UM REQUISITO SOLO
     // Gabriel Gonçalves Medeiros
 
-    public void updateBuyerAndSeller(ShopOrder shopOrderClosed) {
+    private void updateBuyerAndSeller(ShopOrder shopOrderClosed) {
         // update buyer
         double valuePurchased = sumShopOrderItem(shopOrderClosed.getShopOrderItem()).getTotalPrice();
         updatePurchasedBuyerQuantity(shopOrderClosed.getBuyer().getBuyerId(), valuePurchased);
@@ -232,8 +232,22 @@ public class ShopOrderService implements IShopOrderService {
     }
 
     private void updateSellersHistory(List<ShopOrderItem> shopOrderItems) {
+        //TODO: Before save, check if exists productId and sellerId, ver se eu mesmo posso criar a chave composta por productId,SellerAdId
         shopOrderItems.forEach(shopOrderItem -> {
-            sellerHistory.save(new SellerHistory(shopOrderItem));
+            SellerAd sa = shopOrderItem.getSellerAd();
+            Seller sl = sa.getSeller();
+            long sellerId = sl.getSellerId();
+            long sellerAdId = shopOrderItem.getSellerAd().getSellerAdId();
+            SellerHistory sellerHistoryAlreadyExists = sellerHistory.getSellerHistoryIfExists(sellerId, sellerAdId);
+            if(sellerHistoryAlreadyExists != null) {
+                double sellerHistoryActualQuantity = sellerHistoryAlreadyExists.getQuantity();
+                double quantityToSum = shopOrderItem.getQuantity();
+                double totalNewQuantity = sellerHistoryActualQuantity + quantityToSum;
+                sellerHistory.save(new SellerHistory(shopOrderItem, sellerHistoryAlreadyExists.getId(), totalNewQuantity));
+            } else {
+                sellerHistory.save(new SellerHistory(shopOrderItem));
+            }
+
         });
     }
 
