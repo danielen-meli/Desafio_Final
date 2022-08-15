@@ -10,4 +10,5 @@ public interface ISellerBuyerHistoryService {
     Buyer getABuyer(long id);
     List<Buyer> getBuyersOrderedBuyPurchaseQuantity(String orderBy);
     List<SellerHistoryDto> getAllSellersHistory();
+    List<Buyer> getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(double purchaseStart, double purchaseEnd, String orderBy);
 }

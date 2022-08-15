@@ -30,6 +30,15 @@ public class SellerBuyerHistoryController {
         return ResponseEntity.ok(sellerBuyerHistoryService.getBuyersOrderedBuyPurchaseQuantity(orderBy));
     }
 
+    @GetMapping("/buyers/between")
+    public ResponseEntity<List<Buyer>> getBuyersBetweenValuePurchaseOrderedBuyPurchaseQuantity(
+            @RequestParam("start") long start,
+            @RequestParam("end") long end,
+            @RequestParam("orderBy") String orderBy
+    ) {
+        return ResponseEntity.ok(sellerBuyerHistoryService.getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(start, end, orderBy));
+    }
+
     @GetMapping("/sellers/all")
     public ResponseEntity<List<SellerHistoryDto>> getAllSellersHistory() {
         return ResponseEntity.ok(sellerBuyerHistoryService.getAllSellersHistory());

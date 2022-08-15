@@ -33,11 +33,6 @@ public class InboundOrderIntegrationTest {
     @Autowired
     IInboundOrderRepository inboundOrderRepository;
 
-    @BeforeEach
-    public void setup() {
-        inboundOrderRepository.deleteAll();
-    }
-
     @Test
     public void InsertAndUpdateInboundOrder() throws Exception {
         InboundOrderRequestDto inboundOrderRequestDto = getInboundOrderRequestDtoMockIntegrationTests();

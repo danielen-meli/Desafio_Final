@@ -36,6 +36,15 @@ public class SellerBuyerHistoryService implements ISellerBuyerHistoryService {
         throw new BadRequestException("Invalid orderBy type");
     }
 
+    public List<Buyer> getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(double purchaseStart, double purchaseEnd, String orderBy) {
+        if(orderBy.equalsIgnoreCase("asc")) {
+            return buyerRepository.findBuyerBetweenPurchaseValueAsc(purchaseStart, purchaseEnd);
+        } else if(orderBy.equalsIgnoreCase("desc")) {
+            return buyerRepository.findBuyerBetweenPurchaseValueDesc(purchaseStart, purchaseEnd);
+        }
+        throw new BadRequestException("Invalid orderBy type");
+    }
+
     public List<SellerHistoryDto> getAllSellersHistory() {
         return sellerHistoryRepository.findAll().stream().map(SellerHistoryDto::new).collect(Collectors.toList());
     }
