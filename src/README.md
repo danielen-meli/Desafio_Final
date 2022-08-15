@@ -31,6 +31,10 @@ Implementar uma API Rest e aplicar os conteúdos trabalhados durante o Bootcamp 
 ##### - Será possível consultar os produtos em estoque que estão prestes a expirar no almoxarifado, a fim de aplicar alguma ação comercial com eles.
     A data de validade deve estar dentro do intervalo consultado.
 
+### 06. Consulta de descontos disponiveis para um carrinho 
+##### - Será possível consultar os descontos de um determinado carrinho, pode ser aplicado até 2 tipos de descontos, frete grátis para as compras a cima de 119,99 e desconto de atacado, 5% nos itens de carrinhos que tenha mais de 10 unidades do mesmo anúncio
+    O carrinho deve existir e não pode estar fechado
+
 ## Dados:
 - SQL que popula o banco;
 - Arquivos JSON Postman => projeto_integrador/src/main/resources/PostMan

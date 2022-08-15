@@ -43,3 +43,8 @@ insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 1.0, 2, 3, 2);
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 8.0, 5, 4, 2);
 
+
+-- sql para requisito 6 tati
+insert into product values(null, "FROZEN", "Picanha" );
+insert into seller_ad values (null, 120.0, 7, 1);
+insert into seller_ad values (null, 5.0, 6, 1);
