@@ -40,6 +40,5 @@ public class ShopOrder {
         this.status = shopOrderRequestDto.getOrderStatus();
         this.buyer = buyer;
         this.shopOrderItem = shopOrderItem;
-        this.promoCode = shopOrderRequestDto.getPromoCode();//TODO paula: criar dto promo code?
     }
 }
