@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ISectionRepository extends JpaRepository<Section, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT sec.section_id from section as sec where sec.category = :category")
+    @Query(nativeQuery = true, value = "SELECT sec.section_id from section as sec where sec.category = category")
     List<BigInteger> getSectionsIdsByCategory(@Param("category") Category category);
 
 }

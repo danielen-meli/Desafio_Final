@@ -31,7 +31,6 @@ public class ShopOrderItem {
     @JoinColumn(name = "sellerAd_id")
     private SellerAd sellerAd;
 
-    //TODO ver se esse construtor está sendo usado
     public ShopOrderItem(int i, Object o, double v, int i1, Object o1) {
     }
 
