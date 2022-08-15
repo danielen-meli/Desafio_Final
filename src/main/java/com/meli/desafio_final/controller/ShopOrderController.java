@@ -1,9 +1,11 @@
 package com.meli.desafio_final.controller;
 
+import com.meli.desafio_final.dto.DiscountResponseDto;
 import com.meli.desafio_final.dto.ShopOrderDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.model.ShopOrder;
+import com.meli.desafio_final.repository.IShopOrderRepository;
 import com.meli.desafio_final.service.IShopOrderService;
 import com.meli.desafio_final.service.ShopOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -50,5 +53,11 @@ public class ShopOrderController{
     @PutMapping("/closed-shopOrder/{id}")
     public ResponseEntity<ShopOrder> closeShopOrder(@PathVariable long id){
         return ResponseEntity.ok(shopOrderService.closedShopOrder(id));
+    }
+
+
+    @GetMapping("/discount/{id}")
+    public ResponseEntity<List<DiscountResponseDto>> discountsAvailable(@PathVariable long id){
+        return ResponseEntity.ok(shopOrderService.discountsAvailable(id));
     }
 }

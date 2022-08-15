@@ -1,8 +1,6 @@
 package com.meli.desafio_final.service;
 
-import com.meli.desafio_final.dto.OrderAdRequestDto;
-import com.meli.desafio_final.dto.ShopOrderRequestDto;
-import com.meli.desafio_final.dto.ShopOrderResponseDto;
+import com.meli.desafio_final.dto.*;
 import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.*;
@@ -12,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +36,9 @@ public class ShopOrderService implements IShopOrderService {
 
     @Autowired
     private ISectionRepository sectionRepository;
+
+    @Autowired
+    private IShopOrderItemRepository shopOrderItemRepository;
 
     /** Method that verifies if the buyer is registered.
      * @param id buyer's id
@@ -203,6 +206,97 @@ public class ShopOrderService implements IShopOrderService {
         return shopOrderRepository.save(shopOrder);
     }
 
+    /**
+     * Retorna uma lista com todos os descontos disponíveis para aquele shop order
+     * @param shopOrderId
+     * @return
+     */
+    @Override
+    public List<DiscountResponseDto> discountsAvailable(long shopOrderId){
+        List<DiscountResponseDto> discountResponseDtoList = new ArrayList<>();
+        ShopOrder shopOrder = verifyShopOrder(shopOrderId);
 
+        ShopOrderResponseDto total = sumShopOrderItem(shopOrder.getShopOrderItem());
+        List<ShopOrderItem> currentShopOrderItem = wholesaleDiscount(shopOrder.getShopOrderItem());
+        ShopOrderResponseDto currenttotal = sumShopOrderItem(currentShopOrderItem);
+
+        DiscountResponseDto wholesaleDiscountConvertion = wholesaleDiscountConvertion(total.getTotalPrice(), currenttotal.getTotalPrice());
+        DiscountResponseDto freeShipping = calculateFreeShipping(shopOrder.getShopOrderItem());
+
+        if (freeShipping != null ) {
+            discountResponseDtoList.add(freeShipping);
+        }
+        if(wholesaleDiscountConvertion != null ){
+            discountResponseDtoList.add(wholesaleDiscountConvertion);
+        }
+        return discountResponseDtoList;
+    }
+
+    /**
+     * Busca se aquele shopOrder existe e se ele não está com status de finalizado
+     * @param id
+     * @return ShopOrder
+     */
+    private ShopOrder verifyShopOrder(long id){
+        ShopOrder shopOrder = getById(id);
+        if(shopOrder.getStatus().equals(Status.CLOSED)){
+            throw new BadRequestException("Shop order not available");
+        }
+        return shopOrder;
+    }
+
+    /**
+     * Valida se o valor total do carrinho, já aplicado o desconto de atacado, se for maior de 119,99 aplicará frete grátis
+     * @param shopOrderItemList
+     * @return DiscountResponseDto
+     */
+    private DiscountResponseDto  calculateFreeShipping(List<ShopOrderItem> shopOrderItemList){
+
+        if(sumShopOrderItem(shopOrderItemList).getTotalPrice() > 119.99){
+            return DiscountResponseDto.builder()
+                    .type("Free shipping")
+                    .currentTotal(0)
+                    .total(0)
+                    .build();
+        }
+        return null;
+    }
+
+    /**
+     * Valida se a quantidade de cada item é maior que 10, assim aplica o desconto do atacado de 5%
+     * @param shopOrderItemList
+     * @return List ShopOrderItem
+     */
+    private List<ShopOrderItem> wholesaleDiscount(List<ShopOrderItem> shopOrderItemList){
+        ShopOrderResponseDto total = sumShopOrderItem(shopOrderItemList);
+        List<ShopOrderItem> currentShopOrderItem =  shopOrderItemList.stream().peek(soi -> {
+            if(soi.getQuantity() > 10){
+                soi.setPrice(soi.getPrice() - (soi.getPrice() * 0.05));
+            }
+        }).collect(Collectors.toList());
+
+        sumShopOrderItem(currentShopOrderItem);
+
+        return currentShopOrderItem;
+    }
+
+    /**
+     * Caso o valor atual seja diferente do valor antigo terá o retorno de um response informado o valor do desconto
+     * @param total
+     * @param currentTotal
+     * @return DiscountResponseDto
+     */
+    private DiscountResponseDto wholesaleDiscountConvertion(double total, double currentTotal){
+
+
+        if(total != currentTotal){
+            return  DiscountResponseDto.builder()
+                    .type("Wholesale discount")
+                    .currentTotal(currentTotal)
+                    .total(total)
+                    .build();
+        }
+        return null;
+    }
 
 }
