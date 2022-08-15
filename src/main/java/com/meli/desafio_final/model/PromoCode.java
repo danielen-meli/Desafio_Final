@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,8 +18,10 @@ public class PromoCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPromoCode;
-    private String code;
+    private String promoCode;
     private double discount;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
 
     @OneToMany(mappedBy = "promoCode")
     @JsonIgnoreProperties("promoCode")

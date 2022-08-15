@@ -111,8 +111,12 @@ public class ShopOrderService implements IShopOrderService {
      * @param shopOrderItemList list of itens requested in the order
      * @return Object ShopOrderResponseDto
      */
-    private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList){
+    private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList, double discount){
         double total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
+
+        if(discount != 0){
+            total = total * discount;
+        }
 
         return ShopOrderResponseDto.builder()
                 .totalPrice(total)
@@ -131,7 +135,8 @@ public class ShopOrderService implements IShopOrderService {
 
         ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer);
         List<ShopOrderItem> shopOrderItems = shopOrderSaved.getShopOrderItem();
-        return sumShopOrderItem(shopOrderItems);
+
+        return sumShopOrderItem(shopOrderItems, shopOrderRequestDto.getPromoCode().getDiscount());
     }
 
     /** Method that finds a shop order by id.
@@ -200,6 +205,7 @@ public class ShopOrderService implements IShopOrderService {
                 }
             }
         });
+
         return shopOrderRepository.save(shopOrder);
     }
 

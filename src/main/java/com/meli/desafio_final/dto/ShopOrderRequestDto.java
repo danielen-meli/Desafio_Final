@@ -1,5 +1,6 @@
 package com.meli.desafio_final.dto;
 
+import com.meli.desafio_final.model.PromoCode;
 import com.meli.desafio_final.model.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,4 +29,5 @@ public class ShopOrderRequestDto {
     @Valid
     private List<OrderAdRequestDto> products;
 
+    private PromoCode promoCode;
 }
