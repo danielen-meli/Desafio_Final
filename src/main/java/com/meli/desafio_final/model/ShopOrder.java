@@ -1,5 +1,6 @@
 package com.meli.desafio_final.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.model.enums.Status;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,10 @@ public class ShopOrder {
 
     @ManyToOne
     private Buyer buyer;
+
+    @ManyToOne
+    @JsonIgnoreProperties("shopOrder")
+    private PromoCode promoCode;
 
     public ShopOrder(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, List<ShopOrderItem> shopOrderItem){
         this.status = shopOrderRequestDto.getOrderStatus();
