@@ -1,7 +1,10 @@
 package com.meli.desafio_final.integration;
 
+import com.meli.desafio_final.repository.IInboundOrderRepository;
 import com.meli.desafio_final.service.IInboundService;
 import com.meli.desafio_final.util.TestUtilsGeneratorInboundOrder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,6 +25,9 @@ public class WarehouseIntegrationTest {
 
     @Autowired
     IInboundService inboundService;
+
+    @Autowired
+    IInboundOrderRepository inboundOrderRepository;
 
 
     @Test
