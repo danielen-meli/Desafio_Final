@@ -232,6 +232,7 @@ public class ShopOrderService implements IShopOrderService {
         return discountResponseDtoList;
     }
 
+
     /**
      * Busca se aquele shopOrder existe e se ele não está com status de finalizado
      * @param id
@@ -245,13 +246,13 @@ public class ShopOrderService implements IShopOrderService {
         return shopOrder;
     }
 
+
     /**
      * Valida se o valor total do carrinho, já aplicado o desconto de atacado, se for maior de 119,99 aplicará frete grátis
      * @param shopOrderItemList
      * @return DiscountResponseDto
      */
     private DiscountResponseDto  calculateFreeShipping(List<ShopOrderItem> shopOrderItemList){
-
         if(sumShopOrderItem(shopOrderItemList).getTotalPrice() > 119.99){
             return DiscountResponseDto.builder()
                     .type("Free shipping")
@@ -261,6 +262,7 @@ public class ShopOrderService implements IShopOrderService {
         }
         return null;
     }
+
 
     /**
      * Valida se a quantidade de cada item é maior que 10, assim aplica o desconto do atacado de 5%
@@ -280,6 +282,7 @@ public class ShopOrderService implements IShopOrderService {
         return currentShopOrderItem;
     }
 
+
     /**
      * Caso o valor atual seja diferente do valor antigo terá o retorno de um response informado o valor do desconto
      * @param total
@@ -287,8 +290,6 @@ public class ShopOrderService implements IShopOrderService {
      * @return DiscountResponseDto
      */
     private DiscountResponseDto wholesaleDiscountConvertion(double total, double currentTotal){
-
-
         if(total != currentTotal){
             return  DiscountResponseDto.builder()
                     .type("Wholesale discount")

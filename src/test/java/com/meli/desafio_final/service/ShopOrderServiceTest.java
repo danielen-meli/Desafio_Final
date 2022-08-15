@@ -135,4 +135,8 @@ class ShopOrderServiceTest {
         assertThat(shopOrderResponseDto.getTotalPrice()).isEqualTo(315.00);
     }
 
+
+    public void discountsAvailable(){
+        
+    }
 }
