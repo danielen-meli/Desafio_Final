@@ -58,6 +58,11 @@ insert into seller_ad values(null, 5, 4, 2);
 insert into seller_ad values(null, 4, 5, 3);
 insert into seller_ad values(null, 8, 6, 4);
 
+insert into seller_ad values(null, 7, 3, 3);
+insert into seller_ad values(null, 4, 4, 5);
+
+
+
 -- id, quantity_purchased, user_user_id
 insert into buyer values(null, 20, 1);
 insert into buyer values(null, 300, 2);

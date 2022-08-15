@@ -1,11 +1,10 @@
 package com.meli.desafio_final.controller;
 
-import com.meli.desafio_final.dto.SellerAdDTO;
+import com.meli.desafio_final.dto.SellerHistoryByProductsResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryDto;
+import com.meli.desafio_final.dto.SellerHistoryTotalSoldResponseDto;
 import com.meli.desafio_final.model.Buyer;
 import com.meli.desafio_final.model.Seller;
-import com.meli.desafio_final.model.SellerHistory;
-import com.meli.desafio_final.model.enums.Category;
 import com.meli.desafio_final.service.ISellerBuyerHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,7 @@ public class SellerBuyerHistoryController {
 
     @Autowired
     private ISellerBuyerHistoryService sellerBuyerHistoryService;
+
 
     @GetMapping("/buyer/{id}")
     public ResponseEntity<Buyer> getABuyer(@PathVariable long id){
@@ -39,6 +39,9 @@ public class SellerBuyerHistoryController {
         return ResponseEntity.ok(sellerBuyerHistoryService.getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(start, end, orderBy));
     }
 
+
+    // SELLERS PART
+
     @GetMapping("/sellers/all")
     public ResponseEntity<List<SellerHistoryDto>> getAllSellersHistory() {
         return ResponseEntity.ok(sellerBuyerHistoryService.getAllSellersHistory());
@@ -51,11 +54,13 @@ public class SellerBuyerHistoryController {
     }
 
     @GetMapping("sellers/byProduct/{id}")
-    public ResponseEntity<List<Seller>> getSellersHistoryByProduct(@PathVariable long id, @RequestParam("orderBy") String orderBy) {
-        // TODO: fazer um Sellect SellerAd where productId = productId da rota, isso
-        //  vai retornar uma lista de ids de SellerAd, com isso buscar na tabela de SellerHistory
-        //  todos os que tem SellerAdId dessa lista (usar o in) como no exemplo passado para o mauri
-        return null;
+    public ResponseEntity<List<SellerHistoryByProductsResponseDto>> getSellersHistoryByProduct(@PathVariable long id) {
+        return ResponseEntity.ok(sellerBuyerHistoryService.getSellersHistoryByProduct(id));
+    }
+
+    @GetMapping("/sellers/totalSold")
+    public ResponseEntity<List<SellerHistoryTotalSoldResponseDto>> getSellersOrderedByTotalSold () {
+        return ResponseEntity.ok(sellerBuyerHistoryService.getSellersOrderedByTotalSold());
     }
 
 }

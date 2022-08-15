@@ -27,7 +27,7 @@ public class SellerAdIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON));
 
         mvcResult.andExpect(status().isOk()).
-                andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(6)));
+                andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(8)));
     }
 
     @Test
@@ -38,6 +38,6 @@ public class SellerAdIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON));
 
         mvcResult.andExpect(status().isOk()).
-                andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));
+                andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(4)));
     }
 }
