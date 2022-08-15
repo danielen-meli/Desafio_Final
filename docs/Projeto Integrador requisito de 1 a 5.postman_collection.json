@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "b2158660-298c-4a78-8b4b-fd476caaf377",
+		"name": "Projeto Integrador requisito de 1 a 5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21746723"
+	},
+	"item": [
+		{
+			"name": "1 - Post Inbound Order REFRIGERATED",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 150,\n            \"dueDate\": \"2025-08-15\"\n        },\n          {\n            \"sellerAdId\": 2,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 50,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"inboundorder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1 - Post Inbound Order Fresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 2,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 1,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"sellerAdId\": 4,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"inboundorder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5 - New shopOrder /post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-15\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 4,\n        \"quantity\": 5\n\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8 - Lista de estoques de um determinado produto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-15\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 4,\n        \"quantity\": 5\n\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/stock?productId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"stock"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9 - Lista de estoques de um determinado produto  ordenado por Id do produto, Quantidade e Data de validade",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-15\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 4,\n        \"quantity\": 5\n\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/stock/orderBy?productId=1&orderBy=V",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"stock",
+						"orderBy"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "1"
+						},
+						{
+							"key": "orderBy",
+							"value": "V"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7 - Fechar carrinho. /put ShopOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders/closed-shopOrder/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"closed-shopOrder",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6 - Fechar carrinho. /put ShopOrder Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2- Update Inbound Order",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"batchStockId\":1,\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 300,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 50,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"batchStockId\":2,\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 300,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 10,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"inboundorder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4 - Lista de produtos por categoria",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/category?category=REFRIGERATED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"category"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "REFRIGERATED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 - Lista de produtos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11 - Lista de estoques  com validade de acordo com o parametro",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/due-date?number_days=3000&section=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"due-date"
+					],
+					"query": [
+						{
+							"key": "number_days",
+							"value": "3000"
+						},
+						{
+							"key": "section",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12 - Lista de estoques  de acordo com o parametro, categoria, data de validade, e ordenação ASC e DESC(pela data)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-15\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2022-09-03\"\n        },\n        {\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 200,\n            \"currentQuantity\": 200,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 200,\n            \"dueDate\": \"2025-08-15\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/due-date/list?number_days=3000&category=FRESH&orderType=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"due-date",
+						"list"
+					],
+					"query": [
+						{
+							"key": "number_days",
+							"value": "3000"
+						},
+						{
+							"key": "category",
+							"value": "FRESH"
+						},
+						{
+							"key": "orderType",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10 - Quantidade de produto por warehouse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/warehouse/2/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"warehouse",
+						"2",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
