@@ -37,9 +37,10 @@ public class ShopOrder {
     //@JsonIgnoreProperties("shopOrder")
     private PromoCode promoCode;
 
-    public ShopOrder(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, List<ShopOrderItem> shopOrderItem){
+    public ShopOrder(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, List<ShopOrderItem> shopOrderItem, PromoCode promoCode){
         this.status = shopOrderRequestDto.getOrderStatus();
         this.buyer = buyer;
         this.shopOrderItem = shopOrderItem;
+        this.promoCode = promoCode;
     }
 }

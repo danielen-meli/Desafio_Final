@@ -64,4 +64,7 @@ insert into seller_ad values(null, 4, 2, 1);
 insert into buyer values(null, 1);
 
 insert into promo_code
-values("BEMVINDO10", '2022-08-16', '2022-09-30', 0.90);
+values("BEMVINDO10", '2022-08-16', '2022-09-30', 0.90, "MULTIPLY", 100);
+
+insert into promo_code
+values("15REAIS", '2022-08-16', '2022-09-30', -15, "SUBTRACT", 60);

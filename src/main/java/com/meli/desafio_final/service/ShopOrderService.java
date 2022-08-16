@@ -6,6 +6,7 @@ import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.exception.NotFoundException;
 import com.meli.desafio_final.model.*;
+import com.meli.desafio_final.model.enums.DiscountType;
 import com.meli.desafio_final.model.enums.Status;
 import com.meli.desafio_final.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +99,7 @@ public class ShopOrderService implements IShopOrderService {
      * @param buyer id of the buyer
      * @return calls method to register the order
      */
-    private ShopOrder save(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer) {
+    private ShopOrder save(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, String promoCodeId) {
         List<ShopOrderItem> shopOrderItems = shopOrderRequestDto.getProducts().stream().map(order -> {
             SellerAd sellerAd = sellerAdRepository.findById(order.getSellerAdId()).orElseThrow(() -> new BadRequestException("SellerAd Invalid"));
             int quantity = order.getQuantity();
@@ -106,7 +107,12 @@ public class ShopOrderService implements IShopOrderService {
             return new ShopOrderItem(date, quantity, sellerAd);
         }).collect(Collectors.toList());
 
-        ShopOrder shopOrder = new ShopOrder(shopOrderRequestDto, buyer, shopOrderItems);
+        PromoCode promoCode = promoCodeRepository.findById(promoCodeId).get();
+        if(promoCodeRepository.findById(promoCodeId).isEmpty()){
+            promoCode = PromoCode.builder().build();
+        }
+
+        ShopOrder shopOrder = new ShopOrder(shopOrderRequestDto, buyer, shopOrderItems, promoCode);
         return shopOrderRepository.save(shopOrder);
     }
 
@@ -115,15 +121,30 @@ public class ShopOrderService implements IShopOrderService {
      * @return Object ShopOrderResponseDto
      */
     private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList, PromoCode promoCode){
-        double total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
+        double totalSum = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
 
-        if(promoCode.getDiscount() != 0){
-            total = total * promoCode.getDiscount();
-        }
+        double total = applyDiscount(totalSum, promoCode);
 
         return ShopOrderResponseDto.builder()
                 .totalPrice(total)
                 .build();
+    }
+
+    private double applyDiscount(double totalSum, PromoCode promoCode){
+        switch (promoCode.getDiscountType()){
+            case MULTIPLY:
+                if(promoCode.getDiscount() != 0){
+                    totalSum = totalSum * promoCode.getDiscount();
+                }
+                break;
+            case SUBTRACT:
+                if(promoCode.getDiscount() != 0){
+                    totalSum = totalSum + promoCode.getDiscount();
+                }
+                break;
+        }
+
+        return totalSum;
     }
 
     /** Method that registers a new shop order.
@@ -136,21 +157,25 @@ public class ShopOrderService implements IShopOrderService {
         Buyer buyer = verifyBuyerExists(shopOrderRequestDto.getBuyerId());
         productStocksAvailable(shopOrderRequestDto.getProducts());
 
-        PromoCode promoCode;
-        Optional<PromoCode> optionalPromoCode = promoCodeRepository.findById(shopOrderRequestDto.getPromoCode());
-        if(optionalPromoCode.isEmpty()){
-            if(shopOrderRequestDto.getPromoCode().length() > 0){
-                throw new NotFoundException("O cupom não é válido.");
-            }
-            promoCode = PromoCode.builder().discount(0).build();
-        } else{
-            promoCode = optionalPromoCode.get();
-        }
+        PromoCode promoCode = validatePromoCode(shopOrderRequestDto.getPromoCode());
 
-        ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer);
+        ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer, shopOrderRequestDto.getPromoCode());
         List<ShopOrderItem> shopOrderItems = shopOrderSaved.getShopOrderItem();
 
         return sumShopOrderItem(shopOrderItems, promoCode);
+    }
+
+    public PromoCode validatePromoCode(String promoCodeId){
+        Optional<PromoCode> optionalPromoCode = promoCodeRepository.findById(promoCodeId);
+
+        if(optionalPromoCode.isEmpty()){
+            if(promoCodeId.length() > 0){
+                throw new NotFoundException("O cupom não é válido.");
+            }
+            return PromoCode.builder().discount(0).discountType(DiscountType.MULTIPLY).build();
+        }
+
+        return optionalPromoCode.get();
     }
 
     /** Method that finds a shop order by id.
