@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "18588a1a-f4c3-4801-8db4-4334622f33f4",
+		"name": "Requisito 06 Gabriel Gonçalves Grupo 09",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Passo 01 - Registrar todos os inbound orders",
+			"item": [
+				{
+					"name": "Add inbound orders",
+					"item": [
+						{
+							"name": "Add new inbound order Refrigerated section 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderDate\": \"2022-08-17\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 1,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 2,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"inboundorder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new inbound order FRESH Section 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderDate\": \"2022-08-17\",\n    \"section\": 3,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 4,\n            \"currentTemperature\": 10,\n            \"minimumTemperature\": 9,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 5,\n            \"currentTemperature\": 11,\n            \"minimumTemperature\": 7,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 6,\n            \"currentTemperature\": 10,\n            \"minimumTemperature\": 6,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"inboundorder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new inbound order FROZEN Section 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderDate\": \"2022-08-17\",\n    \"section\": 5,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 7,\n            \"currentTemperature\": 2,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 8,\n            \"currentTemperature\": 3,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 9,\n            \"currentTemperature\": 3,\n            \"minimumTemperature\": 0,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"inboundorder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new inbound order Refrigerated section 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderDate\": \"2022-08-17\",\n    \"section\": 1,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 1,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 2,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 3,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"inboundorder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new inbound order FRESH section 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderDate\": \"2022-08-17\",\n    \"section\": 4,\n    \"batchStockList\": [\n        {\n            \"sellerAdId\": 13,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 14,\n            \"currentTemperature\": 5,\n            \"minimumTemperature\": 2,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        },\n        {\n            \"sellerAdId\": 15,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 250,\n            \"currentQuantity\": 250,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 250,\n            \"dueDate\": \"2022-12-08\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"inboundorder"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Passo 02 - Realizar e finalizar as compras (carrinhos)",
+			"item": [
+				{
+					"name": "Add shop orders",
+					"item": [
+						{
+							"name": "New ShopOrder Buyer 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-17\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 1,\n        \"quantity\": 3\n    }, {\n        \"sellerAdId\": 4,\n        \"quantity\": 4\n    }, {\n        \"sellerAdId\": 7,\n        \"quantity\": 2\n    }, {\n        \"sellerAdId\": 10,\n        \"quantity\": 2\n    }, {\n        \"sellerAdId\": 13,\n        \"quantity\": 1\n    }]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New ShopOrder Buyer 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-17\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 1,\n        \"quantity\": 3\n    }, {\n        \"sellerAdId\": 4,\n        \"quantity\": 4\n    }, {\n        \"sellerAdId\": 7,\n        \"quantity\": 2\n    }, {\n        \"sellerAdId\": 10,\n        \"quantity\": 2\n    }, {\n        \"sellerAdId\": 13,\n        \"quantity\": 1\n    }]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New ShopOrder Buyer 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-17\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 1,\n        \"quantity\": 3\n    }, {\n        \"sellerAdId\": 4,\n        \"quantity\": 4\n    }, {\n        \"sellerAdId\": 7,\n        \"quantity\": 2\n    }, {\n        \"sellerAdId\": 10,\n        \"quantity\": 2\n    }, {\n        \"sellerAdId\": 13,\n        \"quantity\": 1\n    }]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Close Cart",
+					"item": [
+						{
+							"name": "Update ShopOrder Buyer 1",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/orders/closed-shopOrder/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"orders",
+										"closed-shopOrder",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update ShopOrder Buyer 2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/orders/closed-shopOrder/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"orders",
+										"closed-shopOrder",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update ShopOrder Buyer 3",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/fresh-products/orders/closed-shopOrder/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"fresh-products",
+										"orders",
+										"closed-shopOrder",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Passo 3 - Utilizar os endpoints do requisito 06",
+			"item": [
+				{
+					"name": "Buyer",
+					"item": [
+						{
+							"name": "Req 6 get a buyers ordered asc",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/history/buyers?orderBy=asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"history",
+										"buyers"
+									],
+									"query": [
+										{
+											"key": "orderBy",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET buyers between total purchase ordered",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/history/buyers?orderBy=desc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"history",
+										"buyers"
+									],
+									"query": [
+										{
+											"key": "orderBy",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Sellers",
+					"item": [
+						{
+							"name": "Get All sellers history",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/history/sellers/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"history",
+										"sellers",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All sellers by product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/history/sellers/byProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"history",
+										"sellers",
+										"byProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Sellers ordered by total quantity sold",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/history/sellers/ordered?orderBy=asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"history",
+										"sellers",
+										"ordered"
+									],
+									"query": [
+										{
+											"key": "orderBy",
+											"value": "asc"
+										},
+										{
+											"key": "orderBy",
+											"value": "desc",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
