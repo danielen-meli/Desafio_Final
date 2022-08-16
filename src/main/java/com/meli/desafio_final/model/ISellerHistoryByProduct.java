@@ -6,4 +6,6 @@ public interface ISellerHistoryByProduct {
     Long getSeller_seller_id();
     String getSeller_name();
     Double getPrice();
+    String getEmail();
+    String getProduct_name();
 }

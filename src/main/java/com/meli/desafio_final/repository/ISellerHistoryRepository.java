@@ -23,12 +23,16 @@ public interface ISellerHistoryRepository extends JpaRepository<SellerHistory, L
             "GROUP BY sh.seller_seller_id order by total_sold DESC;")
     List<ISellerHistoryTotalSold> sellerHistoryTotalSold();
 
-    @Query(nativeQuery = true, value = "SELECT sh.id, sh.quantity as total_quantity_sold, sh.seller_seller_id, sl.seller_name, sa.price FROM meli_fresh.seller_history as sh\n" +
+    @Query(nativeQuery = true, value = "SELECT sh.id, sh.quantity as total_quantity_sold, sh.seller_seller_id, sl.seller_name, us.email, sa.price, pd.product_name FROM meli_fresh.seller_history as sh\n" +
             "INNER JOIN meli_fresh.seller_ad as sa\n" +
-            "on sh.seller_ad_seller_ad_id = sa.seller_ad_id\n" +
+            "ON sh.seller_ad_seller_ad_id = sa.seller_ad_id\n" +
             "INNER JOIN meli_fresh.seller as sl\n" +
-            "on sh.seller_seller_id = sl.seller_id\n" +
-            "where sa.product_product_id = :productId\n" +
-            "order by sh.quantity DESC;")
+            "ON sh.seller_seller_id = sl.seller_id\n" +
+            "INNER JOIN meli_fresh.product as pd\n" +
+            "ON pd.product_id = :productId\n" +
+            "INNER JOIN meli_fresh.user as us\n" +
+            "ON us.user_id = sl.user_user_id\n" +
+            "WHERE sa.product_product_id = :productId\n" +
+            "ORDER BY sh.quantity DESC;")
     List<ISellerHistoryByProduct> getSellersHistoryByProduct(@Param("productId") Long productId);
 }

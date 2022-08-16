@@ -31,6 +31,25 @@ Implementar uma API Rest e aplicar os conteúdos trabalhados durante o Bootcamp 
 ##### - Será possível consultar os produtos em estoque que estão prestes a expirar no almoxarifado, a fim de aplicar alguma ação comercial com eles.
     A data de validade deve estar dentro do intervalo consultado.
 
+
+### 06. Requisito individual, Gabriel: Histórico de compra e vendas. 
+##### - Será possível consultar os compradores (Buyers) com o atributo da quantidade total que o comprador já efetuou na plataforma.
+##### - Será possível ordenar os compradores pela quantidade total de compra
+##### - Será possível filtrar os compradores dentro de uma margem de valor que já foi efetuada na plataforma
+##### - Será possível filtrar e ordenar vendedores pela quantidade total vendida na plataforma.
+##### - Será possível filtrar e ordenar vendedores pela quantidade total vendida de um produto específico na plataforma.
+
+    Após finalizar uma compra, tanto o comprador quanto os vendedores relacionados aquela compra
+    serão atualizados.
+    
+    Compradores: terão atualizados o atributo que relaciona a quantidade total gasta na plataforma.
+    
+    Vendedores: receberão um novo registro de histórico caso seja a primeira vez que vendem
+    determinado produto, ou atualizados caso já tenha vendido aquele produto, relacionando assim 
+    o vendedor ao produto e a quantidade vendida daquele produto.
+
+
+
 ## Dados:
 - SQL que popula o banco;
 - Arquivos JSON Postman => projeto_integrador/src/main/resources/PostMan

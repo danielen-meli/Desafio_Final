@@ -11,15 +11,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class SellerHistoryByProductsResponseDto {
-    private long id;
+    // private long id;
     private double totalAlreadySold;
     private long sellerId;
     private String sellerName;
+    private String sellerEmail;
+    private String product;
 
     public SellerHistoryByProductsResponseDto(ISellerHistoryByProduct sellerHistoryByProduct) {
-        this.id = sellerHistoryByProduct.getId();
+        // this.id = sellerHistoryByProduct.getId();
         this.totalAlreadySold = sellerHistoryByProduct.getTotal_quantity_sold();
         this.sellerId = sellerHistoryByProduct.getSeller_seller_id();
         this.sellerName = sellerHistoryByProduct.getSeller_name();
+        this.sellerEmail = sellerHistoryByProduct.getEmail();
+        this.product = sellerHistoryByProduct.getProduct_name();
     }
 }

@@ -268,6 +268,13 @@ class SellerHistoryByProduct implements ISellerHistoryByProduct {
     public String getSeller_name() {
         return "name";
     }
+
+    @Override
+    public String getEmail() { return "email@email.com"; }
+
+    @Override
+    public String getProduct_name() { return "prod name"; }
+
 }
 
 
