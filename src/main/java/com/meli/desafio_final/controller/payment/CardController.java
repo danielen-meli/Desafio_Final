@@ -1,8 +1,8 @@
 package com.meli.desafio_final.controller.payment;
 
 
-import com.meli.desafio_final.dto.payment.CustomerCardDto;
-import com.meli.desafio_final.service.payment.CardService;
+import com.meli.desafio_final.controller.payment.dto.CustomerCardDto;
+import com.meli.desafio_final.controller.payment.service.CardService;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.net.MPResourceList;

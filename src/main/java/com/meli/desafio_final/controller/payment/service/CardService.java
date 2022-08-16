@@ -1,6 +1,6 @@
-package com.meli.desafio_final.service.payment;
+package com.meli.desafio_final.controller.payment.service;
 
-import com.meli.desafio_final.dto.payment.CustomerCardDto;
+import com.meli.desafio_final.controller.payment.dto.CustomerCardDto;
 import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.customer.CustomerCardClient;
 import com.mercadopago.client.customer.CustomerCardCreateRequest;
