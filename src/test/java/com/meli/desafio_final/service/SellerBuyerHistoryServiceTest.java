@@ -1,5 +1,6 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.dto.BuyerResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryByProductsResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryDto;
 import com.meli.desafio_final.dto.SellerHistoryTotalSoldResponseDto;
@@ -79,13 +80,13 @@ class SellerBuyerHistoryServiceTest {
 
     @Test
     void getBuyersOrderedBuyPurchaseQuantity() {
-        List<Buyer> buyersAsc = sellerBuyerHistoryService.getBuyersOrderedBuyPurchaseQuantity("asc");
+        List<BuyerResponseDto> buyersAsc = sellerBuyerHistoryService.getBuyersOrderedBuyPurchaseQuantity("asc");
 
         assertThat(buyersAsc).isNotNull();
         assertThat(buyersAsc).isNotEmpty();
         assertThat(buyersAsc.size()).isEqualTo(3);
 
-        List<Buyer> buyersDesc = sellerBuyerHistoryService.getBuyersOrderedBuyPurchaseQuantity("desc");
+        List<BuyerResponseDto> buyersDesc = sellerBuyerHistoryService.getBuyersOrderedBuyPurchaseQuantity("desc");
 
         assertThat(buyersDesc).isNotNull();
         assertThat(buyersDesc).isNotEmpty();
@@ -101,8 +102,8 @@ class SellerBuyerHistoryServiceTest {
 
     @Test
     void getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity() {
-        List<Buyer> buyersBetweenAsc = sellerBuyerHistoryService.getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(20, 40, "asc");
-        List<Buyer> buyersBetweenDesc = sellerBuyerHistoryService.getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(20, 40, "desc");
+        List<BuyerResponseDto> buyersBetweenAsc = sellerBuyerHistoryService.getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(20, 40, "asc");
+        List<BuyerResponseDto> buyersBetweenDesc = sellerBuyerHistoryService.getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(20, 40, "desc");
 
         assertThat(buyersBetweenAsc).isNotNull();
         assertThat(buyersBetweenAsc).isNotEmpty();
@@ -151,9 +152,22 @@ class SellerBuyerHistoryServiceTest {
     public List<Buyer> generateListBuyer() {
         List<Buyer> buyersOrdered = new ArrayList<>();
 
-        buyersOrdered.add(Buyer.builder().buyerId(1L).build());
-        buyersOrdered.add(Buyer.builder().buyerId(2L).build());
-        buyersOrdered.add(Buyer.builder().buyerId(3L).build());
+        buyersOrdered.add(Buyer
+                .builder()
+                .buyerId(1L)
+                .user(User.builder().userName("name").email("email@email.com").build())
+                .quantityPurchased(30.3)
+                .build());
+
+        buyersOrdered.add(Buyer.builder().buyerId(2L)
+                .user(User.builder().userName("name").email("email@email.com").build())
+                .quantityPurchased(30.3)
+                .build());
+
+        buyersOrdered.add(Buyer.builder().buyerId(3L)
+                .user(User.builder().userName("name").email("email@email.com").build())
+                .quantityPurchased(30.3)
+                .build());
 
         return buyersOrdered;
     }

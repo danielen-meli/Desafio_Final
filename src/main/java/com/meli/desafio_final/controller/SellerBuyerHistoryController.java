@@ -1,5 +1,6 @@
 package com.meli.desafio_final.controller;
 
+import com.meli.desafio_final.dto.BuyerResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryByProductsResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryDto;
 import com.meli.desafio_final.dto.SellerHistoryTotalSoldResponseDto;
@@ -34,7 +35,7 @@ public class SellerBuyerHistoryController {
      * @return the List of all buyers.
      */
     @GetMapping("/buyers")
-    public ResponseEntity<List<Buyer>> getBuyersOrderedBuyPurchaseQuantity(@RequestParam("orderBy") String orderBy) {
+    public ResponseEntity<List<BuyerResponseDto>> getBuyersOrderedBuyPurchaseQuantity(@RequestParam("orderBy") String orderBy) {
         return ResponseEntity.ok(sellerBuyerHistoryService.getBuyersOrderedBuyPurchaseQuantity(orderBy));
     }
 
@@ -46,7 +47,7 @@ public class SellerBuyerHistoryController {
      * @return the List of buyers where buyer total purchase is between start and end.
      */
     @GetMapping("/buyers/between")
-    public ResponseEntity<List<Buyer>> getBuyersBetweenValuePurchaseOrderedBuyPurchaseQuantity(
+    public ResponseEntity<List<BuyerResponseDto>> getBuyersBetweenValuePurchaseOrderedBuyPurchaseQuantity(
             @RequestParam("start") long start,
             @RequestParam("end") long end,
             @RequestParam("orderBy") String orderBy

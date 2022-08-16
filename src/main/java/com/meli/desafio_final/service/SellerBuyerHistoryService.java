@@ -1,5 +1,6 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.dto.BuyerResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryByProductsResponseDto;
 import com.meli.desafio_final.dto.SellerHistoryDto;
 import com.meli.desafio_final.dto.SellerHistoryTotalSoldResponseDto;
@@ -31,20 +32,24 @@ public class SellerBuyerHistoryService implements ISellerBuyerHistoryService {
         return buyerRepository.findById(id).orElseThrow(() -> new BadRequestException("Buyer does't exists"));
     }
 
-    public List<Buyer> getBuyersOrderedBuyPurchaseQuantity(String orderBy) {
+    public List<BuyerResponseDto> getBuyersOrderedBuyPurchaseQuantity(String orderBy) {
         if(orderBy.equalsIgnoreCase("asc")) {
-            return buyerRepository.findByOrderByQuantityPurchasedAsc();
+            List<Buyer> buyers = buyerRepository.findByOrderByQuantityPurchasedAsc();
+            return buyers.stream().map(BuyerResponseDto::new).collect(Collectors.toList());
         } else if(orderBy.equalsIgnoreCase("desc")) {
-            return buyerRepository.findByOrderByQuantityPurchasedDesc();
+            List<Buyer> buyers = buyerRepository.findByOrderByQuantityPurchasedDesc();
+            return buyers.stream().map(BuyerResponseDto::new).collect(Collectors.toList());
         }
         throw new BadRequestException("Invalid orderBy type");
     }
 
-    public List<Buyer> getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(double purchaseStart, double purchaseEnd, String orderBy) {
+    public List<BuyerResponseDto> getBuyersBetweenValuesPurchaseOrderedBuyPurchaseQuantity(double purchaseStart, double purchaseEnd, String orderBy) {
         if(orderBy.equalsIgnoreCase("asc")) {
-            return buyerRepository.findBuyerBetweenPurchaseValueAsc(purchaseStart, purchaseEnd);
+            List<Buyer> buyers = buyerRepository.findBuyerBetweenPurchaseValueAsc(purchaseStart, purchaseEnd);
+            return buyers.stream().map(BuyerResponseDto::new).collect(Collectors.toList());
         } else if(orderBy.equalsIgnoreCase("desc")) {
-            return buyerRepository.findBuyerBetweenPurchaseValueDesc(purchaseStart, purchaseEnd);
+            List<Buyer> buyers = buyerRepository.findBuyerBetweenPurchaseValueDesc(purchaseStart, purchaseEnd);
+            return buyers.stream().map(BuyerResponseDto::new).collect(Collectors.toList());
         }
         throw new BadRequestException("Invalid orderBy type");
     }
