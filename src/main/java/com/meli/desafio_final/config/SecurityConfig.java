@@ -1,3 +1,4 @@
+/*
 package com.meli.desafio_final.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -14,8 +16,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -27,10 +29,15 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
             "/login/**",
     };
 
-    // definir quais rotas estarao livres
+    // definir all gets livres
     private static final String[] PUBLIC_MATCHERS_GET = {
             "/v1/**",
     };
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/**.html", "/v1/api-docs", "/webjars/**","/configuration/**", "/swagger-resources/**");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,3 +59,4 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         return source;
     }
 }
+*/
