@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,6 +25,9 @@ public class PromoCode {
     private LocalDate dateStart;
     private LocalDate dateEnd;
     private double minimum;
+
+//    @OneToMany(mappedBy = "promoCode", cascade = CascadeType.PERSIST)
+//    private List<ShopOrder> shopOrders;
 
     public PromoCode(String promoCode) {
         this.promoCode = promoCode;

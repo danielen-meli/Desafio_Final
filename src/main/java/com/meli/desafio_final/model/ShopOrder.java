@@ -32,7 +32,7 @@ public class ShopOrder {
     @ManyToOne
     private Buyer buyer;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "promoId")
     //@JsonIgnoreProperties("shopOrder")
     private PromoCode promoCode;

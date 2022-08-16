@@ -107,9 +107,11 @@ public class ShopOrderService implements IShopOrderService {
             return new ShopOrderItem(date, quantity, sellerAd);
         }).collect(Collectors.toList());
 
-        PromoCode promoCode = promoCodeRepository.findById(promoCodeId).get();
+        PromoCode promoCode;
         if(promoCodeRepository.findById(promoCodeId).isEmpty()){
             promoCode = PromoCode.builder().build();
+        } else {
+            promoCode = promoCodeRepository.findById(promoCodeId).get();
         }
 
         ShopOrder shopOrder = new ShopOrder(shopOrderRequestDto, buyer, shopOrderItems, promoCode);
@@ -123,10 +125,16 @@ public class ShopOrderService implements IShopOrderService {
     private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList, PromoCode promoCode){
         double totalSum = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
 
-        double total = applyDiscount(totalSum, promoCode);
+        if(promoCode.getDiscount() != 0){
+            double total = applyDiscount(totalSum, promoCode);
+
+            return ShopOrderResponseDto.builder()
+                    .totalPrice(total)
+                    .build();
+        }
 
         return ShopOrderResponseDto.builder()
-                .totalPrice(total)
+                .totalPrice(totalSum)
                 .build();
     }
 
@@ -172,7 +180,7 @@ public class ShopOrderService implements IShopOrderService {
             if(promoCodeId.length() > 0){
                 throw new NotFoundException("O cupom não é válido.");
             }
-            return PromoCode.builder().discount(0).discountType(DiscountType.MULTIPLY).build();
+            return PromoCode.builder().promoCode("Invalid").discount(0).discountType(DiscountType.MULTIPLY).build();
         }
 
         return optionalPromoCode.get();
