@@ -63,3 +63,37 @@ insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 1.0, 2, 3, 2);
 insert into SHOP_ORDER_ITEM (id, date, price, quantity, seller_ad_id, shop_order_id) VALUES (null, "2022-08-08", 8.0, 5, 4, 2);
 
+
+drop table IF EXISTS users_perfis;
+drop table IF EXISTS users;
+drop table IF EXISTS perfil;
+
+create table users(
+                      username varchar(50) not null primary key,
+                      password varchar(500) not null,
+                      enabled boolean not null
+);
+
+insert into users values('danielen', '$2a$10$ukdgXj8w.j/B.TFmsdZYteoMU4tOQdLbPU62P9vs/jCIqa5ampbya', '1');
+insert into users values('mauri', '$2a$10$ZTD5yPb/J0nGGvnJi61kr.nbf.8rBfjGonKiYnDOjKx7mJP6g8i.y', '2');
+insert into users values('joice', '$2a$10$6GweoH8l1HZ6P.Riat6/h.aSK/ebp7IZGRT2wSM1zimZfkplaU1te', '3');
+
+
+create table perfil(
+                       id serial not null primary key,
+                       nome varchar(20) not null
+);
+
+insert into perfil(nome) values ('ADMIN');
+insert into perfil(nome) values ('CUSTOMER');
+insert into perfil(nome) values ('SELLER');
+
+create table users_perfis(
+                             usuario_username  varchar(50) not null,
+                             perfis_id integer not null,
+                             constraint pk_usuario_perfil primary key (usuario_username , perfis_id)
+);
+
+insert into users_perfis values ('danielen',1);
+insert into users_perfis values ('mauri',2);
+insert into users_perfis values ('joice',3);
