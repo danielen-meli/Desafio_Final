@@ -2,10 +2,7 @@ package com.meli.desafio_final.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.desafio_final.controller.ShopOrderController;
-import com.meli.desafio_final.dto.BatchStockRequestDto;
-import com.meli.desafio_final.dto.InboundOrderRequestDto;
-import com.meli.desafio_final.dto.OrderAdRequestDto;
-import com.meli.desafio_final.dto.ShopOrderRequestDto;
+import com.meli.desafio_final.dto.*;
 import com.meli.desafio_final.model.InboundOrder;
 import com.meli.desafio_final.model.ShopOrder;
 import com.meli.desafio_final.model.enums.Status;
@@ -65,23 +62,18 @@ class ShopOrderControllerTest {
     @Mock
     private ShopOrderService shopOrderService;
 
+    @Autowired
+    private IInboundService inboundService;
+
+    @Autowired
+    private ShopOrderService shopOrderS;
+
     @BeforeEach
     public void setup(){
         shopOrderRepository.deleteAll();
     }
 
 
-//    @Test
-//    public void insert_insertNewShopOrder_whenNewShoporder() throws Exception {
-//        ShopOrderRequestDto shopOrder = TestUtilsGeneratorShopOrder.getShopOrderRequestDtoMock();
-//
-//        BDDMockito.when(shopOrderService.insertNewShopOrder(ArgumentMatchers.any(ShopOrderRequestDto.class)))
-//                .thenReturn(shopOrder);
-//
-//        mockMvc.perform( post("/api/v1/fresh-products/orders")
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
-//    }
 
     @Test
     public void getById_getShopOrder_WhenShopOrderIsValid() throws Exception{
@@ -96,7 +88,17 @@ class ShopOrderControllerTest {
                 })
                 .andExpect(status().isOk());
     }
-
+//
+//    @Test
+//    public void getDiscount_ShopOrder() throws Exception{
+//
+//        InboundOrderResponseDto inboundOrderResponseDto = inboundService.insertNewInboundOrder(TestUtilsGeneratorShopOrder.inboundOrderRequestDtoReq6());
+//        ShopOrderResponseDto shop = shopOrderS.insertNewShopOrder(TestUtilsGeneratorShopOrder.shopOrderRequestDtoReq6());
+//
+//        mockMvc.perform( get("/api/v1/fresh-products/orders/discount/3"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType("application/json"));
+//    }
 
 
 

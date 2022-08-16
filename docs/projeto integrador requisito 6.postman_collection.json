@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "5519b809-3cd6-49e7-9921-8d88cc3f4abe",
+		"name": "projeto integrador requisito 6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21746723"
+	},
+	"item": [
+		{
+			"name": "1 - cadastrar um estoque",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderDate\": \"2022-08-08\",\n    \"section\": 3,\n    \"batchStockList\": [\n     \n        {\n            \"sellerAdId\": 7,\n            \"currentTemperature\": 8,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 50,\n            \"currentQuantity\": 50,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 50,\n            \"dueDate\": \"2022-11-08\"\n        },\n        {\n            \"sellerAdId\": 8,\n            \"currentTemperature\": 9,\n            \"minimumTemperature\": 1,\n            \"initialQuantity\": 150,\n            \"currentQuantity\": 150,\n            \"manufacturingDate\": \"2022-08-08\",\n            \"manufacturingTime\": \"2007-12-03T10:15:30\",\n            \"volume\": 150,\n            \"dueDate\": \"2022-11-08\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/inboundorder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"inboundorder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3- Busca desconto de atacado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders/discount/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"discount",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-Busca desconto de frete gratis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders/discount/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"discount",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3- Busca desconto de frete gratis e atacado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders/discount/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"discount",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2- Cadastrar um carrinho com um produto de 120,00",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-08\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 7,\n        \"quantity\": 1\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2- Cadastrar um carrinho com 11 produtos q o valor da abaixo de 119,99",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-08\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 8,\n        \"quantity\": 11\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2- Cadastrar um carrinho com 30 produtos q o valor passa 119,99",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \"buyerId\": 1,\n    \"date\":  \"2022-08-08\",\n    \"orderStatus\": \"OPEN\",\n    \"products\": [{\n        \"sellerAdId\": 8,\n        \"quantity\": 30\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fresh-products/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

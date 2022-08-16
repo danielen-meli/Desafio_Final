@@ -1,5 +1,6 @@
 package com.meli.desafio_final.service;
 
+import com.meli.desafio_final.dto.DiscountResponseDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.exception.NotFoundException;
@@ -21,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -135,8 +137,13 @@ class ShopOrderServiceTest {
         assertThat(shopOrderResponseDto.getTotalPrice()).isEqualTo(315.00);
     }
 
-
+    @Test
     public void discountsAvailable(){
-        
+        BDDMockito.when(shopOrderRepository.findById(anyLong()))
+                .thenReturn(Optional.of(TestUtilsGeneratorShopOrder.newShopOrderReq6()));
+
+        List<DiscountResponseDto> discountResponseDto = service.discountsAvailable(1L);
+
+        assertThat(discountResponseDto.size()).isEqualTo(1);
     }
 }

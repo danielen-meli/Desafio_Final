@@ -208,8 +208,8 @@ public class ShopOrderService implements IShopOrderService {
 
     /**
      * Retorna uma lista com todos os descontos disponíveis para aquele shop order
-     * @param shopOrderId
-     * @return
+     * @param shopOrderId long
+     * @return List<DiscountResponseDto>
      */
     @Override
     public List<DiscountResponseDto> discountsAvailable(long shopOrderId){
@@ -235,7 +235,7 @@ public class ShopOrderService implements IShopOrderService {
 
     /**
      * Busca se aquele shopOrder existe e se ele não está com status de finalizado
-     * @param id
+     * @param id long
      * @return ShopOrder
      */
     private ShopOrder verifyShopOrder(long id){
@@ -249,7 +249,7 @@ public class ShopOrderService implements IShopOrderService {
 
     /**
      * Valida se o valor total do carrinho, já aplicado o desconto de atacado, se for maior de 119,99 aplicará frete grátis
-     * @param shopOrderItemList
+     * @param shopOrderItemList List<ShopOrderItem>
      * @return DiscountResponseDto
      */
     private DiscountResponseDto  calculateFreeShipping(List<ShopOrderItem> shopOrderItemList){
@@ -266,8 +266,8 @@ public class ShopOrderService implements IShopOrderService {
 
     /**
      * Valida se a quantidade de cada item é maior que 10, assim aplica o desconto do atacado de 5%
-     * @param shopOrderItemList
-     * @return List ShopOrderItem
+     * @param shopOrderItemList List<ShopOrderItem>
+     * @return List<ShopOrderItem>
      */
     private List<ShopOrderItem> wholesaleDiscount(List<ShopOrderItem> shopOrderItemList){
         ShopOrderResponseDto total = sumShopOrderItem(shopOrderItemList);
@@ -285,8 +285,8 @@ public class ShopOrderService implements IShopOrderService {
 
     /**
      * Caso o valor atual seja diferente do valor antigo terá o retorno de um response informado o valor do desconto
-     * @param total
-     * @param currentTotal
+     * @param total double
+     * @param currentTotal double
      * @return DiscountResponseDto
      */
     private DiscountResponseDto wholesaleDiscountConvertion(double total, double currentTotal){
