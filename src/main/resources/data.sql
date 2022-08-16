@@ -85,7 +85,7 @@ create table perfil(
 );
 
 insert into perfil(nome) values ('ADMIN');
-insert into perfil(nome) values ('CUSTOMER');
+insert into perfil(nome) values ('BUYER');
 insert into perfil(nome) values ('SELLER');
 
 create table users_perfis(
