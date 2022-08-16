@@ -136,7 +136,16 @@ public class ShopOrderService implements IShopOrderService {
         Buyer buyer = verifyBuyerExists(shopOrderRequestDto.getBuyerId());
         productStocksAvailable(shopOrderRequestDto.getProducts());
 
-        PromoCode promoCode = promoCodeRepository.findById(shopOrderRequestDto.getPromoCode()).get();
+        PromoCode promoCode;
+        Optional<PromoCode> optionalPromoCode = promoCodeRepository.findById(shopOrderRequestDto.getPromoCode());
+        if(optionalPromoCode.isEmpty()){
+            if(shopOrderRequestDto.getPromoCode().length() > 0){
+                throw new NotFoundException("O cupom não é válido.");
+            }
+            promoCode = PromoCode.builder().discount(0).build();
+        } else{
+            promoCode = optionalPromoCode.get();
+        }
 
         ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer);
         List<ShopOrderItem> shopOrderItems = shopOrderSaved.getShopOrderItem();

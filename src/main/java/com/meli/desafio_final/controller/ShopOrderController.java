@@ -46,7 +46,7 @@ public class ShopOrderController{
      * @param id order shop identification number
      * @return a completed purchase order
      */
-    @PutMapping("/closed-shopOrder/{id}")
+    @PutMapping("")
     public ResponseEntity<ShopOrder> closeShopOrder(@PathVariable long id){
         return ResponseEntity.ok(shopOrderService.closedShopOrder(id));
     }
