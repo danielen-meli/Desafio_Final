@@ -29,5 +29,5 @@ public class ShopOrderRequestDto {
     @Valid
     private List<OrderAdRequestDto> products;
 
-    private PromoCodeRequestDto promoCode;
+    private String promoCode;
 }

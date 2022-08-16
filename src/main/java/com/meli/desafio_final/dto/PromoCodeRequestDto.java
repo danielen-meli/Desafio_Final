@@ -10,4 +10,4 @@ public class PromoCodeRequestDto {
     public PromoCodeRequestDto(PromoCode promoCode) {
         this.promoCode = promoCode.getPromoCode();
     }
-}
+}//TODO paula: esta sendo usado? apagar?

@@ -33,7 +33,8 @@ public class ShopOrder {
     private Buyer buyer;
 
     @ManyToOne
-    @JsonIgnoreProperties("shopOrder")
+    @JoinColumn(name = "promoId")
+    //@JsonIgnoreProperties("shopOrder")
     private PromoCode promoCode;
 
     public ShopOrder(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, List<ShopOrderItem> shopOrderItem){

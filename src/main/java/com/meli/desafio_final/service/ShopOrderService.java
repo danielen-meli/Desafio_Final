@@ -37,6 +37,9 @@ public class ShopOrderService implements IShopOrderService {
     @Autowired
     private ISectionRepository sectionRepository;
 
+    @Autowired
+    private IPromoCodeRepository promoCodeRepository;
+
     /** Method that verifies if the buyer is registered.
      * @param id buyer's id
      * @return if exists
@@ -111,14 +114,11 @@ public class ShopOrderService implements IShopOrderService {
      * @param shopOrderItemList list of itens requested in the order
      * @return Object ShopOrderResponseDto
      */
-    private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList, String promoCode){
-        double total;
+    private ShopOrderResponseDto sumShopOrderItem(List<ShopOrderItem> shopOrderItemList, PromoCode promoCode){
+        double total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
 
-        if(promoCode.isEmpty()){
-            total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
-        } else {
-
-
+        if(promoCode.getDiscount() != 0){
+            total = total * promoCode.getDiscount();
         }
 
         return ShopOrderResponseDto.builder()
@@ -136,10 +136,12 @@ public class ShopOrderService implements IShopOrderService {
         Buyer buyer = verifyBuyerExists(shopOrderRequestDto.getBuyerId());
         productStocksAvailable(shopOrderRequestDto.getProducts());
 
+        PromoCode promoCode = promoCodeRepository.findById(shopOrderRequestDto.getPromoCode()).get();
+
         ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer);
         List<ShopOrderItem> shopOrderItems = shopOrderSaved.getShopOrderItem();
 
-        return sumShopOrderItem(shopOrderItems, shopOrderRequestDto.getPromoCode().getPromoCode());
+        return sumShopOrderItem(shopOrderItems, promoCode);
     }
 
     /** Method that finds a shop order by id.

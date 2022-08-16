@@ -4,7 +4,6 @@ import com.meli.desafio_final.dto.ShopOrderDto;
 import com.meli.desafio_final.dto.ShopOrderRequestDto;
 import com.meli.desafio_final.dto.ShopOrderResponseDto;
 import com.meli.desafio_final.model.ShopOrder;
-import com.meli.desafio_final.service.IShopOrderService;
 import com.meli.desafio_final.service.ShopOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
