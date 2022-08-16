@@ -3,6 +3,7 @@ package com.meli.desafio_final.handler;
 import com.meli.desafio_final.exception.BadRequestException;
 import com.meli.desafio_final.exception.ExceptionsDetails;
 import com.meli.desafio_final.exception.NotFoundException;
+import com.mercadopago.exceptions.MPApiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,4 +33,16 @@ public class MyExceptionHandler {
                 .statusHttp(HttpStatus.BAD_REQUEST.value())
                 .build(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(MPApiException.class)
+    public ResponseEntity<ExceptionsDetails> MPApiException(MPApiException ex){
+        return new ResponseEntity<>(ExceptionsDetails.builder()
+                .erro("Invalid Argument")
+                .message(ex.getApiResponse().getContent())
+                .dateTime(LocalDateTime.now())
+                .build(), HttpStatus.BAD_REQUEST);
+    }
+
+
+
 }
