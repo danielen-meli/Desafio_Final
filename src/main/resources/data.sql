@@ -74,9 +74,9 @@ create table users(
                       enabled boolean not null
 );
 
-insert into users values('danielen', '$2a$10$ukdgXj8w.j/B.TFmsdZYteoMU4tOQdLbPU62P9vs/jCIqa5ampbya', '1');
-insert into users values('mauri', '$2a$10$ZTD5yPb/J0nGGvnJi61kr.nbf.8rBfjGonKiYnDOjKx7mJP6g8i.y', '2');
-insert into users values('joice', '$2a$10$6GweoH8l1HZ6P.Riat6/h.aSK/ebp7IZGRT2wSM1zimZfkplaU1te', '3');
+insert into users values('administrador', '$2a$10$ukdgXj8w.j/B.TFmsdZYteoMU4tOQdLbPU62P9vs/jCIqa5ampbya', '1');
+insert into users values('usuario', '$2a$10$ZTD5yPb/J0nGGvnJi61kr.nbf.8rBfjGonKiYnDOjKx7mJP6g8i.y', '2');
+
 
 
 create table perfil(
@@ -85,8 +85,8 @@ create table perfil(
 );
 
 insert into perfil(nome) values ('ADMIN');
-insert into perfil(nome) values ('BUYER');
-insert into perfil(nome) values ('SELLER');
+insert into perfil(nome) values ('USER');
+
 
 create table users_perfis(
                              usuario_username  varchar(50) not null,
@@ -94,6 +94,5 @@ create table users_perfis(
                              constraint pk_usuario_perfil primary key (usuario_username , perfis_id)
 );
 
-insert into users_perfis values ('danielen',1);
-insert into users_perfis values ('mauri',2);
-insert into users_perfis values ('joice',3);
+insert into users_perfis values ('administrador',1);
+insert into users_perfis values ('usuario',2);

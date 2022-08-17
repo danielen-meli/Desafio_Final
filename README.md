@@ -21,7 +21,6 @@ Implementar uma API Rest e aplicar os conteúdos trabalhados durante o Bootcamp 
     O produto não deve aparecer no setor errado.
     O produto não deve estar vencido ou prestes a expirar (mínimo 3 semanas)
 
-
 ### 04. Consultar o estoque de um produto em todos os armazéns
 ##### - Será possível poder consultar um produto em todos os armazéns e saber o estoque em cada armazém do referido produto.
     Inserido o código do produto a quantidade do mesmo é exibida;
@@ -30,6 +29,12 @@ Implementar uma API Rest e aplicar os conteúdos trabalhados durante o Bootcamp 
 ### 05. Consultar a data de validade por lote.
 ##### - Será possível consultar os produtos em estoque que estão prestes a expirar no almoxarifado, a fim de aplicar alguma ação comercial com eles.
     A data de validade deve estar dentro do intervalo consultado.
+
+### 06. Criar um perfil de segurança (autenticação).
+##### - Deverá existir ao menos um perfil de administrador para controlar as inserções de lotes no sistema.
+    Deve existir ao menos um perfil de segurança;
+    Não deve ser possível inserir lotes no armazém sem token de segurança;
+
 
 ## Dados:
 - SQL que popula o banco;

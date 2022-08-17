@@ -1,5 +1,9 @@
 package com.meli.desafio_final.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
+@Entity @Data @Builder @NoArgsConstructor @AllArgsConstructor
 @Table(name = "users")
 public class Usuario implements UserDetails{
 
@@ -51,6 +55,7 @@ public class Usuario implements UserDetails{
 		this.perfis.forEach(perfil-> authorities.add(new SimpleGrantedAuthority(perfil.getNome())));
 		return authorities;
 	}
+
 	@Override
 	public String getPassword() {
 		return this.senha;
