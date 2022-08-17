@@ -98,7 +98,7 @@ public class ShopOrderService implements IShopOrderService {
      * @param buyer id of the buyer
      * @return calls method to register the order
      */
-    private ShopOrder save(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer) {
+    private ShopOrder save(ShopOrderRequestDto shopOrderRequestDto, Buyer buyer, PromoCode promoCode) {
         List<ShopOrderItem> shopOrderItems = shopOrderRequestDto.getProducts().stream().map(order -> {
             SellerAd sellerAd = sellerAdRepository.findById(order.getSellerAdId()).orElseThrow(() -> new BadRequestException("SellerAd Invalid"));
             int quantity = order.getQuantity();
@@ -106,7 +106,7 @@ public class ShopOrderService implements IShopOrderService {
             return new ShopOrderItem(date, quantity, sellerAd);
         }).collect(Collectors.toList());
 
-        ShopOrder shopOrder = new ShopOrder(shopOrderRequestDto, buyer, shopOrderItems);
+        ShopOrder shopOrder = new ShopOrder(shopOrderRequestDto, buyer, shopOrderItems, promoCode);
         return shopOrderRepository.save(shopOrder);
     }
 
@@ -151,7 +151,7 @@ public class ShopOrderService implements IShopOrderService {
             promoCode = optionalPromoCode.get();
         }
 
-        ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer);
+        ShopOrder shopOrderSaved = save(shopOrderRequestDto, buyer, promoCode);
         List<ShopOrderItem> shopOrderItems = shopOrderSaved.getShopOrderItem();
 
         return sumShopOrderItem(shopOrderItems, promoCode);
