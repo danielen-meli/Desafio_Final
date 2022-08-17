@@ -29,7 +29,9 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"juliahe@gmail.com\",\n    \"firstName\": \"Julia\",\n    \"lastName\": \"Heberle\",\n    \"phone\": {\n        \"areaCode\": \"55\",\n        \"number\": \"991234517\"\n    },\n    \"identification\": {\n        \"type\": \"CPF\",\n        \"number\": \"54321\"\n    }\n}",
+
+									"raw": "{\n    \"email\": \"juliaheberle@gmail.com\",\n    \"firstName\": \"Julia\",\n    \"lastName\": \"Heberle\",\n    \"phone\": {\n        \"areaCode\": \"55\",\n        \"number\": \"991234517\"\n    },\n    \"identification\": {\n        \"type\": \"CPF\",\n        \"number\": \"54321\"\n    }\n}",
+
 									"options": {
 										"raw": {
 											"language": "json"
@@ -37,15 +39,19 @@
 									}
 								},
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payments/clients/",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
 										"payments",
 										"clients",
 										""
@@ -84,14 +90,17 @@
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/payments/clients/1180762750-IIaBmroVkHxdmZ",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
 										"payments",
 										"clients",
 										"1180762750-IIaBmroVkHxdmZ"
@@ -126,15 +135,19 @@
 									}
 								},
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payments/clients/1180087246-lzE5LGeDXFsI3N",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
 										"payments",
 										"clients",
 										"1180087246-lzE5LGeDXFsI3N"
@@ -169,15 +182,21 @@
 									}
 								},
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payment/1180585787-OqnUkVVwTNuEub/cards",
+
+						
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
+
 										"payment",
 										"1180585787-OqnUkVVwTNuEub",
 										"cards"
@@ -210,15 +229,19 @@
 									}
 								},
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payment/1180585787-OqnUkVVwTNuEub/cards",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
 										"payment",
 										"1180585787-OqnUkVVwTNuEub",
 										"cards"
@@ -228,6 +251,44 @@
 							"response": []
 						},
 						{
+
+							"name": "create card Copy 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"7675b2660c6a92bce185603f6d1552fc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payment/1180082712-vW1Wxu5nQL5u17/cards",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payment",
+										"1180082712-vW1Wxu5nQL5u17",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+
 							"name": "delete card",
 							"request": {
 								"method": "DELETE",
@@ -239,15 +300,19 @@
 									}
 								],
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payment/1180082712-vW1Wxu5nQL5u17/cards/1660610444195",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
 										"payment",
 										"1180082712-vW1Wxu5nQL5u17",
 										"cards",
@@ -283,15 +348,20 @@
 									"raw": "{\n    \"payer\": {\n        \"email\": \"felipegomes@gmkail.com\"\n    },\n    \"token\": \"65c6a0c9c64cb2a7f219e64261517213\",\n    \"description\": \"Payment for product\",\n    \"installments\": 1,\n    \"paymentMethodId\": \"visa\"\n}"
 								},
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payments/1",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
+
 										"payments",
 										"1"
 									]
@@ -323,15 +393,19 @@
 									"raw": ""
 								},
 								"url": {
+
 									"raw": "http://localhost:8080/api/v1/payments/1307739637",
+
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+
 										"api",
 										"v1",
+
 										"payments",
 										"1307739637"
 									]
@@ -340,6 +414,7 @@
 							"response": []
 						}
 					]
+
 				},
 				{
 					"name": "new inbound order",
@@ -371,6 +446,7 @@
 						}
 					},
 					"response": []
+
 				}
 			]
 		}
