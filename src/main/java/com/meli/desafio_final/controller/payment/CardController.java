@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/payment/{customerId}/cards")
+@RequestMapping("/api/v1/payment/{customerId}/cards")
 public class CardController {
 
     @Autowired
