@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "6a3cedaf-8e1b-4493-893e-db4f535770a5",
+		"name": "Projeto integrador-R6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mercado pago",
+			"item": [
+				{
+					"name": "client",
+					"item": [
+						{
+							"name": "criar cliente",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer TEST-3400945058736804-081210-23eb23642d6ccff5d60584729fd2488f-1006640405",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"juliaheberle@gmail.com\",\n    \"firstName\": \"Julia\",\n    \"lastName\": \"Heberle\",\n    \"phone\": {\n        \"areaCode\": \"55\",\n        \"number\": \"991234517\"\n    },\n    \"identification\": {\n        \"type\": \"CPF\",\n        \"number\": \"54321\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payments/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payments",
+										"clients",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get client by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer TEST-3400945058736804-081210-23eb23642d6ccff5d60584729fd2488f-1006640405",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payments/clients/1180762750-IIaBmroVkHxdmZ",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payments",
+										"clients",
+										"1180762750-IIaBmroVkHxdmZ"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update client",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer TEST-3400945058736804-081210-23eb23642d6ccff5d60584729fd2488f-1006640405",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Julia\",\n    \"lastName\": \"Silva Heberle\",\n    \"phone\": {\n        \"areaCode\": \"55\",\n        \"number\": \"991234516\"\n    },\n    \"identification\": {\n        \"type\": \"CPF\",\n        \"number\": \"54322\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payments/clients/1180087246-lzE5LGeDXFsI3N",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payments",
+										"clients",
+										"1180087246-lzE5LGeDXFsI3N"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "card",
+					"item": [
+						{
+							"name": "create card",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"7675b2660c6a92bce185603f6d1552fc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payment/1180585787-OqnUkVVwTNuEub/cards",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payment",
+										"1180585787-OqnUkVVwTNuEub",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all cards",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payment/1180585787-OqnUkVVwTNuEub/cards",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payment",
+										"1180585787-OqnUkVVwTNuEub",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create card Copy 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"7675b2660c6a92bce185603f6d1552fc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/payment/1180082712-vW1Wxu5nQL5u17/cards",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payment",
+										"1180082712-vW1Wxu5nQL5u17",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete card",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/payment/1180082712-vW1Wxu5nQL5u17/cards/1660610444195",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payment",
+										"1180082712-vW1Wxu5nQL5u17",
+										"cards",
+										"1660610444195"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "payment",
+					"item": [
+						{
+							"name": "create payment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payer\": {\n        \"email\": \"felipegomes@gmkail.com\"\n    },\n    \"token\": \"65c6a0c9c64cb2a7f219e64261517213\",\n    \"description\": \"Payment for product\",\n    \"installments\": 1,\n    \"paymentMethodId\": \"visa\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/payments/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get payment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token-mercado-pago}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/payments/1307739637",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"payments",
+										"1307739637"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
