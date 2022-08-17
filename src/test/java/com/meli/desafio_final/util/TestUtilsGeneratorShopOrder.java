@@ -86,7 +86,7 @@ public class TestUtilsGeneratorShopOrder {
         List<OrderAdRequestDto> orderAdRequestDtosList = generatedOrderAdRequestDtoListMock();
         return ShopOrderRequestDto
                 .builder()
-                .date(LocalDate.of(2022,07,8))
+                .date(LocalDate.of(2022,7,8))
                 .buyerId(1L)
                 .orderStatus(Status.OPEN)
                 .products(orderAdRequestDtosList)
