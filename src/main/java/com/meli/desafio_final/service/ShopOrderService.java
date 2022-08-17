@@ -118,7 +118,11 @@ public class ShopOrderService implements IShopOrderService {
         double total = shopOrderItemList.stream().mapToDouble(so-> so.getQuantity() * so.getPrice()).sum();
 
         if(promoCode.getDiscount() != 0){
-            total = total * promoCode.getDiscount();
+            if(total > 100){
+                total = total * promoCode.getDiscount();
+            } else{
+                throw new BadRequestException("A compra não atinge o valor necessário para usar o cupom.");
+            }
         }
 
         return ShopOrderResponseDto.builder()
