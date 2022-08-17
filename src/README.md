@@ -30,6 +30,13 @@ Implementar uma API Rest e aplicar os conteúdos trabalhados durante o Bootcamp 
 ### 05. Consultar a data de validade por lote.
 ##### - Será possível consultar os produtos em estoque que estão prestes a expirar no almoxarifado, a fim de aplicar alguma ação comercial com eles.
     A data de validade deve estar dentro do intervalo consultado.
+    
+### 06. Requisito individual- Integração com o Mercado Pago  
+##### - Será possível inserir clientes.
+##### - Será possível inserir cartões.
+##### - Será possível realizar pagamentos pagamentos de um carrinho.
+    
+    
 
 ## Dados:
 - SQL que popula o banco;
