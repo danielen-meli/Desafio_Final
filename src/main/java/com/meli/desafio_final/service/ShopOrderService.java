@@ -203,6 +203,11 @@ public class ShopOrderService implements IShopOrderService {
         return shopOrderRepository.save(shopOrder);
     }
 
+    public ShopOrder getShopOrderByIdClient(Long idBuyer){
+        Optional<ShopOrder> shopOrder = shopOrderRepository.findByBuyerBuyerId(idBuyer);
+        if(shopOrder.isEmpty())
+            throw new NotFoundException("Shop order not found");
 
-
+        return shopOrder.get();
+    }
 }

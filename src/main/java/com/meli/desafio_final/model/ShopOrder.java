@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -35,5 +36,15 @@ public class ShopOrder {
         this.status = shopOrderRequestDto.getOrderStatus();
         this.buyer = buyer;
         this.shopOrderItem = shopOrderItem;
+    }
+
+    public BigDecimal getValorTotal(){
+        Double precoTotal = .0;
+
+        for(ShopOrderItem item: shopOrderItem){
+            precoTotal += item.getSellerAd().getPrice() * item.getQuantity();
+        }
+
+        return new BigDecimal(precoTotal);
     }
 }

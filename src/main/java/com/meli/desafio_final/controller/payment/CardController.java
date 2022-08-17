@@ -22,6 +22,7 @@ public class CardController {
     @GetMapping()
     public ResponseEntity<MPResourceList<CustomerCard>> all(@PathVariable String customerId) throws MPException, MPApiException {
         MPResourceList<CustomerCard> customer = cardService.getAllByCustomerId(customerId);
+        customer.setResponse(null);
         return ResponseEntity.ok(customer);
     }
 
